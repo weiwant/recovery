@@ -11,7 +11,7 @@ class Response:
     """
     extensions = []
 
-    def __init__(self, status_code: int, message: str = None, data=None):
+    def __init__(self, status_code: int = 200, message: str = None, data=None):
         """
         构造响应结果
 
