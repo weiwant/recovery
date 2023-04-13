@@ -3,6 +3,7 @@ from logging import getLogger
 import config
 
 logger = getLogger(__name__)
+logger.setLevel('INFO')
 if hasattr(config, 'DATABASE_CONFIG') and hasattr(config, 'TABLES'):
     from sqlalchemy import create_engine, MetaData
     from sqlalchemy.ext.automap import automap_base
