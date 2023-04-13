@@ -1,6 +1,7 @@
 from logging import getLogger, StreamHandler
 
 import config
+from src.utils.model import ModelExt
 
 logger = getLogger(__name__)
 logger.setLevel('INFO')
@@ -17,7 +18,7 @@ if hasattr(config, 'DATABASE_CONFIG') and hasattr(config, 'TABLES'):
     engine = create_engine(connect_string)
     meta = MetaData()
     meta.reflect(engine, only=TABLES)
-    base = automap_base(metadata=meta)
+    base = automap_base(metadata=meta, cls=ModelExt)
     base.prepare()
     session_maker = sessionmaker(engine, expire_on_commit=False)
     logger.info('获取数据库连接成功')
