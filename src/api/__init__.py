@@ -1,8 +1,10 @@
-from logging import getLogger
+from logging import getLogger, StreamHandler
 
 import sanic
 
 logger = getLogger(__name__)
+logger.setLevel('INFO')
+logger.addHandler(StreamHandler())
 
 api_blueprint = sanic.blueprints.Blueprint('api', url_prefix='/recovery/api')
 method_get = {}
