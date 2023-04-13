@@ -7,6 +7,7 @@ from src.api import api_blueprint
 from src.middlewares import REQUEST, RESPONSE
 
 logger = getLogger(__name__)
+logger.setLevel('INFO')
 app = sanic.Sanic(__name__)
 app.blueprint(api_blueprint)
 for middleware in REQUEST:
