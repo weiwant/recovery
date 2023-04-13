@@ -1,4 +1,4 @@
-import json
+import json as _json
 
 from sanic import json, text, empty
 
@@ -30,7 +30,7 @@ class Response:
         :return: json
         """
         setattr(JSONEncoder, 'ext', Response.extensions)
-        return json(json.loads(json.dumps(self.data, cls=JSONEncoder)), status=self.status)
+        return json(_json.loads(_json.dumps(self.data, cls=JSONEncoder)), status=self.status)
 
     def text(self):
         """
