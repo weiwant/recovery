@@ -1,7 +1,7 @@
 from logging import getLogger, StreamHandler
 
 import config
-from src.utils.model import ModelExt
+from src.models.model import ModelExt
 
 logger = getLogger(__name__)
 logger.setLevel('INFO')
