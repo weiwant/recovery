@@ -3,13 +3,16 @@ import json as _json
 from sanic import json, text, empty
 
 from src.utils.encoder import JSONEncoder
+from src.utils.model import ModelExt
 
 
 class Response:
     """
     响应类
     """
-    extensions = []
+    extensions = [
+        (ModelExt, lambda o: _json.loads(o.__repr__()))
+    ]
 
     def __init__(self, status_code: int = 200, message: str = None, data=None):
         """
