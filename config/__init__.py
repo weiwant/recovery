@@ -10,3 +10,4 @@ DATABASE_CONFIG = {
 TABLES = [
     'test'
 ]
+USE_GPU = True
