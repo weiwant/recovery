@@ -1,11 +1,8 @@
-from logging import getLogger, StreamHandler
-
 import config
+from src.utils.logger import get_logger
 from src.utils.model import ModelExt
 
-logger = getLogger(__name__)
-logger.setLevel('INFO')
-logger.addHandler(StreamHandler())
+logger = get_logger(__name__)
 if hasattr(config, 'DATABASE_CONFIG') and hasattr(config, 'TABLES'):
     from sqlalchemy import create_engine, MetaData
     from sqlalchemy.ext.automap import automap_base

@@ -1,14 +1,11 @@
-from logging import getLogger, StreamHandler
-
 import sanic
 from sanic_cors import CORS
 
 from src.api import api_blueprint
 from src.middlewares import REQUEST, RESPONSE
+from src.utils.logger import get_logger
 
-logger = getLogger(__name__)
-logger.setLevel('INFO')
-logger.addHandler(StreamHandler())
+logger = get_logger(__name__)
 app = sanic.Sanic(__name__)
 app.blueprint(api_blueprint)
 for middleware in REQUEST:
