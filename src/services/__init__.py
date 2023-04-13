@@ -1,9 +1,10 @@
-from logging import getLogger
+from logging import getLogger, StreamHandler
 
 import config
 
 logger = getLogger(__name__)
 logger.setLevel('INFO')
+logger.addHandler(StreamHandler())
 if hasattr(config, 'DATABASE_CONFIG') and hasattr(config, 'TABLES'):
     from sqlalchemy import create_engine, MetaData
     from sqlalchemy.ext.automap import automap_base
