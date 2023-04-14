@@ -8,6 +8,9 @@ DATABASE_CONFIG = {
     'port': '3306'
 }
 TABLES = [
-    'test'
+    'taskinfo',
+    'patientinfo',
+    'doctorinfo',
+    'detailinfo'
 ]
 USE_GPU = True
