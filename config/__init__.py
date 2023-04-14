@@ -8,6 +8,7 @@ DATABASE_CONFIG = {
     'port': '3306'
 }
 TABLES = [
+    'userinfo',
     'taskinfo',
     'patientinfo',
     'doctorinfo',
