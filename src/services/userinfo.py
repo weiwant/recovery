@@ -1,3 +1,5 @@
+import json
+
 from src.models.mapper import Mapper
 from src.models.model import DataModel
 from src.services import session_maker, base
@@ -41,7 +43,7 @@ def login(**kwargs):
         elif not result:
             return 401, None
         else:
-            result = result[0]
+            result = json.loads(str(result[0]))
             result.pop(fields.map_dict['password'])
             result.pop(fields.map_dict['id'])
             return 200, result
