@@ -36,7 +36,12 @@ def login(**kwargs):
     """
     if fields.has_values(kwargs, ['username', 'password']):
         result = user_info.get_record(**kwargs)
-        return 200 if result is not None else 500, result
+        if result is None:
+            return 500, None
+        elif not result:
+            return 401, None
+        else:
+            return 200, result
     else:
         logger.error('缺少参数')
         return 500, None
