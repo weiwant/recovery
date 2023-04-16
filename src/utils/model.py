@@ -17,3 +17,11 @@ class ModelExt:
         if '_sa_instance_state' in fields:
             del fields['_sa_instance_state']
         return json.dumps(fields, cls=ModelExt.encoder)
+
+    def to_json(self):
+        """
+        实例的json表示
+
+        :return: str
+        """
+        return json.loads(str(self))
