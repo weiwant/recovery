@@ -41,6 +41,9 @@ def login(**kwargs):
         elif not result:
             return 401, None
         else:
+            result = result[0]
+            result.pop(fields.map_dict['password'])
+            result.pop(fields.map_dict['id'])
             return 200, result
     else:
         logger.error('缺少参数')
