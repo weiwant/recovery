@@ -19,8 +19,11 @@ def register(**kwargs):
     :param kwargs:
     :return:
     """
-    if fields.has_values(kwargs, ['username', 'password', 'type']):
-        result = user_info.add_record(**kwargs)
+    args = ['username', 'password', 'type']
+    if fields.has_values(kwargs, args):
+        keys = [fields.map_dict[arg] for arg in args]
+        values = [kwargs[key] for key in keys]
+        result = user_info.add_record(**dict.fromkeys(keys, values))
         return 200 if result is not None else 500, result
     else:
         logger.error('缺少参数')
@@ -34,14 +37,17 @@ def login(**kwargs):
     :param kwargs:
     :return:
     """
-    if fields.has_values(kwargs, ['username', 'password']):
-        result = user_info.get_record(**kwargs)
+    args = ['username', 'password']
+    if fields.has_values(kwargs, args):
+        keys = [fields.map_dict[arg] for arg in args]
+        values = [kwargs[key] for key in keys]
+        result = user_info.get_record(**dict.fromkeys(keys, values))
         if result is None:
             return 500, None
         elif not result:
             return 401, None
         else:
-            return 200, result[0]
+            return 200, result[0].to_json()
     else:
         logger.error('缺少参数')
         return 500, None
