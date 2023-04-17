@@ -37,8 +37,8 @@ class Mapper:
         if opt is None:
             opt = []
         if isinstance(key, list):
-            dic = dict(zip([self.map_dict[k] for k in key], [dic[self.map_dict[k]] for k in key]))
-            dic.update([(self.map_dict[k], dic[self.map_dict[k]]) for k in opt if self.map_dict[k] in dic.keys()])
-            return dic
+            dic_ = dict(zip([self.map_dict[k] for k in key], [dic[self.map_dict[k]] for k in key]))
+            dic_.update([(self.map_dict[k], dic[self.map_dict[k]]) for k in opt if self.map_dict[k] in dic.keys()])
+            return dic_
         else:
             return {self.map_dict[key]: dic[self.map_dict[key]]}
