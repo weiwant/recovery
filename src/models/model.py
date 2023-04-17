@@ -54,8 +54,10 @@ class DataModel:
                 key = kwargs.pop(self.key)
                 session.query(self.class_).filter_by(**{self.key: key}).delete()
                 session.commit()
+                return True
             except Exception as e:
                 self.logger.error(f'删除 {self.class_.__name__} 记录失败: {e}')
+                return False
 
     def update_record(self, **kwargs):
         """
@@ -71,8 +73,10 @@ class DataModel:
                     raise ValueError(f'更新 {self.class_.__name__} 记录失败: 缺少关键字参数 {self.key}')
                 session.execute(update(self.class_), [kwargs])
                 session.commit()
+                return True
             except Exception as e:
                 self.logger.error(f'更新 {self.class_.__name__} 记录失败: {e}')
+                return False
 
     def get_record(self, **kwargs):
         """
