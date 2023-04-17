@@ -100,7 +100,8 @@ async def login(request: Request):
                 iv = cipher.iv
                 if not user_info.update_record(**{
                     userinfo_fields.map_dict['id']: user_id,
-                    userinfo_fields.map_dict['iv']: iv.hex()
+                    userinfo_fields.map_dict['iv']: iv.hex(),
+                    userinfo_fields.map_dict['login_host']: request.host
                 }):
                     raise DataError('操作失败')
 
@@ -117,8 +118,7 @@ async def login(request: Request):
                         pad(str(user_id).encode(), AES.block_size)).hex()
                     info.update({
                         userinfo_fields.map_dict['username']: user_name,
-                        userinfo_fields.map_dict['type']: user_type,
-                        userinfo_fields.map_dict['login_host']: request.host
+                        userinfo_fields.map_dict['type']: user_type
                     })
                     return info
 
