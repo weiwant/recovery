@@ -117,7 +117,8 @@ async def login(request: Request):
                         pad(str(user_id).encode(), AES.block_size)).hex()
                     info.update({
                         userinfo_fields.map_dict['username']: user_name,
-                        userinfo_fields.map_dict['type']: user_type
+                        userinfo_fields.map_dict['type']: user_type,
+                        userinfo_fields.map_dict['login_host']: request.host
                     })
                     return info
 
