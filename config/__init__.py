@@ -1,3 +1,5 @@
+from Crypto.Random import get_random_bytes
+
 DATABASE_CONFIG = {
     'dbtype': 'mysql',
     'user': 'Manager',
@@ -15,3 +17,4 @@ TABLES = [
     'detailinfo'
 ]
 USE_GPU = True
+key = get_random_bytes(16)
