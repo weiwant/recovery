@@ -24,3 +24,16 @@ class Mapper:
             return set(dic.keys()).issuperset(set([self.map_dict[k] for k in key]))
         else:
             return self.map_dict[key] in dic.keys()
+
+    def get_dict(self, dic, key):
+        """
+        获取字典中指定键的值
+
+        :param dic: 字典
+        :param key: 键
+        :return: Any
+        """
+        if isinstance(key, list):
+            return dict(zip([self.map_dict[k] for k in key], [dic[self.map_dict[k]] for k in key]))
+        else:
+            return {self.map_dict[key]: dic[self.map_dict[key]]}
