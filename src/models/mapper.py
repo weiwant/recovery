@@ -25,7 +25,7 @@ class Mapper:
         else:
             return self.map_dict[key] in dic.keys()
 
-    def get_dict(self, dic, key, opt=None):
+    def get_dict(self, dic, key=None, opt=None):
         """
         获取字典中指定键的值
 
@@ -36,9 +36,11 @@ class Mapper:
         """
         if opt is None:
             opt = []
-        if isinstance(key, list):
-            dic_ = dict(zip([self.map_dict[k] for k in key], [dic[self.map_dict[k]] for k in key]))
-            dic_.update([(self.map_dict[k], dic[self.map_dict[k]]) for k in opt if self.map_dict[k] in dic.keys()])
-            return dic_
-        else:
-            return {self.map_dict[key]: dic[self.map_dict[key]]}
+        dic_ = dict()
+        dic_.update([(self.map_dict[k], dic[self.map_dict[k]]) for k in opt if self.map_dict[k] in dic.keys()])
+        if key:
+            if isinstance(key, list):
+                dic_.update(**dict(zip([self.map_dict[k] for k in key], [dic[self.map_dict[k]] for k in key])))
+            else:
+                dic_.update({self.map_dict[key]: dic[self.map_dict[key]]})
+        return dic_
