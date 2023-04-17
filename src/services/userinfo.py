@@ -8,5 +8,7 @@ fields = Mapper({
     'id': 'id',
     'username': 'username',
     'password': 'password',
-    'type': 'type'
+    'type': 'type',
+    'iv': 'iv',
+    'login_host': 'loginhost'
 })
