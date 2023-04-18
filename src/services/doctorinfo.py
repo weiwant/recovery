@@ -2,8 +2,6 @@ from src.models.mapper import Mapper
 from src.models.model import DataModel
 from src.services import session_maker, base
 
-doctor_info = DataModel(__name__, base.classes['doctorinfo'], session_maker, 'id')
-logger = doctor_info.logger
 fields = Mapper({
     'id': 'id',
     'name': 'name',
@@ -14,3 +12,5 @@ fields = Mapper({
     'profile': 'profile',
     'contact': 'contact'
 })
+doctor_info = DataModel(__name__, base.classes['doctorinfo'], session_maker, fields.map_dict['id'])
+logger = doctor_info.logger
