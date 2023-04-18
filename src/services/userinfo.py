@@ -1,3 +1,4 @@
+from Crypto.Cipher import AES
 from Crypto.Hash import MD5
 
 from src.models.error import DataError, RuleError
@@ -61,3 +62,40 @@ class UserService:
         if not result:
             raise DataError('操作失败')
         return result
+
+    @classmethod
+    def get_user_info(cls, **kwargs):
+        """
+        获取用户信息
+
+        :param kwargs: dict
+        :return:
+        """
+        kwargs[fields.map_dict['password']] = MD5.new(kwargs[fields.map_dict['password']].encode()).hexdigest()
+        result = cls.user_info.get_record(**kwargs)
+        if result is None:
+            raise DataError('操作失败')
+        elif not result:
+            raise RuleError('用户名或密码错误')
+        return result
+
+    @classmethod
+    def update_login(cls, userid, key, host):
+        """
+        更新登录信息
+
+        :param userid: userid
+        :param key: 密钥
+        :param host: host
+        :return:
+        """
+        cipher = AES.new(key, AES.MODE_CBC)
+        iv = cipher.iv
+        result = cls.user_info.update_record(**{
+            fields.map_dict['id']: userid,
+            fields.map_dict['iv']: iv.hex(),
+            fields.map_dict['login_host']: host
+        })
+        if not result:
+            raise DataError('操作失败')
+        return cipher
