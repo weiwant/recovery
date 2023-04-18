@@ -1,6 +1,5 @@
 from sanic import Request, Blueprint
 
-from config import key
 from src.models.error import ArgError, RuleError, DataError
 from src.models.response import Response
 from src.services.doctorinfo import DoctorService
@@ -81,7 +80,7 @@ async def login(request: Request):
             user_type = getattr(result[0], userinfo_fields.map_dict['type'])
             user_id = getattr(result[0], userinfo_fields.map_dict['id'])
             user_name = getattr(result[0], userinfo_fields.map_dict['username'])
-            cipher = UserService.update_login(user_id, key, request.host)
+            cipher = UserService.update_login(user_id, request.host)
             usr_info = None
             if user_type == 0:
                 pass

@@ -60,7 +60,7 @@ class PatientService:
 
         :param kwargs: dict
         :param cipher: 加密对象
-        :param result: result
+        :param result: patientinfo
         :return:
         """
         result[fields.map_dict['userid']] = cipher.encrypt(

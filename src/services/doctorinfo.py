@@ -59,7 +59,7 @@ class DoctorService:
 
         :param kwargs: dict
         :param cipher: 加密对象
-        :param result: result
+        :param result: doctorinfo
         :return:
         """
         result.pop(fields.map_dict['id'])

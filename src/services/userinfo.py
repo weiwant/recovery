@@ -1,6 +1,7 @@
 from Crypto.Cipher import AES
 from Crypto.Hash import MD5
 
+from config import key
 from src.models.error import DataError, RuleError
 from src.models.mapper import Mapper
 from src.models.model import DataModel
@@ -80,12 +81,11 @@ class UserService:
         return result
 
     @classmethod
-    def update_login(cls, userid, key, host):
+    def update_login(cls, userid, host):
         """
         更新登录信息
 
         :param userid: userid
-        :param key: 密钥
         :param host: host
         :return:
         """
