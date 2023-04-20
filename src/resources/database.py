@@ -25,8 +25,7 @@ class MetaClass(type):
         return super().__new__(mcs, name, bases, attrs)
 
 
-class Tables:
+class Tables(metaclass=MetaClass):
     """
     数据表
     """
-    __metaclass__ = MetaClass
