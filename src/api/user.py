@@ -191,9 +191,9 @@ async def add_info(request: Request):
 
     try:
         checked = Check(**data).dict(exclude_none=True, exclude={'type'})
-        if checked['type'] == 2:
+        if data['type'] == 2:
             add_patient(**checked)
-        elif checked['type'] == 3:
+        elif data['type'] == 3:
             add_doctor(**checked)
         return Response(200, '添加成功').text()
     except ValidationError as e:
