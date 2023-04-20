@@ -29,7 +29,7 @@ if hasattr(config, 'DATABASE_CONFIG') and hasattr(config, 'TABLES'):
     connect_string = get_connect_string(**DATABASE_CONFIG)
     engine = create_engine(connect_string)
     meta = MetaData()
-    meta.reflect(engine, only=TABLES)
+    meta.reflect(engine, only=TABLES.keys())
     base = automap_base(metadata=meta, cls=ModelExt)
     base.prepare()
     session_maker = sessionmaker(engine, expire_on_commit=False)

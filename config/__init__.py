@@ -9,12 +9,12 @@ DATABASE_CONFIG = {
     'dbname': 'recovery',
     'port': '3306'
 }
-TABLES = [
-    'userinfo',
-    'task_info',
-    'patient_info',
-    'doctor_info',
-    'detail_info'
-]
+TABLES = {
+    'userinfo': 'openid',
+    'task_info': 'id',
+    'patient_info': 'id',
+    'doctor_info': 'id',
+    'detail_info': 'id'
+}
 USE_GPU = True
 key = get_random_bytes(16)
