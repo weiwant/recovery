@@ -43,6 +43,7 @@ async def register(request: Request):
 
     try:
         checked = Check(**data).dict(exclude_none=True)
+        checked['type'] = int(checked['type'])
         if exist_user(openid=checked['openid']):
             return Response(403, '用户已存在').text()
         if checked.get('nickname', None) is None:
@@ -124,6 +125,7 @@ async def update(request: Request):
 
     try:
         checked = Check(**data).dict(exclude_none=True)
+        checked['type'] = int(checked['type'])
         update_user(**checked)
         return Response(200, '更新成功').text()
     except ValidationError as e:
