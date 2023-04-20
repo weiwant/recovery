@@ -100,12 +100,21 @@ async def update(request: Request):
     await request.receive_body()
     data = request.json
 
+    class TypeValue(IntEnum):
+        """
+        类型枚举
+        """
+        UNSET = 0
+        ADMIN = 1
+        PATIENT = 2
+        DOCTOR = 3
+
     class Check(BaseModel):
         """
         检查数据
         """
         openid: str
-        type: int
+        type: TypeValue
 
         class Config:
             """
