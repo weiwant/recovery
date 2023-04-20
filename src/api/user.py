@@ -4,7 +4,7 @@ from pydantic import BaseModel, ValidationError
 from sanic import Request, Blueprint
 
 from src.classes.response import Response
-from src.services.user import add_user, exist_user, get_user, update_user, delete_user,add_patient,add_doctor
+from src.services.user import add_user, exist_user, get_user, update_user, delete_user, add_patient, add_doctor
 from src.utils.logger import get_logger
 
 user_blueprint = Blueprint('user', url_prefix='/user')
@@ -142,6 +142,8 @@ async def delete(request: Request):
     except Exception as e:
         logger.error(f'删除用户失败: {e}')
         return Response(500, '删除用户失败').text()
+
+
 @user_blueprint.route('/add-info', methods=['POST'])
 async def add_info(request: Request):
     """
@@ -152,22 +154,25 @@ async def add_info(request: Request):
     """
     await request.receive_body()
     data = request.json
+
     class Check(BaseModel):
         """
         检查数据
         """
         userid: str
         type: int
+
         class Config:
             """
             配置
             """
             extra = 'allow'
+
     try:
         checked = Check(**data).dict(exclude_none=True)
-        if checked['type']==2:
+        if checked['type'] == 2:
             add_patient(**checked)
-        elif checked['type']==3:
+        elif checked['type'] == 3:
             add_doctor(**checked)
         return Response(200, '添加成功').text()
     except ValidationError as e:
@@ -176,4 +181,3 @@ async def add_info(request: Request):
     except Exception as e:
         logger.error(f'添加用户信息失败: {e}')
         return Response(500, '添加用户信息失败').text()
-
