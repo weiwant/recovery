@@ -29,7 +29,7 @@ class MetaClass(type):
             table = base.classes[name].__dict__['__table__']
             annotations = {}
             for c in getattr(table.columns, '_all_columns'):
-                annotations.update({c.name: Union[NoneType, c.type.python_type]})
+                annotations.update({str(c.name): Union[NoneType, c.type.python_type]})
             field_name = pascalcase(name) + 'Field'
             attrs.update({field_name: type(field_name, (BaseModel,), {'__annotations__': annotations})})
         return super().__new__(mcs, name, bases, attrs)
