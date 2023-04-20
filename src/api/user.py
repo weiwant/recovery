@@ -1,3 +1,4 @@
+from enum import IntEnum
 from typing import Optional
 
 from pydantic import BaseModel, ValidationError
@@ -22,12 +23,21 @@ async def register(request: Request):
     await request.receive_body()
     data = request.json
 
+    class TypeValue(IntEnum):
+        """
+        类型枚举
+        """
+        UNSET = 0
+        ADMIN = 1
+        PATIENT = 2
+        DOCTOR = 3
+
     class Check(BaseModel):
         """
         检查数据
         """
         openid: str
-        type: int
+        type: TypeValue
         session_key: Optional[str]
         nickname: Optional[str]
 
