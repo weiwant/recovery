@@ -34,7 +34,7 @@ def update_user(**kwargs):
     :param kwargs: 用户信息
     :return:
     """
-    data = user_fields(**kwargs).dict(exclude_none=True, exclude={'type'} if kwargs.get('type') == 0 else {})
+    data = user_fields(**kwargs).dict(exclude_none=True, exclude={'type'} if not kwargs.get('type') == 0 else {})
     if not Userinfo.update_record(**data):
         user_logger.error(f'更新用户失败: {data}')
         raise ValueError(f'更新用户失败: {data}')
