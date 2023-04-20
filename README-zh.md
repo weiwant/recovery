@@ -23,7 +23,7 @@
 1. 克隆仓库
 
 ```sh
-git clone
+git clone git@gitlab.com:ZWForum/recovery.git
 ```
 
 2. 解压文件***packages/openpose-1.7.0.zip***到项目根目录下，命名为***openpose***

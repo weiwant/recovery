@@ -24,7 +24,7 @@ add ***path/to/cudnn/cuda/bin*** to ***PATH*** in ***environment variables***
 1. clone the repo
 
 ```sh
-git clone
+git clone git@gitlab.com:ZWForum/recovery.git
 ```
 
 2. unzip the file ***packages/openpose-1.7.0.zip*** as ***openpose*** in the root directory
