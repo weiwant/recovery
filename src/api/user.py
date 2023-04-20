@@ -169,7 +169,7 @@ async def add_info(request: Request):
             extra = 'allow'
 
     try:
-        checked = Check(**data).dict(exclude_none=True)
+        checked = Check(**data).dict(exclude_none=True, exclude={'type'})
         if checked['type'] == 2:
             add_patient(**checked)
         elif checked['type'] == 3:
