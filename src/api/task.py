@@ -60,7 +60,7 @@ async def add(request: Request):
     try:
         checked = Check(**data).dict(exclude_none=True)
         checked['status'] = 0
-        checked['create_date'] = date.today()
+        checked['create_time'] = date.today()
         checked['training_root'] = SHA256.new((str(datetime.now()) + json.dumps(data)).encode()).hexdigest()
         checked['evaluate_root'] = SHA256.new((str(datetime.now()) + json.dumps(data)).encode()).hexdigest()
         checked['difficulty'] = int(checked['difficulty'])
