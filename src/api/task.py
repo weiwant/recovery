@@ -4,6 +4,7 @@ import shutil
 from datetime import date
 from datetime import datetime
 from enum import IntEnum
+from typing import Optional
 
 from Crypto.Hash import SHA256
 from pydantic import BaseModel, ValidationError, validator
@@ -48,7 +49,7 @@ async def add(request: Request):
         type: str
         difficulty: DifficultyValue
 
-        @validator('deadline')
+        @validator('deadline', allow_reuse=True)
         def deadline_must_greater_than_today(cls, v):
             """
             截止日期必须大于今天
@@ -148,14 +149,14 @@ async def update(request: Request):
         检查数据
         """
         id: int
-        status: State
-        description: str
-        deadline: date
-        circle_time: str
-        type: str
-        difficulty: DifficultyValue
+        status: Optional[State]
+        description: Optional[str]
+        deadline: Optional[date]
+        circle_time: Optional[str]
+        type: Optional[str]
+        difficulty: Optional[DifficultyValue]
 
-        @validator('deadline')
+        @validator('deadline', allow_reuse=True)
         def deadline_must_greater_than_today(cls, v):
             """
             截止日期必须大于今天
@@ -163,17 +164,16 @@ async def update(request: Request):
             :param v:
             :return:
             """
-            if v < date.today():
+            if v and v < date.today():
                 raise ValueError('截止日期必须大于今天')
             return v
 
-        class Config:
-            extra = 'ignore'
-
     try:
         checked = Check(**data).dict(exclude_none=True)
-        checked['difficulty'] = int(checked['difficulty'])
-        checked['status'] = int(checked['status'])
+        if checked.get('difficulty', None) is not None:
+            checked['difficulty'] = int(checked['difficulty'])
+        if checked.get('status', None) is not None:
+            checked['status'] = int(checked['status'])
         update_task(**checked)
         return Response(200, '更新成功').text()
     except ValidationError as e:
