@@ -1,4 +1,7 @@
+import os
 from datetime import date
+from typing import List
+from uuid import uuid4
 
 from pydantic import BaseModel, ValidationError
 from sanic import Request, Blueprint
@@ -70,6 +73,43 @@ async def get(request: Request):
         checked = Check(**data).dict(exclude_none=True)
         result = get_detail(**checked)[0].to_json()
         return Response(200, data=result).json()
+    except ValidationError as e:
+        logger.error(f'参数错误: {e}')
+        return Response(400, '参数错误').text()
+    except Exception as e:
+        logger.error(f'获取失败: {e}')
+        return Response(500, '获取失败').text()
+
+
+@detail_blueprint.route('/upload', methods=['POST'])
+async def upload(request: Request):
+    """
+    上传详情
+
+    :param request:
+    :return:
+    """
+    await request.receive_body()
+    data = request.form
+
+    class Check(BaseModel):
+        """
+        检查数据
+        """
+        task: List[int]
+        video_type: List[str]
+
+    try:
+        file = request.files['video'][0]
+        file_name = uuid4().hex
+        checked = Check(**data).dict(exclude_none=True)
+        file_name = file_name + '.' + checked['video_type'][0]
+        result = get_task(id=checked['task'][0])[0]
+        training_root = getattr(result, 'training_root')
+        file_path = os.path.join('training', training_root, file_name)
+        with open(file_path, 'wb') as f:
+            f.write(file.body)
+        return Response(200, data=file_name).json()
     except ValidationError as e:
         logger.error(f'参数错误: {e}')
         return Response(400, '参数错误').text()
