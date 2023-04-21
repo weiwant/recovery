@@ -49,7 +49,7 @@ async def add(request: Request):
         difficulty: DifficultyValue
 
         @validator('deadline')
-        def deadline_must_greater_than_today(self, v):
+        def deadline_must_greater_than_today(cls, v):
             """
             截止日期必须大于今天
             :param v:
@@ -156,7 +156,7 @@ async def update(request: Request):
         difficulty: DifficultyValue
 
         @validator('deadline')
-        def deadline_must_greater_than_today(self, v):
+        def deadline_must_greater_than_today(cls, v):
             """
             截止日期必须大于今天
 
