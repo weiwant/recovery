@@ -1,4 +1,5 @@
 import json as _json
+from datetime import date
 
 from sanic import json, text, empty
 
@@ -11,7 +12,8 @@ class Response:
     响应类
     """
     extensions = [
-        (ModelExt, lambda o: _json.loads(o.__repr__()))
+        (ModelExt, lambda o: _json.loads(o.__repr__())),
+        (date, lambda o: str(o))
     ]
 
     def __init__(self, status_code: int = 200, message: str = None, data=None):
