@@ -195,18 +195,8 @@ async def get(request: Request):
     await request.receive_body()
     data = request.json
 
-    class Check(BaseModel):
-        """
-        检查数据
-        """
-        id: int
-
-        class Config:
-            extra = 'allow'
-
     try:
-        checked = Check(**data).dict(exclude_none=True)
-        result = get_task(**checked)
+        result = get_task(**data)
         return Response(200, data=result).json()
     except ValidationError as e:
         logger.error(f'参数错误: {e}')
