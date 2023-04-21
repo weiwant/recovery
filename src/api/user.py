@@ -5,6 +5,7 @@ from pydantic import BaseModel, ValidationError
 from sanic import Request, Blueprint
 
 from src.classes.response import Response
+from src.services.task import delete_task, get_task
 from src.services.user import add_user, exist_user, get_user, update_user, delete_user, add_patient, add_doctor
 from src.utils.logger import get_logger
 
@@ -155,6 +156,16 @@ async def delete(request: Request):
 
     try:
         checked = Check(**data).dict(exclude_none=True)
+        result = get_user(**checked)
+        user_type = result['type']
+        temp = {}
+        if user_type == 2:
+            temp.update({'patient': checked['openid']})
+        elif user_type == 3:
+            temp.update({'doctor': checked['openid']})
+        for task in get_task(**temp):
+            delete_task(**{'id': getattr(task, 'id'), 'training_root': getattr(task, 'training_root'),
+                           'evaluate_root': getattr(task, 'evaluate_root')})
         delete_user(**checked)
         return Response(200, '删除成功').text()
     except ValidationError as e:
