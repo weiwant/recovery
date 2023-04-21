@@ -5,7 +5,7 @@ from pydantic import BaseModel, ValidationError
 from sanic import Request, Blueprint
 
 from src.classes.response import Response
-from src.services.detail import add_detail, get_detail, upload
+from src.services.detail import add_detail, get_detail, upload_video
 from src.services.model import inference
 from src.services.task import get_task
 from src.utils.logger import get_logger
@@ -104,7 +104,7 @@ async def upload(request: Request):
         checked['task'] = checked['task'][0]
         result = get_task(id=checked['task'])[0]
         checked['training_root'] = getattr(result, 'training_root')
-        file_name = upload(**checked)
+        file_name = upload_video(**checked)
         return Response(200, data=file_name).json()
     except ValidationError as e:
         logger.error(f'参数错误: {e}')

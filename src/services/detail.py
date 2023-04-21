@@ -42,7 +42,7 @@ def get_detail(**kwargs):
     return result
 
 
-def upload(**kwargs):
+def upload_video(**kwargs):
     """
     上传文件
 
