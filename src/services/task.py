@@ -1,18 +1,9 @@
-from sqlalchemy.orm.session import Session
-
 from src.classes.model import DataModel
-from src.resources import session_maker, base
 from src.resources.database import Tables
 
 TaskInfo: DataModel = getattr(Tables, 'TaskInfo')
 task_logger = TaskInfo.logger
 task_fields = getattr(Tables, 'TaskInfoField')
-DoctorInfo: DataModel = getattr(Tables, 'DoctorInfo')
-doctor_logger = DoctorInfo.logger
-doctor_fields = getattr(Tables, 'DoctorInfoField')
-PatientInfo: DataModel = getattr(Tables, 'PatientInfo')
-patient_logger = PatientInfo.logger
-patient_fields = getattr(Tables, 'PatientInfoField')
 
 
 def update_task(**kwargs):
@@ -34,7 +25,7 @@ def add_task(**kwargs):
     :param kwargs: 任务参数
     :return:
     """
-    if not TaskInfo.add_record(**kwargs):
+    if TaskInfo.add_record(**kwargs) is None:
         task_logger.error(f'添加任务失败: {kwargs}')
         raise ValueError(f'添加任务失败: {kwargs}')
 
@@ -58,11 +49,8 @@ def get_task(**kwargs):
     :param kwargs: 任务参数
     :return:
     """
-    with session_maker() as session:
-        try:
-            session: Session
-            return session.query(base.classes['task_info']).filter_by(
-                **task_fields(**kwargs).dict(exclude_none=True)).all()
-        except Exception as e:
-            task_logger.error(f'获取任务失败: {e}')
-            raise ValueError(f'获取任务失败: {e}')
+    result = TaskInfo.get_record(**task_fields(**kwargs).dict(exclude_none=True))
+    if result is None:
+        task_logger.error(f'获取任务失败: {kwargs}')
+        raise ValueError(f'获取任务失败: {kwargs}')
+    return result

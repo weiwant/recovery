@@ -131,7 +131,7 @@ def add_patient(**kwargs):
     :param kwargs: 患者信息
     :return:
     """
-    if not PatientInfo.add_record(**patient_fields(**kwargs).dict(exclude_none=True, exclude={'id'})):
+    if PatientInfo.add_record(**patient_fields(**kwargs).dict(exclude_none=True, exclude={'id'})) is None:
         patient_logger.error(f'添加患者失败: {kwargs}')
         raise ValueError(f'添加患者失败: {kwargs}')
 
@@ -143,6 +143,6 @@ def add_doctor(**kwargs):
     :param kwargs: 医生信息
     :return:
     """
-    if not DoctorInfo.add_record(**doctor_fields(**kwargs).dict(exclude_none=True, exclude={'id'})):
+    if DoctorInfo.add_record(**doctor_fields(**kwargs).dict(exclude_none=True, exclude={'id'})) is None:
         doctor_logger.error(f'添加医生失败: {kwargs}')
         raise ValueError(f'添加医生失败: {kwargs}')
