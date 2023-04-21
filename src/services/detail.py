@@ -1,3 +1,5 @@
+from uuid import uuid4
+
 from src.classes.model import DataModel
 from src.resources.database import Tables
 
@@ -38,3 +40,19 @@ def get_detail(**kwargs):
         detail_logger.error(f'获取任务详情失败: {kwargs}')
         raise ValueError(f'获取任务详情失败: {kwargs}')
     return result
+
+
+def upload(**kwargs):
+    """
+    上传文件
+
+    :param kwargs: 任务详情参数
+    :return:
+    """
+    file = kwargs['video']
+    training_root = kwargs['training_root']
+    file_name = uuid4().hex + '.' + kwargs['video_type']
+    file_path = f'./training/{training_root}/{file_name}'
+    with open(file_path, 'wb') as f:
+        f.write(file.body)
+    return file_name

@@ -1,13 +1,11 @@
-import os
 from datetime import date
 from typing import List
-from uuid import uuid4
 
 from pydantic import BaseModel, ValidationError
 from sanic import Request, Blueprint
 
 from src.classes.response import Response
-from src.services.detail import add_detail, get_detail
+from src.services.detail import add_detail, get_detail, upload
 from src.services.model import inference
 from src.services.task import get_task
 from src.utils.logger import get_logger
@@ -100,15 +98,13 @@ async def upload(request: Request):
         video_type: List[str]
 
     try:
-        file = request.files['video'][0]
-        file_name = uuid4().hex
         checked = Check(**data).dict(exclude_none=True)
-        file_name = file_name + '.' + checked['video_type'][0]
-        result = get_task(id=checked['task'][0])[0]
-        training_root = getattr(result, 'training_root')
-        file_path = os.path.join('training', training_root, file_name)
-        with open(file_path, 'wb') as f:
-            f.write(file.body)
+        checked['video'] = request.files['video'][0]
+        checked['video_type'] = checked['video_type'][0]
+        checked['task'] = checked['task'][0]
+        result = get_task(id=checked['task'])[0]
+        checked['training_root'] = getattr(result, 'training_root')
+        file_name = upload(**checked)
         return Response(200, data=file_name).json()
     except ValidationError as e:
         logger.error(f'参数错误: {e}')
