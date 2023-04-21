@@ -43,6 +43,8 @@ async def register(request: Request):
 
     try:
         checked = Check(**data).dict(exclude_none=True)
+        if checked.get('nickname', None) is None:
+            checked['nickname'] = '微信用户'
         checked['type'] = int(checked['type'])
         if exist_user(openid=checked['openid']):
             return Response(403, '用户已存在').text()

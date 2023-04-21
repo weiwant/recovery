@@ -22,8 +22,6 @@ def add_user(**kwargs):
     :param kwargs: 用户信息
     :return:
     """
-    if kwargs.get('nickname', None) is None:
-        kwargs['nickname'] = '微信用户'
     if not Userinfo.add_record(**kwargs):
         user_logger.error(f'添加用户失败: {kwargs}')
         raise ValueError(f'添加用户失败: {kwargs}')
