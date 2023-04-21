@@ -1,8 +1,10 @@
 import os
 import re
 import sys
+from datetime import date
 
 import config
+from src.utils.encoder import JSONEncoder
 from src.utils.logger import get_logger
 from src.utils.model import ModelExt
 
@@ -30,6 +32,10 @@ if hasattr(config, 'DATABASE_CONFIG') and hasattr(config, 'TABLES'):
     engine = create_engine(connect_string)
     meta = MetaData()
     meta.reflect(engine, only=TABLES.keys())
+    setattr(JSONEncoder, 'ext', [
+        (date, lambda o: str(o))
+    ])
+    setattr(ModelExt, 'encoder', JSONEncoder)
     base = automap_base(metadata=meta, cls=ModelExt)
     base.prepare()
     session_maker = sessionmaker(engine, expire_on_commit=False)
