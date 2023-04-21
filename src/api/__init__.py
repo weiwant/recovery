@@ -1,5 +1,6 @@
 import sanic
 
+from src.api.task import task_blueprint
 from src.api.user import user_blueprint
 from src.utils.logger import get_logger
 
@@ -10,7 +11,8 @@ api_group = sanic.blueprints.BlueprintGroup(url_prefix='/recovery/api')
 method_get = {}
 method_post = {}
 blueprints = [
-    user_blueprint
+    user_blueprint,
+    task_blueprint
 ]
 for (k, v) in method_get.items():
     api_blueprint.add_route(v, k)
