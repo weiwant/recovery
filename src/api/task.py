@@ -1,12 +1,7 @@
-import json
-import os
-import shutil
 from datetime import date
-from datetime import datetime
 from enum import IntEnum
 from typing import Optional
 
-from Crypto.Hash import SHA256
 from pydantic import BaseModel, ValidationError, validator
 from sanic import Request, Blueprint
 
@@ -62,16 +57,8 @@ async def add(request: Request):
 
     try:
         checked = Check(**data).dict(exclude_none=True)
-        checked['status'] = 0
-        checked['create_time'] = date.today()
-        checked['training_root'] = SHA256.new((str(datetime.now()) + json.dumps(data)).encode()).hexdigest()
-        checked['evaluate_root'] = SHA256.new((str(datetime.now()) + json.dumps(data)).encode()).hexdigest()
         checked['difficulty'] = int(checked['difficulty'])
         add_task(**checked)
-        if not os.path.exists(f'./training/{checked["training_root"]}'):
-            os.makedirs(f'./training/{checked["training_root"]}')
-        if not os.path.exists(f'./evaluation/{checked["evaluate_root"]}'):
-            os.makedirs(f'./evaluation/{checked["evaluate_root"]}')
         return Response(200, '添加成功').text()
     except ValidationError as e:
         logger.error(f'参数错误: {e}')
@@ -100,14 +87,7 @@ async def delete(request: Request):
 
     try:
         checked = Check(**data).dict(exclude_none=True)
-        temp = get_task(id=checked['id'])[0].to_json()
-        training_root = temp['training_root']
-        evaluate_root = temp['evaluate_root']
         delete_task(**checked)
-        if os.path.exists(f'./training/{training_root}'):
-            shutil.rmtree(f'./training/{training_root}')
-        if os.path.exists(f'./evaluation/{evaluate_root}'):
-            shutil.rmtree(f'./evaluation/{evaluate_root}')
         return Response(200, '删除成功').text()
     except ValidationError as e:
         logger.error(f'参数错误: {e}')
