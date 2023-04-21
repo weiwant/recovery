@@ -6,7 +6,7 @@ from datetime import datetime
 from enum import IntEnum
 
 from Crypto.Hash import SHA256
-from pydantic import BaseModel, ValidationError
+from pydantic import BaseModel, ValidationError, validator
 from sanic import Request, Blueprint
 
 from src.classes.response import Response
@@ -47,6 +47,17 @@ async def add(request: Request):
         circle_time: str
         type: str
         difficulty: DifficultyValue
+
+        @validator('deadline')
+        def deadline_must_greater_than_today(self, v):
+            """
+            截止日期必须大于今天
+            :param v:
+            :return:
+            """
+            if v < date.today():
+                raise ValueError('截止日期必须大于今天')
+            return v
 
     try:
         checked = Check(**data).dict(exclude_none=True)
@@ -143,6 +154,18 @@ async def update(request: Request):
         circle_time: str
         type: str
         difficulty: DifficultyValue
+
+        @validator('deadline')
+        def deadline_must_greater_than_today(self, v):
+            """
+            截止日期必须大于今天
+
+            :param v:
+            :return:
+            """
+            if v < date.today():
+                raise ValueError('截止日期必须大于今天')
+            return v
 
         class Config:
             extra = 'ignore'
