@@ -46,8 +46,6 @@ async def register(request: Request):
         checked['type'] = int(checked['type'])
         if exist_user(openid=checked['openid']):
             return Response(403, '用户已存在').text()
-        if checked.get('nickname', None) is None:
-            checked['nickname'] = '微信用户'
         add_user(**checked)
         return Response(200, '用户注册成功').text()
     except ValidationError as e:
