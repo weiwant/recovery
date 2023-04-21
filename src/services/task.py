@@ -1,9 +1,5 @@
-import json
 import os
 import shutil
-from datetime import date, datetime
-
-from Crypto.Hash import SHA256
 
 from src.classes.model import DataModel
 from src.resources.database import Tables
@@ -32,10 +28,6 @@ def add_task(**kwargs):
     :param kwargs: 任务参数
     :return:
     """
-    kwargs['status'] = 0
-    kwargs['create_date'] = date.today()
-    kwargs['training_root'] = SHA256.new((str(datetime.now()) + json.dumps(kwargs)).encode()).hexdigest()
-    kwargs['evaluate_root'] = SHA256.new((str(datetime.now()) + json.dumps(kwargs)).encode()).hexdigest()
     if TaskInfo.add_record(**kwargs) is None:
         task_logger.error(f'添加任务失败: {kwargs}')
         raise ValueError(f'添加任务失败: {kwargs}')
@@ -52,9 +44,8 @@ def delete_task(**kwargs):
     :param kwargs: 任务参数
     :return:
     """
-    temp = TaskInfo.get_record(id=kwargs['id'])[0].to_json()
-    training_root = temp['training_root']
-    evaluate_root = temp['evaluate_root']
+    training_root = kwargs['training_root']
+    evaluate_root = kwargs['evaluate_root']
     if not TaskInfo.delete_record(**kwargs):
         task_logger.error(f'删除任务失败: {kwargs}')
         raise ValueError(f'删除任务失败: {kwargs}')
