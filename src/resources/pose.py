@@ -9,7 +9,7 @@ from src.utils.logger import get_logger
 logger = get_logger(__name__)
 
 
-def process_video(video_path, model_type='MPI', max_people=1):
+def process_video(video_path, model_type='BODY_25', max_people=1):
     """
     处理视频
 
@@ -39,5 +39,5 @@ def process_video(video_path, model_type='MPI', max_people=1):
         datum = op.Datum()
         datum.cvInputData = frame
         opWrapper.emplaceAndPop(op.VectorDatum([datum]))
-        yield datum.poseKeypoints
+        yield datum.poseKeypoints[:15]
     cap.release()
