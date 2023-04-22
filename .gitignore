@@ -144,3 +144,4 @@ cython_debug/
 openpose*/
 training/
 evaluation/
+datasets/
