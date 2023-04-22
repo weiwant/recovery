@@ -39,5 +39,5 @@ def process_video(video_path, model_type='MPI', max_people=1):
         datum = op.Datum()
         datum.cvInputData = frame
         opWrapper.emplaceAndPop(op.VectorDatum([datum]))
-        yield datum.cvOutputData
+        yield datum.poseKeypoints
     cap.release()
