@@ -5,7 +5,7 @@ from pydantic import BaseModel, ValidationError
 from sanic import Request, Blueprint
 
 from src.classes.response import Response
-from src.services.detail import add_detail, get_detail, upload_video, check_exist
+from src.services.detail import add_detail, get_detail, upload_video, check_exist, update_detail
 from src.services.model import inference
 from src.services.task import get_task
 from src.utils.logger import get_logger
@@ -35,13 +35,17 @@ async def add(request: Request):
     try:
         checked = Check(**data).dict(exclude_none=True)
         checked['finish_date'] = date.today()
+        exist = False
         if check_exist(**checked):
-            return Response(403, '已存在').text()
+            exist = True
         result = get_task(id=checked['task'])[0]
         checked['deadline'] = getattr(result, 'deadline')
         checked['score'], checked['evaluation'] = inference(checked['video'], getattr(result, 'training_root'),
                                                             getattr(result, 'evaluate_root'))
-        add_detail(**checked)
+        if exist:
+            update_detail(**checked)
+        else:
+            add_detail(**checked)
         return Response(200, '添加成功').text()
     except ValidationError as e:
         logger.error(f'参数错误: {e}')

@@ -65,6 +65,18 @@ def check_exist(**kwargs):
     :param kwargs: 任务详情参数
     :return:
     """
-    if DetailInfo.get_record(**detail_fields(**kwargs).dict(exclude_none=True)):
+    if DetailInfo.get_record(**detail_fields(**kwargs).dict(exclude_none=True, include={'task', 'finish_date'})):
         return True
     return False
+
+
+def update_detail(**kwargs):
+    """
+    更新任务详情
+
+    :param kwargs: 任务详情参数
+    :return:
+    """
+    if not DetailInfo.update_record(**detail_fields(**kwargs).dict(exclude_none=True)):
+        detail_logger.error(f'更新任务详情失败: {kwargs}')
+        raise ValueError(f'更新任务详情失败: {kwargs}')
