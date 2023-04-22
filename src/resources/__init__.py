@@ -1,5 +1,4 @@
 import os
-import re
 import sys
 from datetime import date
 
@@ -9,17 +8,15 @@ from src.utils.logger import get_logger
 from src.utils.model import ModelExt
 
 logger = get_logger(__name__)
-if hasattr(config, 'USE_GPU'):
-    from config import USE_GPU
+if hasattr(config, 'USE_GPU') and hasattr(config, 'OPENPOSE_ROOT'):
+    from config import USE_GPU, OPENPOSE_ROOT
 
-    for dir_name in os.listdir(os.path.dirname(os.path.realpath('src'))):
-        if re.match(r'openpose.*', dir_name):
-            build_dir = 'build_GPU' if USE_GPU else 'build_CPU'
-            bin_dir = os.path.join(dir_name, build_dir, 'bin')
-            dll_dir = os.path.join(dir_name, build_dir, 'x64', 'Release')
-            os.environ['PATH'] = os.environ['PATH'] + ';' + bin_dir + ';' + dll_dir
-            sys.path.append(os.path.join(dir_name, build_dir, 'python', 'openpose', 'Release'))
-            break
+    dir_name = OPENPOSE_ROOT
+    build_dir = 'build_GPU' if USE_GPU else 'build_CPU'
+    bin_dir = os.path.join(dir_name, build_dir, 'bin')
+    dll_dir = os.path.join(dir_name, build_dir, 'x64', 'Release')
+    os.environ['PATH'] = os.environ['PATH'] + ';' + bin_dir + ';' + dll_dir
+    sys.path.append(os.path.join(dir_name, build_dir, 'python', 'openpose', 'Release'))
 if hasattr(config, 'DATABASE_CONFIG') and hasattr(config, 'TABLES'):
     from sqlalchemy import create_engine, MetaData
     from sqlalchemy.ext.automap import automap_base

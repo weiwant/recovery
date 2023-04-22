@@ -17,4 +17,5 @@ TABLES = {
     'detail_info': 'id'
 }
 USE_GPU = True
+OPENPOSE_ROOT = 'openpose-1.7.0'
 key = get_random_bytes(16)
