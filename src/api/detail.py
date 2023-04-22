@@ -36,15 +36,15 @@ async def add(request: Request):
         checked = Check(**data).dict(exclude_none=True)
         checked['finish_date'] = date.today()
         exist = False
-        result = get_detail(**{'task': checked['task'], 'finish_date': checked['finish_date']})
-        if result:
+        result_detail = get_detail(**{'task': checked['task'], 'finish_date': checked['finish_date']})
+        if result_detail:
             exist = True
         result = get_task(id=checked['task'])[0]
         checked['deadline'] = getattr(result, 'deadline')
         checked['score'], checked['evaluation'] = inference(checked['video'], getattr(result, 'training_root'),
                                                             getattr(result, 'evaluate_root'))
         if exist:
-            checked.update({'id': getattr(result[0], 'id')})
+            checked.update({'id': getattr(result_detail[0], 'id')})
             update_detail(**checked)
         else:
             add_detail(**checked)
