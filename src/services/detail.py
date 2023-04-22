@@ -58,18 +58,6 @@ def upload_video(**kwargs):
     return file_name
 
 
-def check_exist(**kwargs):
-    """
-    检查文件是否存在
-
-    :param kwargs: 任务详情参数
-    :return:
-    """
-    if DetailInfo.get_record(**detail_fields(**kwargs).dict(exclude_none=True, include={'task', 'finish_date'})):
-        return True
-    return False
-
-
 def update_detail(**kwargs):
     """
     更新任务详情
