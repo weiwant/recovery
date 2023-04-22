@@ -56,3 +56,15 @@ def upload_video(**kwargs):
     with open(file_path, 'wb') as f:
         f.write(file.body)
     return file_name
+
+
+def check_exist(**kwargs):
+    """
+    检查文件是否存在
+
+    :param kwargs: 任务详情参数
+    :return:
+    """
+    if DetailInfo.get_record(**detail_fields(**kwargs).dict(exclude_none=True)):
+        return True
+    return False
