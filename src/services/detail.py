@@ -68,3 +68,7 @@ def update_detail(**kwargs):
     if not DetailInfo.update_record(**detail_fields(**kwargs).dict(exclude_none=True)):
         detail_logger.error(f'更新任务详情失败: {kwargs}')
         raise ValueError(f'更新任务详情失败: {kwargs}')
+    if kwargs['deadline'] == kwargs['finish_date']:
+        if not TaskInfo.update_record(**{'id': kwargs['task'], 'status': 2}):
+            task_logger.error(f'更新任务失败: {kwargs}')
+            raise ValueError(f'更新任务失败: {kwargs}')
