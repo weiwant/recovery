@@ -23,7 +23,7 @@ def process_video(video_path, model_type='BODY_25', max_people=1):
     params["model_folder"] = os.path.join(OPENPOSE_ROOT, 'models')
     params["model_pose"] = model_type
     params["number_people_max"] = max_people
-    params['net_resolution'] = '256x320'
+    params['net_resolution'] = '256x192'
     VideoCapture = getattr(cv2, 'VideoCapture')
     cap = VideoCapture(video_path)
     if not cap.isOpened():
