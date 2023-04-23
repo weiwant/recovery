@@ -1,7 +1,7 @@
 from datetime import date
 from typing import List
 
-from pydantic import BaseModel, ValidationError
+from pydantic import BaseModel, ValidationError, validator
 from sanic import Request, Blueprint
 
 from src.classes.response import Response
@@ -31,16 +31,28 @@ async def add(request: Request):
         """
         task: int
         video: str
+        deadline: date
+
+        @validator('deadline', allow_reuse=True)
+        def deadline_must_greater_than_today(cls, v):
+            """
+            截止日期必须大于今天
+            :param v:
+            :return:
+            """
+            if v < date.today():
+                raise ValueError('截止日期必须大于今天')
+            return v
 
     try:
+        result = get_task(id=data['task'])[0]
+        data['deadline'] = getattr(result, 'deadline')
         checked = Check(**data).dict(exclude_none=True)
         checked['finish_date'] = date.today()
         exist = False
         result_detail = get_detail(**{'task': checked['task'], 'finish_date': checked['finish_date']})
         if result_detail:
             exist = True
-        result = get_task(id=checked['task'])[0]
-        checked['deadline'] = getattr(result, 'deadline')
         checked['score'], checked['evaluation'] = inference(checked['video'], getattr(result, 'training_root'),
                                                             getattr(result, 'evaluate_root'))
         if exist:
