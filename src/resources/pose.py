@@ -26,6 +26,7 @@ def process_video(video_path, model_type='BODY_25', max_people=1):
     params['net_resolution'] = '256x192'
     VideoCapture = getattr(cv2, 'VideoCapture')
     cap = VideoCapture(video_path)
+    frame_count = cap.get(getattr(cv2, 'CAP_PROP_FRAME_COUNT'))
     if not cap.isOpened():
         logger.error(f'视频打开失败: {video_path}')
         return
@@ -39,5 +40,5 @@ def process_video(video_path, model_type='BODY_25', max_people=1):
         datum = op.Datum()
         datum.cvInputData = frame
         opWrapper.emplaceAndPop(op.VectorDatum([datum]))
-        yield datum.poseKeypoints[:15]
+        yield datum.poseKeypoints[0, :15, :2]
     cap.release()
