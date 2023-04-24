@@ -34,11 +34,12 @@ def process_video(video_path, model_type='BODY_25', max_people=1):
     opWrapper.configure(params)
     opWrapper.start()
     while True:
+        frame_index = cap.get(getattr(cv2, 'CAP_PROP_POS_FRAMES'))
         ret, frame = cap.read()
         if not ret:
             break
         datum = op.Datum()
         datum.cvInputData = frame
         opWrapper.emplaceAndPop(op.VectorDatum([datum]))
-        yield datum.poseKeypoints[0, :15, :2]
+        yield datum.poseKeypoints[0, :15, :2], frame_index, frame_count
     cap.release()
