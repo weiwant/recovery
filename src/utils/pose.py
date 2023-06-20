@@ -37,3 +37,39 @@ def process_video(video_path, OPENPOSE_ROOT, model_type='BODY_25', max_people=1)
         opWrapper.emplaceAndPop(op.VectorDatum([datum]))
         yield datum.poseKeypoints[0, :15, :2], frame_index, frame_count
     cap.release()
+
+
+def get_pose_at(video_path, frame_index, OPENPOSE_ROOT, model_type='BODY_25', max_people=1):
+    """
+    获取视频中的pose
+
+    :param video_path: 视频路径
+    :param frame_index: 帧索引
+    :param OPENPOSE_ROOT: openpose根目录
+    :param model_type: 模型类型
+    :param max_people: 最大人数
+    :return:
+    """
+    params = {
+        'model_folder': os.path.join(OPENPOSE_ROOT, 'models'),
+        'model_pose': model_type,
+        'number_people_max': max_people,
+        'net_resolution': '256x192'
+    }
+    VideoCapture = getattr(cv2, 'VideoCapture')
+    cap = VideoCapture(video_path)
+    if not cap.isOpened():
+        return
+    opWrapper = op.WrapperPython()
+    opWrapper.configure(params)
+    opWrapper.start()
+    for i in frame_index:
+        cap.set(getattr(cv2, 'CAP_PROP_POS_FRAMES'), i)
+        ret, frame = cap.read()
+        if not ret:
+            break
+        datum = op.Datum()
+        datum.cvInputData = frame
+        opWrapper.emplaceAndPop(op.VectorDatum([datum]))
+        yield datum.poseKeypoints[0, :15, :2]
+    cap.release()
