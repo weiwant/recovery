@@ -1,0 +1,73 @@
+<!--pages/mine/index.wxml-->
+<!-- 用户信息 -->
+<view class="cu-list menu-avatar userInfo margin-bottom-lg">
+  <view class="cu-item cur">
+    <view class="cu-avatar radius xl " style="background-image:url(https://s2.loli.net/2023/04/14/SfTo1UYsOCZwBM2.jpg);">
+    </view>
+    <view class="content margin-left">
+      <view>
+        <text class="text-xl userName margin-bottom-xs">细品岁月</text>
+      </view>
+      <view class="text-gray text-df flex margin-bottom-xxs">
+        <text>
+          <text class="cuIcon-profile text-green margin-right-xs"></text> 账号ID：203254455 
+        </text>
+      </view>
+      <view class="text-gray text-df flex">
+        <text>
+          <text class="cuIcon-evaluate text-pink margin-right-xs"></text> 康复训练：脑卒中  
+        </text>
+      </view>
+    </view>
+    <view class="action text-xxl">
+      <view class="cuIcon-qr_code text-gray xl"></view>
+    </view>
+  </view>
+</view>
+
+<!-- 功能列表 -->
+
+  <view class="cu-list menu ">
+    <view class="cu-item arrow">
+      <view class="content" bindtap="goTo">
+        <image src="/images/doctor.png" class="png" mode="aspectFit"></image>
+        <text class="text-black margin-left-xs">我的医生</text>
+      </view>
+    </view>
+    <view class="cu-item arrow">
+      <view class="content">
+        <image src="/images/geren.png" class="png" mode="aspectFit"></image>
+        <text class="text-black margin-left-xs">我的信息</text>
+      </view>
+    </view>
+    <view class="cu-item arrow">
+      <view class="content">
+        <image src="/images/shoucang.png" class="png" mode="aspectFit"></image>
+        <text class="text-black margin-left-xs">我的收藏</text>
+      </view>
+    </view>
+    <view class="cu-item arrow">
+      <view class="content">
+        <image src="/images/hudong.png" class="png" mode="aspectFit"></image>
+        <text class="text-black margin-left-xs">我的互动</text>
+      </view>
+    </view>
+    <view class="cu-item arrow">
+      <view class="content">
+        <image src="/images/yinsi.png" class="png" mode="aspectFit"></image>
+        <text class="text-black margin-left-xs">隐私政策</text>
+      </view>
+    </view>
+    <view class="cu-item arrow">
+      <view class="content">
+        <image src="/images/shezhi.png" class="png" mode="aspectFit"></image>
+        <text class="text-black margin-left-xs">设置</text>
+      </view>
+    </view>
+    <view class="cu-item arrow">
+      <view class="content">
+        <image src="/images/guanyu.png" class="png" mode="aspectFit"></image>
+        <text class="text-black margin-left-xs">关于</text>
+      </view>
+    </view>
+  </view>

@@ -1,0 +1,134 @@
+<!--pages/circle/index.wxml-->
+<!-- 导航栏 -->
+<scroll-view scroll-x class="bg-white nav flex text-center">
+  <view class="cu-item {{0==TabCur?'text-blue cur':''}}" bindtap="tabSelect" data-id="0">
+    <text class="cuIcon-locationfill"></text> 
+    同城
+  </view>
+  <view class="cu-item {{1==TabCur?'text-blue cur':''}}" bindtap="tabSelect" data-id="1">
+    <text class="cuIcon-hotfill"></text> 
+    推荐
+  </view>
+  <view class="cu-item {{2==TabCur?'text-blue cur':''}}" bindtap="tabSelect" data-id="2">
+    <text class="cuIcon-friendfill"></text> 
+    关注
+  </view>
+  <view class="cu-item {{3==TabCur?'text-blue cur':''}}" bindtap="tabSelect" data-id="3">
+    <text class="cuIcon-peoplefill"></text> 
+    我的
+  </view>
+</scroll-view>
+<!-- 帖子卡片1 -->
+<view class="cu-card dynamic 'no-card'">
+  <view class="cu-item shadow">
+    <view class="cu-list menu-avatar">
+      <view class="cu-item">
+        <view class="cu-avatar round lg" style="background-image:url(https://s2.loli.net/2023/04/14/boRaWVHMzskLc6B.jpg);">
+          <view class="cu-tag badge cuIcon-vip bg-orange"></view>
+        </view>
+        <view class="content flex-sub">
+          <view>疗康院康复师9527</view>
+          <view class="bg-img" style="background-image:url(/images/医生.png)"> </view>
+          <view class="text-gray text-sm flex justify-between">
+            2023年4月3日 14:44
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="text-content" bindtap="goToDetail">
+      今天很荣幸参加了由GZCPT主办的脑卒中康复治疗学习班，“镜”观其变，以“镜”促动--带您走进脑卒中后康复的镜像世界了解到了新镜子疗法。在这里把一些要点分享给大家😊😊😊。
+      镜像疗法是基于镜像神经元理论，利
+    </view>
+    <view class="text-content text-blue">
+        ...全文
+      </view>
+    <view class="grid flex-sub padding-lr col-3 grid-square">
+     <view class="bg-img" style="background-image:url(https://s2.loli.net/2023/04/14/nMYUPyKBTxjgqSG.png);" >
+      </view>
+      <view class="bg-img" style="background-image:url(https://s2.loli.net/2023/04/14/VkqXaetJ3cGCnAU.png);">
+      </view>
+      <view class="bg-img" style="background-image:url(https://s2.loli.net/2023/04/14/ksPzQiIdbVg5rZm.png);">
+      </view>
+    </view>
+    <view class="text-gray text text-right padding flex align-center">
+      <text class="cuIcon-attentionfill margin-lr-xs "></text> 浏览（1684）
+      <text class="{{iconName[index]}} flex-sub margin-lr-xs text-red" bindtap="change"></text> {{tt[index]}}
+      <text class="cuIcon-messagefill flex-sub margin-lr-xs"></text> 评论（307）
+      <text class="cuIcon-forwardfill flex-sub margin-lr-xs text-green"></text>转发
+
+    </view>
+  </view>
+</view>
+
+<!-- 帖子卡片2 -->
+<view class="cu-card dynamic 'no-card'">
+  <view class="cu-item shadow">
+    <view class="cu-list menu-avatar">
+      <view class="cu-item">
+        <view class="cu-avatar round lg" style="background-image:url(https://s2.loli.net/2023/04/14/SxzmLAo8sNvhGYt.jpg);"></view>
+        <view class="content flex-sub">
+          <view>早日康复</view>
+          <view class="text-gray text-sm flex justify-between">
+            2023年4月2日 15:53
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="text-content">
+      最近治疗效果逐渐好转，医生说还有一些注意事项，在这里分享给大家~ ~
+      1. 在病情稳定后，对留有后遗症的患者，3个月内应抓紧时机及早进行康复治疗。
+      2. 良肢位的摆放。（中风偏瘫最有利的肢体摆放）3. 肢体康
+    </view>
+    <view class="text-content text-blue">
+        ...全文
+      </view>
+    <view class="grid flex-sub padding-lr col-3 grid-square">
+     <view class="bg-img" style="background-image:url(https://s2.loli.net/2023/04/14/7McpjWKHz4YSiJ5.jpg);" >
+      </view>
+      <view class="bg-img" style="background-image:url(https://s2.loli.net/2023/04/14/RnJUVbxtT7Qq6sW.jpg);">
+      </view>
+    </view>
+    <view class="text-gray text text-right padding flex align-center">
+      <text class="cuIcon-attentionfill margin-lr-xs"></text> 浏览（684）
+      <text class="cuIcon-appreciate margin-lr-xs text-red"></text> 点赞（164）
+      <text class="cuIcon-messagefill margin-lr-xs"></text> 评论（87）
+      <text class="cuIcon-forwardfill margin-lr-xs text-green"></text>转发
+    </view>
+  </view>
+</view>
+<!-- 卡片3 -->
+<view class="cu-card dynamic 'no-card'">
+  <view class="cu-item shadow">
+    <view class="cu-list menu-avatar">
+      <view class="cu-item">
+        <view class="cu-avatar round lg" style="background-image:url(https://s2.loli.net/2023/04/14/vZo9rCgjNGIPSb2.jpg);"></view>
+        <view class="content flex-sub">
+          <view>幸福</view>
+          <view class="text-gray text-sm flex justify-between">
+            2023年3月28日 08:31
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="text-content">
+      这个月终于完成了本阶段的步行训练！康复师说我离成功又近了一步！步行训练一开始真的很困难，在这里给大家几点经验分享，希望可以帮到大家！1. 刚开始可以先原地踏步，逐渐慢慢练习
+    </view>
+    <view class="text-content text-blue">
+        ...全文
+      </view>
+    <view class="text-gray text text-right padding flex align-center">
+      <text class="cuIcon-attentionfill margin-lr-xs"></text> 浏览（356）
+      <text class="cuIcon-appreciate margin-lr-xs text-red"></text> 点赞（109）
+      <text class="cuIcon-messagefill margin-lr-xs"></text> 评论（24）
+      <text class="cuIcon-forwardfill margin-lr-xs text-green"></text>转发
+    </view>
+  </view>
+</view>
+
+<movable-area class="movable-area" bindtap="goTo">
+    <movable-view class="movable-view" direction="all">
+      <image class="img" src="https://s2.loli.net/2023/04/18/dkB18mDIxELiAjo.png" mode=""/>
+    </movable-view>
+  </movable-area>
+
+<view class="cu-tabbar-height"></view>

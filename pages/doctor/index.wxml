@@ -1,0 +1,90 @@
+<!--pages/doctor/index.wxml-->
+
+<view class="cu-bar bg-white">
+  <view class="action">
+    <text class="cuIcon-title text-green "></text> 我的医生
+  </view>
+  <view class="action">
+    <button class="cu-btn bg-green shadow" bindtap="showModal" data-target="DialogModal1">点击绑定</button>
+  </view>
+</view>
+<!-- 绑定窗口 -->
+<view class="cu-modal {{modalName=='DialogModal1'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">绑定医生</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding-xl">
+      <view class="cu-form-group">
+        <view class="title">医生ID：</view>
+        <input placeholder="请输入绑定医生的账号ID"></input>
+	    </view>
+    </view>
+    <view class="cu-bar bg-white justify-end">
+      <view class="action">
+        <button class="cu-btn line-green text-green" bindtap="hideModal">取消</button>
+        <button class="cu-btn bg-green margin-left" bindtap="hideModal1">确定</button>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 医生信息 -->
+<view class="cu-list menu-avatar userInfo margin-top-lg">
+  <view class="cu-item cur">
+    <view class="cu-avatar radius xl " style="background-image:url(https://s2.loli.net/2023/04/17/mbhk3zOcYalJE1Q.jpg);">
+    </view>
+    <view class="content margin-left">
+      <view>
+        <text class="text-xl userName margin-bottom-xs">赵医生</text>
+      </view>
+      <view class="text-gray text-df flex margin-bottom-xxs">
+        <text>
+          <text class="cuIcon-profile text-green margin-right-xs"></text> 账号ID：104168891 
+        </text>
+      </view>
+      <view class="text-gray text-df flex">
+        <text>
+          <text class="cuIcon-form text-pink margin-right-xs"></text> 认证：中南医院康复科医师  
+        </text>
+      </view>
+    </view>
+    <view class="action text-xxl">
+      <view class="cuIcon-qr_code text-gray xl"></view>
+    </view>
+  </view>
+</view>
+<!-- 新绑定的医生 -->
+<view class="cu-list menu-avatar userInfo" style="{{1==index?'':'display: none;'}}">
+  <view class="cu-item cur">
+    <view class="cu-avatar radius xl " style="background-image:url(https://s2.loli.net/2023/04/26/a1j2zXPAhdQ7i4D.jpg);">
+    </view>
+    <view class="content margin-left">
+      <view>
+        <text class="text-xl userName margin-bottom-xs">林医生</text>
+      </view>
+      <view class="text-gray text-df flex margin-bottom-xxs">
+        <text>
+          <text class="cuIcon-profile text-green margin-right-xs"></text> 账号ID：105768941 
+        </text>
+      </view>
+      <view class="text-gray text-df flex">
+        <text>
+          <text class="cuIcon-form text-pink margin-right-xs"></text> 认证：中南医院康复科副主任  
+        </text>
+      </view>
+    </view>
+    <view class="action text-xxl">
+      <view class="cuIcon-qr_code text-gray xl"></view>
+    </view>
+  </view>
+</view>
+
+
+<!-- 底部背景图 -->
+<view class="padding-top padding-bottom padding-margin margin-top-xxl">
+  <view class="bg-img padding-tb-xl" style="background-image: url('https://s2.loli.net/2023/04/26/ckuIpR83KfsOlmB.png');height: 414rpx;"></view>
+</view>
+

@@ -1,0 +1,14 @@
+/* pages/exercise/index.wxss */
+.bg-grn{
+  background-color: #3CB285;
+  color: aliceblue;
+}
+.icon{
+  height: 100px;
+  width: 100px;
+  border-radius: 80em;
+}
+.img{
+  width: 220px;
+  height: 150px;
+}

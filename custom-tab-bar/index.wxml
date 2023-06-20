@@ -1,0 +1,31 @@
+<!--custom-tab-bar/index.wxml-->
+<view class="cu-bar tabbar bg-white shadow foot">
+    <view class="action {{selected === 0 ? 'active' : 'default'}}" data-index="0" bindtap="switchTab">
+      <view class="cuIcon-cu-image">
+      <!-- <image src="{{selected === index ? item.img_cli : item.img}}" mode=""/> -->
+      <image src="/images/tabbar/kangfu{{selected===0?'1':''}}.png"></image> 
+      </view>
+      <view class="text-green">康复</view>
+    </view>
+
+    <view class="action {{selected === 1 ? 'active' : 'default'}}" data-index="1" bindtap="switchTab">
+      <view class="cuIcon-cu-image">
+        <image src="/images/tabbar/news{{selected===1?'1':''}}.png"></image>
+      </view>
+      <view class="text-gray">资讯</view>
+    </view>
+
+    <view class="action {{selected === 2 ? 'active' : 'default'}}" data-index="2" bindtap="switchTab">
+      <view class="cuIcon-cu-image">
+        <image src="/images/tabbar/circle{{selected===2?'1':''}}.png"></image>
+      </view>
+      <view class="text-gray">圈子</view>
+    </view>
+
+    <view class="action {{selected === 3 ? 'active' : 'default'}}" data-index="3" bindtap="switchTab">
+      <view class="cuIcon-cu-image">
+        <image src="/images/tabbar/mine{{selected===3?'1':''}}.png"></image>
+      </view>
+      <view class="text-gray">我的</view>
+    </view>
+  </view>

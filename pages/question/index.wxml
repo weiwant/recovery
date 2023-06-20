@@ -1,0 +1,38 @@
+<view class="cu-chat">
+  <view class="cu-info round">温馨提示：当前由智能机器人为您解答。机器人只能提供参考建议，不能取代医生的诊断和治疗建议。如果有严重的症状或疑问，应该尽快咨询医生。</view>
+  <view class="cu-item self">
+    <view class="main">
+      <view class="content bg-green shadow">
+        <text>脑卒中的饮食该怎么吃？</text>
+      </view>
+    </view>
+    <view class="cu-avatar radius" style="background-image:url(https://s2.loli.net/2023/04/14/SfTo1UYsOCZwBM2.jpg);"></view>
+    <view class="date">2023年4月17日 13:23</view>
+  </view>
+  
+  <view class="cu-item">
+    <view class="cu-avatar radius" style="background-image:url(https://s2.loli.net/2023/04/18/u1TL94WytvNxB7Z.jpg);"></view>
+    <view class="main">
+      <view class="content shadow">
+        <text>1. 饮食要有合理结构，以低盐、低脂肪、低胆固醇为宜，适当多食豆制品、蔬菜和水果，戒除吸烟、酗酒等不良习惯。每周至少吃三次鱼。应定时定量，少量多餐，每天4餐，晚餐宜清淡易消化。不宜过饱，忌食辛辣、刺激之品，戒烟酒。昏迷和吞咽困难者，可采用鼻饲，以保持营养。
+        2. 患有高血压者，应低盐饮食（每天控制在5克以下）。
+        3. 有高脂血症者，应低脂低糖饮食， 以牛奶、鸡蛋、鱼类、豆制品等为主， 多吃南瓜、冬瓜、香菇、黑木耳等， 避免吃肥肉、动物内脏、家禽皮，少吃动物油。
+        4. 有糖尿病者，应低糖饮食，并控制饮食。</text>
+      </view>
+    </view>
+    <view class="date "> 13:23</view>
+  </view>
+ 
+ 
+</view>
+
+<view class="cu-bar foot input {{InputBottom!=0?'cur':''}}" style="bottom:{{InputBottom}}px">
+  <view class="action">
+    <text class="cuIcon-sound text-grey"></text>
+  </view>
+  <input class="solid-bottom" bindfocus="InputFocus" bindblur="InputBlur" adjust-position="{{false}}" focus="{{false}}" maxlength="300" cursor-spacing="10"></input>
+  <view class="action">
+    <text class="cuIcon-emojifill text-grey"></text>
+  </view>
+  <button class="cu-btn bg-green shadow">发送</button>
+</view>

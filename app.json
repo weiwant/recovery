@@ -1,0 +1,48 @@
+{
+  "pages": [
+    "pages/welcome/index",
+    "pages/index/index",
+    "pages/mine/index",
+    "pages/circle/index",
+    "pages/news/index",
+    "pages/exercise/index",
+    "pages/results/index",
+    "pages/question/index",
+    "pages/video/index",
+    "pages/article/index",
+    "pages/article/food",
+    "pages/fabu/index",
+    "pages/circleDetail/index",
+    "pages/doctor/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#1684FC",
+    "navigationBarTitleText": "康复珈",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#F5F5F5"
+  },
+  "sitemapLocation": "sitemap.json",
+  
+  "tabBar": {
+    "custom": true,
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "康复"
+      },
+      {
+        "pagePath": "pages/news/index",
+        "text": "科普"
+      },
+      {
+        "pagePath": "pages/circle/index",
+        "text": "交流"
+      },
+      {
+        "pagePath": "pages/mine/index",
+        "text": "我的"
+      }
+    ]
+  }
+}

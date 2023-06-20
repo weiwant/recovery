@@ -1,0 +1,9 @@
+<!--pages/welcome/index.wxml-->
+
+<view class="container"> 
+  <image class="img round" src="https://s2.loli.net/2023/04/25/p8En3HCZ42bTadt.jpg"></image>
+  <text class="motto text text-blue margin-bottom">在家做康复，康复有专家</text> 
+  <button class="cu-btn lines-blue round lg shadow margin-top-xl" bindtap="goTo">开启康复训练</button>
+</view>
+
+

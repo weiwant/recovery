@@ -1,0 +1,135 @@
+<!--pages/circleDetail/index.wxml-->
+<view class="cu-card dynamic 'no-card'">
+  <view class="cu-item shadow">
+    <view class="cu-list menu-avatar">
+      <view class="cu-item">
+        <view class="cu-avatar round lg" style="background-image:url(https://s2.loli.net/2023/04/14/boRaWVHMzskLc6B.jpg);">
+          <view class="cu-tag badge cuIcon-vip bg-orange"></view>
+        </view>
+        <view class="content flex-sub">
+          <view>疗康院康复师9527</view>
+          <view class="bg-img" style="background-image:url(/images/医生.png)"> </view>
+          <view class="text-gray text-sm flex justify-between">
+            2023年4月3日 14:44
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="text-content" bindtap="goToDetail">
+      今天很荣幸参加了由GZCPT主办的脑卒中康复治疗学习班，“镜”观其变，以“镜”促动--带您走进脑卒中后康复的镜像世界了解到了新镜子疗法。在这里把一些要点分享给大家😊😊😊。
+      镜像疗法是基于镜像神经元理论，利用大脑的可塑性,通过视觉反馈、运动观察、运动想象、运动模仿来进行康复训练的一种治疗手段。根据镜面反射相等的物象,以正常肢体镜像代替患侧肢体。患者通过这样视觉反馈进行运动观察，模仿以及再学习。
+    </view>
+    <view class="grid flex-sub padding-lr col-3 grid-square">
+     <view class="bg-img" style="background-image:url(https://s2.loli.net/2023/04/14/nMYUPyKBTxjgqSG.png);" bindtap="showModal" data-target="Image1">
+      </view>
+      <view class="bg-img" style="background-image:url(https://s2.loli.net/2023/04/14/VkqXaetJ3cGCnAU.png);"bindtap="showModal" data-target="Image2">
+      </view>
+      <view class="bg-img" style="background-image:url(https://s2.loli.net/2023/04/14/ksPzQiIdbVg5rZm.png);"bindtap="showModal" data-target="Image3">
+      </view>
+    </view>
+    <!-- 点开图片 -->
+    <view class="cu-modal {{modalName=='Image1'?'show':''}}">
+      <view class="cu-dialog">
+        <view class="bg-img" style="background-image: url('https://s2.loli.net/2023/04/14/nMYUPyKBTxjgqSG.png');height:200px;">
+          <view class="cu-bar justify-end text-white">
+            <view class="action" bindtap="hideModal">
+              <text class="cuIcon-close "></text>
+            </view>
+          </view> 
+        </view>
+      </view>
+    </view>
+    <view class="cu-modal {{modalName=='Image2'?'show':''}}">
+      <view class="cu-dialog">
+        <view class="bg-img" style="background-image: url('https://s2.loli.net/2023/04/14/VkqXaetJ3cGCnAU.png');height:200px;">
+          <view class="cu-bar justify-end text-white">
+            <view class="action" bindtap="hideModal">
+              <text class="cuIcon-close "></text>
+            </view>
+          </view> 
+        </view>
+      </view>
+    </view>
+    <view class="cu-modal {{modalName=='Image3'?'show':''}}">
+      <view class="cu-dialog">
+        <view class="bg-img" style="background-image: url('https://s2.loli.net/2023/04/14/ksPzQiIdbVg5rZm.png');height:200px;">
+          <view class="cu-bar justify-end text-white">
+            <view class="action" bindtap="hideModal">
+              <text class="cuIcon-close "></text>
+            </view>
+          </view> 
+        </view>
+      </view>
+    </view>
+    <!-- 点赞状态栏 -->
+    <view class="text-gray text text-right padding flex align-center">
+      <text class="cuIcon-attentionfill margin-lr-xs "></text> 浏览（1684）
+      <text class="{{iconName[index]}} flex-sub margin-lr-xs text-red" bindtap="change"></text> {{tt[index]}}
+      <text class="cuIcon-messagefill flex-sub margin-lr-xs"></text> 评论（307）
+      <text class="cuIcon-forwardfill flex-sub margin-lr-xs text-green"></text>转发
+    </view>
+    <!-- 评论区 -->
+    <view class="cu-list menu-avatar comment solids-top">
+      <view class="cu-item">
+        <view class="cu-avatar round" style="background-image:url(https://s2.loli.net/2023/04/26/NZctY6iLEuHvpAI.jpg);"></view>
+        <view class="content">
+          <view class="text-orange">喜洋洋</view>
+          <view class="text-black text-content text-df">
+            从我的个人经验来说 我认为这个训练是有用的。。
+          </view>
+          <view class="grey padding-sm radius margin-top-sm  text-sm">
+            <view class="flex">
+              <view class="text-blue">疗康院康复师9527</view>
+              <view class="flex-sub text-grey">：贵在坚持，会有效果的！✊</view>
+            </view>
+            <view class="flex">
+              <view class="text-blue">咪宝的阿婆</view>
+              <view class="flex-sub text-grey">：训练了多久哇</view>
+            </view>
+          </view>
+          <view class="margin-top-sm flex justify-between">
+            <view class="text-gray text-df">2023年4月5日 08:21</view>
+            <view>
+              <text class="cuIcon-appreciatefill text-red"></text>
+              <text class="cuIcon-messagefill text-gray margin-left-sm"></text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="cu-item">
+        <view class="cu-avatar round" style="background-image:url(https://s2.loli.net/2023/04/26/SVwHirl9U63aQyz.jpg);"></view>
+        <view class="content">
+          <view class="text-orange">心渡</view>
+          <view class="text-black text-content text-df">
+            真的有用吗？可以再说详细一点吗？
+          </view>
+          <view class="grey padding-sm radius margin-top-sm  text-sm">
+            <view class="flex">
+              <view class="text-blue">疗康院康复师9527</view>
+              <view class="flex-sub text-grey">：可以看我的最新博文🙂</view>
+            </view>
+          </view>
+          <view class="margin-top-sm flex justify-between">
+            <view class="text-gray text-df">2023年4月4日 18:17</view>
+            <view>
+              <text class="cuIcon-appreciate text-gray"></text>
+              <text class="cuIcon-messagefill text-gray margin-left-sm"></text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 输入框 -->
+<view class="cu-bar input">
+    <view class="cu-avatar round" style="background-image:url(https://s2.loli.net/2023/04/14/SfTo1UYsOCZwBM2.jpg);"></view>
+    <view class="action">
+      <text class="cuIcon-roundaddfill text-grey"></text>
+    </view>
+    <input class="solid-bottom" maxlength="300" cursor-spacing="10"></input>
+    <view class="action">
+      <text class="cuIcon-emojifill text-grey"></text>
+    </view>
+    <button class="cu-btn bg-blue shadow-blur">评论</button>
+  </view>

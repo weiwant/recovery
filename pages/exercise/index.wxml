@@ -1,0 +1,56 @@
+<!--pages/exercise/index.wxml-->
+<calendar list="{{list}}"></calendar>
+<view class="text-center padding">
+      <view class="text text-xl text-left margin-bottom">参考视频：</view>
+      <image class="img" src="https://s2.loli.net/2023/04/18/nTMNiEwbB7lOhXA.png" mode=""/>
+</view>
+<view class="text-center padding-bottom">
+      <button class="cu-btn bg-grn shadow round margin-top-lg margin-bottom-lg text-lg lg" bindtap="goTo">今日打卡</button>
+</view>
+
+
+
+
+<!-- 时间轴 -->
+
+<view class="cu-timeline">
+  <view class="cu-time">04-16</view>
+  <view class="cu-item">
+    <view class="content">
+      <view class="cu-capsule radius">
+        <view class="cu-tag bg-cyan">上午</view>
+        <view class="cu-tag line-cyan">10:00</view>
+      </view>
+      <view class="text-yellow text-sm text-left margin-top">
+        <text class="text-black">评估结果：</text>
+        <text class="cuIcon-favorfill"></text> 
+        <text class="cuIcon-favorfill"></text> 
+        <text class="cuIcon-favorfill"></text>
+        <text class="cuIcon-favorfill"></text>
+        <text class="cuIcon-favor"></text>
+      </view>
+      <view class="margin-top">训练建议：本次的练习中，请注意手臂抬起的角度与高度。其中，右臂与右肩的角度可以适当减小，避免过度训练，引起右大臂肌肉群拉伤，影响右大臂肌肉功能恢复。
+      </view>
+    </view>
+  </view>
+
+  <view class="cu-time">04-15</view>
+  <view class="cu-item">
+    <view class="content">
+      <view class="cu-capsule radius">
+        <view class="cu-tag bg-cyan">上午</view>
+        <view class="cu-tag line-cyan">10:00</view>
+      </view>
+      <view class="text-yellow text-sm text-left margin-top">
+      <text class="text-black">评估结果：</text>
+      <text class="cuIcon-favorfill"></text> 
+      <text class="cuIcon-favorfill"></text> 
+      <text class="cuIcon-favorfill"></text>
+      <text class="cuIcon-favor"></text>
+      <text class="cuIcon-favor"></text>
+    </view>
+      <view class="margin-top">训练建议：在摆臂练习中，要注意手臂抬起的角度与高度。注意不要过度训练，引起肌肉损伤。
+      </view>
+    </view>
+  </view>
+</view>

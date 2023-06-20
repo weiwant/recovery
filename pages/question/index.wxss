@@ -1,0 +1,7 @@
+/* pages/question/index.wxss */
+page{
+  padding-bottom: 100rpx;
+}
+.cu-btn{
+  width: 100px;
+}

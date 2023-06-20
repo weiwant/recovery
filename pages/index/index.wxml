@@ -1,0 +1,106 @@
+<!--index.wxml-->
+
+<!-- 折线图 -->
+<view class="container">
+  <ec-canvas id="mychart-dom-line" canvas-id="mychart-line" ec="{{ ec }}"></ec-canvas>
+</view>
+
+<view class="cu-bar bg-white solid-bottom">
+  <view class="action">
+    <text class="cuIcon-title text-blue"></text>任务列表
+  </view>
+</view>
+<!-- 任务1 -->
+<view class="cu-card dynamic 'no-card'">
+  <view class="cu-item shadow">
+    <view class="cu-list menu-avatar">
+      <view class="cu-item">
+        <view class="cu-avatar round lg" style="background-image:url(https://s2.loli.net/2023/04/17/mbhk3zOcYalJE1Q.jpg);">
+          <view class="cu-tag badge cuIcon-vip bg-orange"></view>
+        </view>
+        <view class="content flex-sub">
+          <view>赵医生</view>
+          <view class="text-gray text-sm flex justify-between">
+            发布于2023年4月10日 9:31
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="cu-item padding-left text-lg">
+      <view class="bg-img padding-tb-xl" style="background-image: url('https://s2.loli.net/2023/04/18/nR1TuhEwjlKxIAP.png');height: 414rpx;">
+        <view class="text-content margin-bottom">截止时间：2023年5月5日</view>
+      <view class="text-content margin-bottom">任务名称：步行练习</view>
+      <view class="text-content margin-bottom">难易程度：难</view>
+      <view class="text-content margin-bottom">完成情况：0/30 天</view>
+      </view>
+    </view>
+    <view class="padding flex flex-direction bg-white">
+      <button class="cu-btn lg text-lg {{colors[index]}}" bindtap="change">{{btn[index]}}</button>
+    </view>
+  </view>
+</view>
+
+
+<!-- 任务2 -->
+<view class="cu-card dynamic 'no-card'">
+  <view class="cu-item shadow">
+    <view class="cu-list menu-avatar">
+      <view class="cu-item">
+        <view class="cu-avatar round lg" style="background-image:url(https://s2.loli.net/2023/04/17/mbhk3zOcYalJE1Q.jpg);">
+          <view class="cu-tag badge cuIcon-vip bg-orange"></view>
+        </view>
+        <view class="content flex-sub">
+          <view>赵医生</view>
+          <view class="text-gray text-sm flex justify-between">
+            发布于2023年4月1日 14:24
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="cu-item padding-left text-lg">
+      <view class="bg-img padding-tb-xl" style="background-image: url('https://s2.loli.net/2023/04/18/nR1TuhEwjlKxIAP.png');height: 414rpx;">
+        <view class="text-content margin-bottom">截止时间：2023年4月28日</view>
+        <view class="text-content margin-bottom">任务名称：抬臂练习</view>
+        <view class="text-content margin-bottom">难易程度：中</view>
+        <view class="text-content margin-bottom">完成情况：11/20 天</view>
+      </view>
+    </view>
+    <view class="padding flex flex-direction bg-white">
+      <button class="cu-btn bg-blue lg text-lg" bindtap="goTo">去打卡</button>
+    </view>
+    
+  </view>
+</view>
+
+
+<!-- 任务三 -->
+<view class="cu-card dynamic 'no-card'">
+  <view class="cu-item shadow">
+    <view class="cu-list menu-avatar">
+      <view class="cu-item">
+        <view class="cu-avatar round lg" style="background-image:url(https://s2.loli.net/2023/04/17/mbhk3zOcYalJE1Q.jpg);">
+          <view class="cu-tag badge cuIcon-vip bg-orange"></view>
+        </view>
+        <view class="content flex-sub">
+          <view>赵医生</view>
+          <view class="text-gray text-sm flex justify-between">
+            发布于2023年3月3日 10:47
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="cu-item padding-left text-lg">
+      <view class="bg-img padding-tb-xl" style="background-image: url('https://s2.loli.net/2023/04/18/nR1TuhEwjlKxIAP.png');height: 414rpx;">
+        <view class="text-content margin-bottom">截止时间：2023年4月6日</view>
+        <view class="text-content margin-bottom">任务名称：抬腿练习</view>
+        <view class="text-content margin-bottom">难易程度：易</view>
+        <view class="text-content margin-bottom">完成情况：30/30 天</view>
+      </view>
+    </view>
+    <view class="padding flex flex-direction bg-white">
+      <button class="cu-btn bg-green lg text-lg" bindtap="goTo">已完成</button>
+    </view>
+  </view>
+</view>
+<!-- 确保tabbar不被遮挡 -->
+<view class="cu-tabbar-height"></view>

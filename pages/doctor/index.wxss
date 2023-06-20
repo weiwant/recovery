@@ -1,0 +1,22 @@
+/* pages/doctor/index.wxss */
+.h{
+  height: 200px;
+}
+.userName{
+  margin-left: 20px;
+  font-weight: 700;
+}
+.userInfo{
+  height: 80px;
+  background-color: #fff;
+  padding: 10px 0;
+}
+.margin-b{
+  margin-bottom: 5px;
+}
+.text11{
+  font-size: 18px;
+}
+.margin-top-xxl{
+  margin-top: 130px;
+}

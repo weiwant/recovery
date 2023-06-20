@@ -1,0 +1,21 @@
+/**index.wxss**/
+.cu-bar{
+  margin-top: 10px;
+
+}
+.cu-card{
+  margin-bottom: 10px;
+}
+.container{
+  height: 220px;
+  background-color: #fff;
+  padding-top: 10px;
+}
+.ec-canvas {
+  width: 100%;
+  height: 100%;
+}
+
+  
+  
+  

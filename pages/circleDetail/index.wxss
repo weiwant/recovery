@@ -1,0 +1,8 @@
+/* pages/circleDetail/index.wxss */
+.cu-card.dynamic>.cu-item>.text-content{
+  overflow:visible;
+  max-height: 500px;
+}
+.grey{
+  background-color: #F5F6F7;
+}
