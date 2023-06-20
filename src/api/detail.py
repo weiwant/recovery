@@ -33,6 +33,7 @@ async def add(request: Request):
         video: str
         deadline: date
 
+        @classmethod
         @validator('deadline', allow_reuse=True)
         def deadline_must_greater_than_today(cls, v):
             """
