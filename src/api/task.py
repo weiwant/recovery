@@ -46,6 +46,7 @@ async def add(request: Request):
         type: str
         difficulty: DifficultyValue
 
+        @classmethod
         @validator('deadline', allow_reuse=True)
         def deadline_must_greater_than_today(cls, v):
             """
@@ -145,6 +146,7 @@ async def update(request: Request):
         type: Optional[str]
         difficulty: Optional[DifficultyValue]
 
+        @classmethod
         @validator('deadline', allow_reuse=True)
         def deadline_must_greater_than_today(cls, v):
             """
