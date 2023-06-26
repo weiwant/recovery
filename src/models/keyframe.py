@@ -28,7 +28,11 @@ class KeyFrame:
             self.last_frame_angle = self.get_angle(self.last_frame_feature)
             self.frame_num = int(frame_num)
         if labels is not None:
-            self.labels = labels
+            if len(labels) != self.frame_num:
+                self.labels = numpy.zeros((self.frame_num,), dtype=numpy.int32)
+                self.labels[:len(labels)] = labels
+            else:
+                self.labels = labels
         self.model = RandomForestClassifier(**kwargs)
 
     def predict(self, frame_gen):
@@ -94,7 +98,11 @@ class KeyFrame:
         self.last_frame_feature = self.get_feature(skeleton)
         self.last_frame_angle = self.get_angle(self.last_frame_feature)
         self.frame_num = int(frame_num)
-        self.labels = labels
+        if len(labels) != self.frame_num:
+            self.labels = numpy.zeros((self.frame_num,), dtype=numpy.int32)
+            self.labels[labels] = 1
+        else:
+            self.labels = labels
 
     @classmethod
     def get_angle(cls, feature):
