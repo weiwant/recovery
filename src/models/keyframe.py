@@ -74,10 +74,9 @@ class KeyFrame:
         :param labels:
         :return:
         """
-        self.labels = labels
         self.gen = frame_gen
         result = next(frame_gen)
-        self.reset(result[2], result[0])
+        self.reset(result[2], result[0], labels)
         self.train()
 
     def reset(self, frame_num, skeleton, labels=None):
