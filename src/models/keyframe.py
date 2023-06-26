@@ -107,7 +107,7 @@ class KeyFrame:
         """
         angle = numpy.zeros((8,), dtype=numpy.float32)
         for i in range(8):
-            v1 = feature[6, i, :]
+            v1 = feature[7, i, :]
             v2 = feature[8, i, :]
             mod_v1 = numpy.linalg.norm(v1)
             mod_v2 = numpy.linalg.norm(v2)
@@ -125,16 +125,14 @@ class KeyFrame:
         """
         feature = numpy.zeros((9, 8, 2), dtype=numpy.float32)
         joints = [2, 3, 5, 6, 9, 10, 12, 13]
-        ends = [0, 1, 4, 7, 11, 14]
+        ends = [0, 1, 4, 8, 7, 11, 14]
         v1 = [(1, 2), (2, 3), (1, 5), (5, 6), (8, 9), (9, 10), (8, 12), (12, 13)]
         v2 = [(3, 2), (4, 3), (6, 5), (7, 6), (10, 9), (11, 10), (13, 12), (14, 13)]
-        v3 = [(4, 2), (3, 1), (7, 5), (6, 1), (11, 9), (10, 8), (14, 12), (13, 8)]
-        for i in range(6):
+        for i in range(7):
             for j in range(8):
                 feature[i, j, :] = skeleton[joints[j]] - skeleton[ends[i]]
         for i in range(8):
-            feature[6, i, :] = skeleton[v1[i][0]] - skeleton[v1[i][1]]
-            feature[7, i, :] = skeleton[v3[i][0]] - skeleton[v3[i][1]]
+            feature[7, i, :] = skeleton[v1[i][0]] - skeleton[v1[i][1]]
             feature[8, i, :] = skeleton[v2[i][0]] - skeleton[v2[i][1]]
         return feature
 
