@@ -130,7 +130,7 @@ class KeyFrame:
         v2 = [(3, 2), (4, 3), (6, 5), (7, 6), (10, 9), (11, 10), (13, 12), (14, 13)]
         for i in range(7):
             for j in range(8):
-                feature[i, j, :] = skeleton[joints[j]] - skeleton[ends[i]]
+                feature[i, j, :] = skeleton[ends[i]] - skeleton[joints[j]]
         for i in range(8):
             feature[7, i, :] = skeleton[v1[i][0]] - skeleton[v1[i][1]]
             feature[8, i, :] = skeleton[v2[i][0]] - skeleton[v2[i][1]]
