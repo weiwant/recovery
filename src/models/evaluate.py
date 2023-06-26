@@ -9,7 +9,7 @@ class Correct:
     矫正模型
     """
 
-    def __init__(self, skeleton_gen, k=0.1, mission_type=None, labels=None, iterations=10, step=0.1):
+    def __init__(self, skeleton_gen=None, k=0.1, mission_type=None, labels=None, iterations=10, step=0.1):
         """
         初始化
 
