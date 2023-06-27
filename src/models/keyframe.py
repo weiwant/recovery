@@ -28,11 +28,7 @@ class KeyFrame:
             self.last_frame_angle = self.get_angle(self.last_frame_feature)
             self.frame_num = int(frame_num)
         if labels is not None:
-            if len(labels) != self.frame_num:
-                self.labels = numpy.zeros((self.frame_num,), dtype=numpy.int32)
-                self.labels[:len(labels)] = labels
-            else:
-                self.labels = labels
+            self.labels = labels
         self.model = RandomForestClassifier(**kwargs)
 
     def predict(self, frame_gen):
@@ -48,6 +44,7 @@ class KeyFrame:
         while result is not None:
             self.next_frame(result[0], result[1])
             result = next(frame_gen, None)
+        self.get_weight()
         X = numpy.concatenate((self.difference, numpy.expand_dims(self.distance, axis=1),
                                numpy.expand_dims(self.weight, axis=1)), axis=1)
         return self.model.predict(X)
@@ -66,8 +63,13 @@ class KeyFrame:
         while result is not None:
             self.next_frame(result[0], result[1])
             result = next(self.gen, None)
+        self.get_weight()
         X = numpy.concatenate((self.difference, numpy.expand_dims(self.distance, axis=1),
                                numpy.expand_dims(self.weight, axis=1)), axis=1)
+        if len(self.labels) != self.frame_num:
+            temp = numpy.zeros((self.frame_num,), dtype=numpy.int32)
+            temp[self.labels] = 1
+            self.labels = temp
         self.model.fit(X, self.labels)
 
     def retrain(self, frame_gen, labels):
@@ -98,11 +100,7 @@ class KeyFrame:
         self.last_frame_feature = self.get_feature(skeleton)
         self.last_frame_angle = self.get_angle(self.last_frame_feature)
         self.frame_num = int(frame_num)
-        if len(labels) != self.frame_num:
-            self.labels = numpy.zeros((self.frame_num,), dtype=numpy.int32)
-            self.labels[labels] = 1
-        else:
-            self.labels = labels
+        self.labels = labels
 
     @classmethod
     def get_angle(cls, feature):
@@ -213,9 +211,12 @@ class KeyFrame:
         feature = self.get_feature(skeleton)
         angle = self.get_angle(feature)
         frame_index = int(frame_index)
+        if frame_index == self.frame_num:
+            self.frame_num += 1
+            self.difference = numpy.concatenate((self.difference, numpy.zeros((1, 8), dtype=numpy.float32)), axis=0)
+            self.distance = numpy.concatenate((self.distance, numpy.zeros((1,), dtype=numpy.float32)), axis=0)
+            self.weight = numpy.concatenate((self.weight, numpy.zeros((1,), dtype=numpy.float32)), axis=0)
         self.difference[frame_index, :] = angle - self.last_frame_angle
         self.distance[frame_index] = self.get_distance(feature, self.last_frame_feature)
         self.last_frame_feature = feature
         self.last_frame_angle = angle
-        if frame_index == self.frame_num - 1:
-            self.get_weight()
