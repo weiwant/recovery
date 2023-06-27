@@ -35,6 +35,8 @@ def process_video(video_path, OPENPOSE_ROOT, model_type='BODY_25', max_people=1)
         datum = op.Datum()
         datum.cvInputData = frame
         opWrapper.emplaceAndPop(op.VectorDatum([datum]))
+        if datum.poseKeypoints is None:
+            continue
         yield datum.poseKeypoints[0, :15, :2], frame_index, frame_count
     cap.release()
 
