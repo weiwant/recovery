@@ -3,13 +3,16 @@
 <view class='container'>
   <image class='audio' src='https://s2.loli.net/2023/04/24/FaxbQ89JnqSU7X3.jpg'></image>
   <image class='head-imagee' src='https://s2.loli.net/2023/04/24/FaxbQ89JnqSU7X3.jpg'></image>
+  <!-- 作者信息及发布时间 -->
   <view class='author-date'>
     <image class='avatar' src='https://s2.loli.net/2023/04/24/a8IJWp9iYnFDZMz.jpg'></image>
     <text class='author'>Aheyces</text>
     <text class='const-text'>发表于</text>
     <text class='date'>1天前</text>
   </view>
+  <!-- 文章标题 -->
   <text class='title'>脑卒中的饮食该怎么吃呢？</text>
+  <!-- 工具栏--收藏及转发 -->
   <view class='tool'>
     <view class='cicle-img'>
       <image  src='/images/share (3).png'></image>
@@ -17,6 +20,7 @@
     </view>
     <view class='horizon'></view>
   </view>
+  <!--文章正文 -->
   <text class='detail margin-bottom' decode="{{true}}">
     &emsp;&emsp;1. 饮食要有合理结构，以低盐、低脂肪、低胆固醇为宜，适当多食豆制品、蔬菜和水果，戒除吸烟、酗酒等不良习惯。每周至少吃三次鱼。应定时定量，少量多餐，每天4餐，晚餐宜清淡易消化。不宜过饱，忌食辛辣、刺激之品，戒烟酒。昏迷和吞咽困难者，可采用鼻饲，以保持营养。
     &emsp;&emsp;2.适当进食肉食，特别是动物性脂肪的摄入量，增长较快、而且脂肪和胆固醇的摄入量远高于西方人，容易患有高胆固醇血症也是引发脑卒中的主要危险因素之一；胆固醇的摄入量每天要小于300毫克，也就是相当于一个鸡蛋的含量；
