@@ -20,7 +20,7 @@
         <view class="cu-tag line-cyan">{{item.time}}</view>
       </view>
       <view class="text-yellow text-sm text-left margin-top">
-        <text class="text-black">评估结果：</text>
+        <text class="text-black">评估结果：hhh</text>
         <text class="cuIcon-favorfill"></text> 
         <text class="cuIcon-favorfill"></text> 
         <text class="cuIcon-favorfill"></text>
