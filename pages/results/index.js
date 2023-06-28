@@ -5,7 +5,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+      isSucceed:1,
+      grades:94,
+      advice:'本次的练习中，请注意手臂抬起的角度与高度。其中，右臂与右肩的角度可以适当减小，避免过度训练，引起右大臂肌肉群拉伤，影响右大臂肌肉功能恢复。'
+  },
+  goToExercise:function(){
+    wx.navigateTo({
+      url: '../exercise/index',
+    })
   },
   showModal(e) {
     this.setData({

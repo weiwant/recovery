@@ -19,12 +19,13 @@
         <view class="cu-tag bg-cyan">{{1==item.isMorn?'上午':'下午'}}</view>
         <view class="cu-tag line-cyan">{{item.time}}</view>
       </view>
-      <view class=" text-yellow  margin-top">
-        <text class="text-black">评估结果：</text>
-        <text>{{item.grades}}</text>
+      <view class="margin-top">
+        评估结果：
+        <text class="text-yellow text-xl text-bold" >{{item.grades}}</text>
       </view>
-      <view class="margin-top">训练建议：{{item.advice}}
-      </view>
+      <view class="margin-top ">训练建议：{{item.advice}}</view>
+     
+      
     </view>
   </view>
 
