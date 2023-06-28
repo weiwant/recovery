@@ -1,8 +1,7 @@
 <!--pages/article/food.wxml-->
 <!--pages/article/index.wxml-->
 <view class='container'>
-  <image class='audio' src='https://s2.loli.net/2023/04/24/FaxbQ89JnqSU7X3.jpg'></image>
-  <image class='head-imagee' src='https://s2.loli.net/2023/04/24/FaxbQ89JnqSU7X3.jpg'></image>
+  <video class='head-imagee' src='http://47.113.202.168/demo.mp4' ></video>
   <!-- 作者信息及发布时间 -->
   <view class='author-date'>
     <image class='avatar' src='https://s2.loli.net/2023/04/24/a8IJWp9iYnFDZMz.jpg'></image>

@@ -68,9 +68,44 @@ Page({
     ec: {
       onInit: initChart
     },
-    colors:['bg-red','bg-blue'],
-    btn:['去接受','去打卡'],
+    colors:['bg-red','bg-blue','bg-green'],
+    btn:['去接受','去打卡','已完成'],
     index:0,
+    taskList:[
+      {
+        url:'https://s2.loli.net/2023/04/17/mbhk3zOcYalJE1Q.jpg',
+        doctor:'赵医生',
+        time:'2023年4月10日 9:31',
+        ddl:'2023年5月5日',
+        name:'步行练习',
+        diff:'难',
+        done:0,
+        all:30,
+        status:0,
+      },
+      {
+        url:'https://s2.loli.net/2023/04/17/mbhk3zOcYalJE1Q.jpg',
+        doctor:'赵医生',
+        time:'2023年4月1日 14:24',
+        ddl:'2023年4月28日',
+        name:'抬臂练习',
+        diff:'中',
+        done:11,
+        all:20,
+        status:1,
+      },
+      {
+        url:'https://s2.loli.net/2023/04/17/mbhk3zOcYalJE1Q.jpg',
+        doctor:'赵医生',
+        time:'2023年3月3日 10:47',
+        ddl:'2023年4月6日',
+        name:'抬腿练习',
+        diff:'易',
+        done:30,
+        all:30,
+        status:2,
+      }
+    ]
   },
 
   onReady() {

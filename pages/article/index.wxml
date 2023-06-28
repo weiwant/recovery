@@ -1,7 +1,7 @@
 <!--pages/article/index.wxml-->
-  <view class='container'>
-  <image class='audio' src='https://s2.loli.net/2023/04/15/OoIvMjgVNFQGqBW.png'></image>
-  <image class='head-imagee' src='https://s2.loli.net/2023/04/15/OoIvMjgVNFQGqBW.png'></image>
+<view class='container'>
+  <image class='head-imagee' src='{{url}}' style="{{1==isArticle?'':'display: none;'}}" ></image>
+  <video class='head-imagee' src='{{url}}' style="{{0==isArticle?'':'display: none;'}}" ></video>
   <!-- 作者信息 -->
   <view class='author-date'>
     <image class='avatar' src='https://s2.loli.net/2023/04/14/boRaWVHMzskLc6B.jpg'></image>
@@ -10,7 +10,7 @@
     <text class='date'>3天前</text>
   </view>
   <!-- 标题 -->
-  <text class='title'>脑卒中，一种在中国发病率极高的疾病。</text>
+  <text class='title'>{{title}}</text>
   <!-- 工具栏 -->
   <view class='tool'>
     <view class='cicle-img'>
@@ -21,11 +21,6 @@
   </view>
   <!-- 正文 -->
   <text class='detail margin-bottom' decode="{{true}}">
-    &emsp;&emsp;脑卒中（stroke），是指突然发生的、由脑血管病变引起的局限的或全脑的功能障碍，持续时间超过24h或引起死亡的临床综合征。我们需要知道的关于脑卒中的一些危险因素。a可调控因素：高血压、糖尿病、心脏病、高脂血症等b.可改变的因素：不良饮食习惯、大量饮酒、吸烟等c.不可变的因素：年龄、性别、家族史等
-    &emsp;&emsp;脑卒中，一种在中国发病率极高的疾病。中国人每5人中就会有两人罹患脑卒中，脑卒中也是我国疾病所致寿命损失年的第一病因，每年约190余万人因卒中死亡。卒中的致残率也同样很高，高达70%-80%。那关于脑卒中我们应该知道哪些东西呢？
-    &emsp;&emsp;我们需要知道的关于脑卒中的一些危险因素:
-    &emsp;&emsp;a可调控因素：高血压、糖尿病、心脏病、高脂血症等
-    &emsp;&emsp;b.可改变的因素：不良饮食习惯、大量饮酒、吸烟等
-    &emsp;&emsp;c.不可变的因素：年龄、性别、家族史等
+    {{content}}
   </text>
 </view>

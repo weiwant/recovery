@@ -34,9 +34,9 @@ Page({
   DelImg(e) {
     wx.showModal({
       title: '删除图片',
-      content: '确定要删除这段回忆吗？',
+      content: '确定要删除这张图片吗？',
       cancelText: '再看看',
-      confirmText: '再见',
+      confirmText: '是的',
       success: res => {
         if (res.confirm) {
           this.data.imgList.splice(e.currentTarget.dataset.index, 1);
