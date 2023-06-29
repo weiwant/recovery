@@ -2,15 +2,15 @@
 <!-- 用户信息 -->
 <view class="cu-list menu-avatar userInfo margin-bottom-lg">
   <view class="cu-item cur">
-    <view class="cu-avatar radius xl " style="background-image:url(https://s2.loli.net/2023/04/14/SfTo1UYsOCZwBM2.jpg);">
+    <view class="cu-avatar radius xl " style="background-image:url({{userImg}});">
     </view>
     <view class="content margin-left">
       <view>
-        <text class="text-xl userName margin-bottom-xs">细品岁月</text>
+        <text class="text-xl userName margin-bottom-xs">{{userName}}</text>
       </view>
       <view class="text-gray text-df flex margin-bottom-xxs">
         <text>
-          <text class="cuIcon-profile text-green margin-right-xs"></text> 账号ID：203254455 
+          <text class="cuIcon-profile text-green margin-right-xs"></text> 账号ID：{{userId}} 
         </text>
       </view>
       <view class="text-gray text-df flex">

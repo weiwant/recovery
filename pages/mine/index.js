@@ -5,7 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+      userName:'细品岁月',
+      userId:'203254455',
+      userImg:'https://s2.loli.net/2023/04/14/SfTo1UYsOCZwBM2.jpg'
   },
   goTo:function(){
     wx.navigateTo({

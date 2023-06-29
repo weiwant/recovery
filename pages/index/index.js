@@ -80,7 +80,7 @@ Page({
         name:'步行练习',
         diff:'难',
         done:0,
-        all:30,
+        all:'30天',
         status:0,
       },
       {
@@ -91,7 +91,7 @@ Page({
         name:'抬臂练习',
         diff:'中',
         done:11,
-        all:20,
+        all:'20天',
         status:1,
       },
       {
@@ -102,7 +102,7 @@ Page({
         name:'抬腿练习',
         diff:'易',
         done:30,
-        all:30,
+        all:'30天',
         status:2,
       }
     ]

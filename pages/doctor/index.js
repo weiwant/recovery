@@ -6,6 +6,20 @@ Page({
    */
   data: {
     index:0,
+    doctorList:[
+      {
+        name:'赵正平',
+        id:'104168891',
+        hospital:'中南医院康复科医师',
+        imgUrl:'https://s2.loli.net/2023/04/17/mbhk3zOcYalJE1Q.jpg'
+      },
+      {
+        name:'林静',
+        id:'105768941',
+        hospital:'中南医院康复科副主任',
+        imgUrl:'https://s2.loli.net/2023/04/26/a1j2zXPAhdQ7i4D.jpg'
+      }
+    ]
   },
   showModal(e) {
     this.setData({

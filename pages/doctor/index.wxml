@@ -32,22 +32,22 @@
   </view>
 </view>
 <!-- 医生信息 -->
-<view class="cu-list menu-avatar userInfo margin-top-lg">
-  <view class="cu-item cur">
-    <view class="cu-avatar radius xl " style="background-image:url(https://s2.loli.net/2023/04/17/mbhk3zOcYalJE1Q.jpg);">
+<view class="cu-list menu-avatar userInfo margin-top-lg"wx:for="{{doctorList}}" wx:key='index'>
+  <view class="cu-item cur" >
+    <view class="cu-avatar radius xl " style="background-image:url({{item.imgUrl}});">
     </view>
     <view class="content margin-left">
       <view>
-        <text class="text-xl userName margin-bottom-xs">赵医生</text>
+        <text class="text-xl userName margin-bottom-xs">{{item.name}}医生</text>
       </view>
       <view class="text-gray text-df flex margin-bottom-xxs">
         <text>
-          <text class="cuIcon-profile text-green margin-right-xs"></text> 账号ID：104168891 
+          <text class="cuIcon-profile text-green margin-right-xs"></text> 账号ID：{{item.id}} 
         </text>
       </view>
       <view class="text-gray text-df flex">
         <text>
-          <text class="cuIcon-form text-pink margin-right-xs"></text> 认证：中南医院康复科医师  
+          <text class="cuIcon-form text-pink margin-right-xs"></text> 认证：{{item.hospital}}  
         </text>
       </view>
     </view>
