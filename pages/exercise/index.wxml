@@ -1,8 +1,30 @@
 <!--pages/exercise/index.wxml-->
+<!-- 日历 -->
 <calendar list="{{list}}"></calendar>
+<!-- 任务详情 -->
+<view class="cu-bar bg-white solid-bottom margin-top">
+  <view class="action">
+    <text class="cuIcon-title text-blue"></text>任务详情
+  </view>
+</view>
+<view class="cu-item text-lg">
+   <view class="bg-img padding-left text-bold" style="background-image: url('https://s2.loli.net/2023/04/18/nR1TuhEwjlKxIAP.png');height: 414rpx;"> 
+    <view class="text-content margin-bottom-xs ">截止时间：{{ddl}}</view>
+    <view class="text-content margin-bottom-xs">任务名称：{{name}}</view>
+    <view class="text-content margin-bottom-xs">难易程度：{{diff}}</view>
+    <view class="text-content margin-bottom-xs">完成情况：{{done}} / {{all}} 天</view>
+    <view class="text-content margin-bottom-xs">任务详情：{{detail}}</view>
+  </view>
+</view>
+
+<!-- 参考视频 -->
+<view class="cu-bar bg-white solid-bottom margin-top">
+  <view class="action">
+    <text class="cuIcon-title text-blue"></text>参考视频
+  </view>
+</view>
 <view class="text-center padding">
-      <view class="text text-xl text-left margin-bottom">参考视频：</view>
-      <video class="img" src='http://47.113.202.168/demo.mp4' ></video>
+    <video class="img" src='http://47.113.202.168/demo.mp4' ></video>
 </view>
 <view class="text-center padding-bottom">
       <button class="cu-btn bg-grn shadow round margin-top-lg margin-bottom-lg text-lg lg" bindtap="goTo">今日打卡</button>

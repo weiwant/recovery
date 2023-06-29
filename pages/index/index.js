@@ -82,6 +82,7 @@ Page({
         done:0,
         all:'30天',
         status:0,
+        detail:'',
       },
       {
         url:'https://s2.loli.net/2023/04/17/mbhk3zOcYalJE1Q.jpg',
@@ -93,6 +94,7 @@ Page({
         done:11,
         all:'20天',
         status:1,
+        detail:'',
       },
       {
         url:'https://s2.loli.net/2023/04/17/mbhk3zOcYalJE1Q.jpg',
@@ -104,6 +106,7 @@ Page({
         done:30,
         all:'30天',
         status:2,
+        detail:'',
       }
     ]
   },

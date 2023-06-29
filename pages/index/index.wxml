@@ -31,10 +31,10 @@
     <!-- 任务具体信息 -->
     <view class="cu-item padding-left text-lg">
       <view class="bg-img padding-tb-xl" style="background-image: url('https://s2.loli.net/2023/04/18/nR1TuhEwjlKxIAP.png');height: 414rpx;">
-        <view class="text-content margin-bottom">截止时间：{{item.ddl}}</view>
+      <view class="text-content margin-bottom">截止时间：{{item.ddl}}</view>
       <view class="text-content margin-bottom">任务名称：{{item.name}}</view>
       <view class="text-content margin-bottom">难易程度：{{item.diff}}</view>
-      <view class="text-content margin-bottom">完成情况：{{item.done}} / {{item.all}} 天</view>
+      <view class="text-content margin-bottom">完成情况：{{item.done}} / {{item.all}} </view>
       </view>
     </view>
     <!-- 任务按钮 -->
