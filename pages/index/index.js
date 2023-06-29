@@ -68,9 +68,11 @@ Page({
     ec: {
       onInit: initChart
     },
+    isPatient:0,
     colors:['bg-red','bg-blue','bg-green'],
     btn:['去接受','去打卡','已完成'],
     index:0,
+    activeNames: ['1'],
     taskList:[
       {
         url:'https://s2.loli.net/2023/04/17/mbhk3zOcYalJE1Q.jpg',
@@ -108,6 +110,41 @@ Page({
         status:2,
         detail:'',
       }
+    ],
+    patientList:[
+      {
+        id:1,
+        patientImg:'https://s2.loli.net/2023/04/14/vZo9rCgjNGIPSb2.jpg',
+        patientName:'李淑芬',
+        patientId:'2789257855',
+        taskList:[
+          {taskName:'抬臂练习',},
+          {taskName:'抬腿练习',},
+          {taskName:'步行练习',},
+        ]
+      },
+      {
+        id:2,
+        patientImg:'https://s2.loli.net/2023/04/18/AQGDHMYIja9Nd2g.jpg',
+        patientName:'赵书',
+        patientId:'2032578554',
+        taskList:[
+          {taskName:'抬臂练习',},
+          {taskName:'抬腿练习',},
+          {taskName:'步行练习',},
+        ]
+      },
+      {
+        id:3,
+        patientImg:'https://s2.loli.net/2023/04/14/SfTo1UYsOCZwBM2.jpg',
+        patientName:'王国发',
+        patientId:'2357846781',
+        taskList:[
+          {taskName:'抬臂练习',},
+          {taskName:'抬腿练习',},
+          {taskName:'步行练习',},
+        ]
+      },
     ]
   },
 
@@ -124,11 +161,25 @@ Page({
       })
     }
   },
-  goTo:function(){
+  
+  onChange(event) {
+    this.setData({
+      activeNames: event.detail,
+    });
+  },
+
+  goToExercise:function(){
     wx.navigateTo({
       url: '../exercise/index',
     })
   },
+
+  goToAdd:function(){
+    wx.navigateTo({
+      url: '../addTask/index',
+    })
+  },
+
   change:function(){
     this.setData({
       index: (this.data.index + 1) % 2
