@@ -9,6 +9,7 @@ Page({
     scrollLeft:0,
     post:[
       {
+        postId:1,
         userImg:'https://s2.loli.net/2023/04/14/boRaWVHMzskLc6B.jpg',
         userName:'疗康院康复师9527',
         isDoctor:1,
@@ -25,6 +26,7 @@ Page({
         ]
       },
       {
+        postId:2,
         userImg:'https://s2.loli.net/2023/04/14/SxzmLAo8sNvhGYt.jpg',
         userName:'早日康复',
         isDoctor:0,
@@ -40,6 +42,7 @@ Page({
         ]
       },
       {
+        postId:2,
         userImg:'https://s2.loli.net/2023/04/14/vZo9rCgjNGIPSb2.jpg',
         userName:'幸福',
         isDoctor:0,
@@ -70,9 +73,12 @@ Page({
       url: '../fabu/index',
     })
   },
-  goToDetail:function(){
+  goToDetail:function(e){
+    // console.log(this.data);
+    console.log(e.currentTarget);
+    console.log(e.currentTarget.id);
     wx.navigateTo({
-      url: '../circleDetail/index',
+      url: '../circleDetail/index?id='+e.currentTarget.id,
     })
   },
   /**

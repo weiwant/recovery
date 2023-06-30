@@ -5,6 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    newsId:0,
     isArticle:1,
     url:'https://s2.loli.net/2023/04/15/OoIvMjgVNFQGqBW.png',
     // url:'http://47.113.202.168/demo.mp4',
@@ -16,7 +17,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-
+    this.setData({
+      newsId:options.id,
+    });
+    console.log(this.data.newsId);
   },
 
   /**

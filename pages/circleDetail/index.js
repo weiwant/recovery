@@ -5,6 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    postId:0,
     index:0,
     iconName:['cuIcon-appreciatefill','cuIcon-appreciate'],
     tt:['已赞(884)','点赞(883)'],
@@ -74,7 +75,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-
+    this.setData({
+      postId: options.id,
+    });
+    //console.log(this.data.postId);
   },
 
   /**

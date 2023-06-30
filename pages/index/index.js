@@ -68,13 +68,14 @@ Page({
     ec: {
       onInit: initChart
     },
-    isPatient:0,
+    isPatient:1,
     colors:['bg-red','bg-blue','bg-green'],
     btn:['去接受','去打卡','已完成'],
     index:0,
     activeNames: ['1'],
     taskList:[
       {
+        taskId:1,
         url:'https://s2.loli.net/2023/04/17/mbhk3zOcYalJE1Q.jpg',
         doctor:'赵医生',
         time:'2023年4月10日 9:31',
@@ -87,6 +88,7 @@ Page({
         detail:'',
       },
       {
+        taskId:2,
         url:'https://s2.loli.net/2023/04/17/mbhk3zOcYalJE1Q.jpg',
         doctor:'赵医生',
         time:'2023年4月1日 14:24',
@@ -99,6 +101,7 @@ Page({
         detail:'',
       },
       {
+        taskId:3,
         url:'https://s2.loli.net/2023/04/17/mbhk3zOcYalJE1Q.jpg',
         doctor:'赵医生',
         time:'2023年3月3日 10:47',
@@ -168,9 +171,9 @@ Page({
     });
   },
 
-  goToExercise:function(){
+  goToExercise:function(e){
     wx.navigateTo({
-      url: '../exercise/index',
+      url: '../exercise/index?id='+e.currentTarget.id,
     })
   },
 

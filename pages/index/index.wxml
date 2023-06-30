@@ -39,7 +39,7 @@
         </view>
       </view>
       <!-- 任务按钮 -->
-      <view class="padding flex flex-direction bg-white" bindtap="goToExercise">
+      <view class="padding flex flex-direction bg-white" bindtap="goToExercise" id="{{item.taskId}}">
         <button class="cu-btn lg text-lg bg-red {{colors[item.status]}} " >
           {{btn[item.status]}}
         </button>

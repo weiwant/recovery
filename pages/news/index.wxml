@@ -33,7 +33,7 @@
 <!-- 锻炼 -->
 <view class="cu-card article" style="{{0==TabCur?'':'display: none;'}}">
   <!-- 内容crad -->
-  <view class="cu-item shadow" bindtap="goToDetail" wx:for="{{news}}" wx:key="index" >
+  <view class="cu-item shadow" bindtap="goToDetail" wx:for="{{news}}" wx:key="index" id="{{item.newsId}}" >
     <!-- 标题 -->
     <view class="title">
       <view class="text-cut">{{item.title}}</view>
