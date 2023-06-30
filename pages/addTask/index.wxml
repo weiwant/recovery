@@ -1,2 +1,46 @@
 <!--pages/addTask/index.wxml-->
-<text>pages/addTask/index.wxml</text>
+<!-- 患者下拉选择 -->
+<view class="cu-form-group">
+  <view class="title">患者</view>
+  <picker bindchange="PickerChange" value="{{pIndex}}" range="{{patients}}">
+    <view class="picker">
+      {{pIndex?patients[pIndex]:'点击选择患者'}}
+    </view>
+  </picker>
+</view>
+<!-- 截止日期选择 -->
+<view class="cu-form-group">
+  <view class="title">截止日期</view>
+  <picker mode="date" value="{{date}}" start="2015-09-01" end="2120-09-01" bindchange="DateChange">
+    <view class="picker">
+      {{date}}
+    </view>
+  </picker>
+</view>
+<!-- 任务难度下拉选择框 -->
+<view class="cu-form-group">
+  <view class="title">任务难度</view>
+  <picker bindchange="PickerChange1" value="{{dIndex}}" range="{{difficulty}}">
+    <view class="picker">
+      {{dIndex?difficulty[dIndex]:'点击选择难度'}}
+    </view>
+  </picker>
+</view>
+<view class="cu-form-group">
+  <view class="title">任务周期</view>
+  <input placeholder="请输入该患者的康复任务周期"></input>
+</view>
+<view class="cu-form-group">
+  <view class="title">康复任务</view>
+  <input placeholder="请输入该患者的康复任务"></input>
+</view>
+
+<view class="cu-form-group align-start solid-bottom">
+  <view class="title">任务详情</view>
+  <textarea maxlength="-1" disabled="{{modalName!=null}}" bindinput="textareaBInput" placeholder="   描述改康复任务详情"></textarea>
+</view>
+
+<view class="padding flex flex-direction bg-white">
+  <button class="cu-btn bg-blue lg">发布任务</button>
+</view>
+<view class="bg-img padding-top" style="background-image: url('https://s2.loli.net/2023/04/18/nR1TuhEwjlKxIAP.png');height: 414rpx;"></view>

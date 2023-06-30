@@ -5,7 +5,28 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    pIndex: null,
+    patients: ['李淑芬', '王国发', '赵书'],
+    dIndex:null,
+    difficulty:['易','中','难'],
+    date: '2023-7-18',
+  },
+  DateChange(e) {
+    this.setData({
+      date: e.detail.value
+    })
+  },
+  PickerChange(e) {
+    console.log(e);
+    this.setData({
+      pIndex: e.detail.value
+    })
+  },
+  PickerChange1(e) {
+    console.log(e);
+    this.setData({
+      dIndex: e.detail.value
+    })
   },
 
   /**

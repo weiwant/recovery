@@ -55,133 +55,8 @@
       <text class="cuIcon-title text-blue"></text>患者列表
     </view>
   </view>
-  <!-- 折叠卡片1 -->
-  <view class="cu-card dynamic 'no-card'">
-    <view class="cu-item shadow">
-      <view class="cu-list menu-avatar">
-        <view class="cu-item">
-          <view class="cu-avatar round lg" style="background-image:url(https://s2.loli.net/2023/04/14/vZo9rCgjNGIPSb2.jpg);"></view>
-          <view class="content flex-sub">
-            <view>李淑芬</view>
-            <view class="text-gray text-sm flex justify-between">
-              账号ID：2789257855
-            </view>
-          </view>
-        </view>
-      </view>
-      <van-collapse value="{{ activeNames }}" bind:change="onChange">
-        <van-collapse-item title="任务详情" name="1">
-          <view class=" cu-list menu ">
-            <view class="cu-item arrow">
-              <view class="content">
-                <text class="text-blue">抬臂练习</text>
-              </view>
-            </view>
-          </view>
-          <view class=" cu-list menu ">
-            <view class="cu-item arrow">
-              <view class="content">
-                <text class="text-blue">抬腿练习</text>
-              </view>
-            </view>
-          </view>
-          <view class=" cu-list menu ">
-            <view class="cu-item arrow">
-              <view class="content">
-                <text class="text-blue">步行练习</text>
-              </view>
-            </view>
-          </view>
-        </van-collapse-item>
-      </van-collapse>
-    </view>
-  </view>
-  <!-- 折叠卡片2 -->
-  <view class="cu-card dynamic 'no-card' margin-top-xs">
-    <view class="cu-item shadow">
-      <view class="cu-list menu-avatar">
-        <view class="cu-item">
-          <view class="cu-avatar round lg" style="background-image:url(https://s2.loli.net/2023/04/18/AQGDHMYIja9Nd2g.jpg);"></view>
-          <view class="content flex-sub">
-            <view>赵书</view>
-            <view class="text-gray text-sm flex justify-between">
-              账号ID：2032578554
-            </view>
-          </view>
-        </view>
-      </view>
-      <van-collapse value="{{ activeNames }}" bind:change="onChange">
-        <van-collapse-item title="任务详情" name="2">
-          <view class=" cu-list menu ">
-            <view class="cu-item arrow">
-              <view class="content">
-                <text class="text-blue">抬臂练习</text>
-              </view>
-            </view>
-          </view>
-          <view class=" cu-list menu ">
-            <view class="cu-item arrow">
-              <view class="content">
-                <text class="text-blue">抬腿练习</text>
-              </view>
-            </view>
-          </view>
-          <view class=" cu-list menu ">
-            <view class="cu-item arrow">
-              <view class="content">
-                <text class="text-blue">步行练习</text>
-              </view>
-            </view>
-          </view>
-        </van-collapse-item>
-      </van-collapse>
-    </view>
-  </view>
-  <!-- 折叠卡片3 -->
-  <view class="cu-card dynamic 'no-card' margin-top-xs">
-    <view class="cu-item shadow">
-      <view class="cu-list menu-avatar">
-        <view class="cu-item">
-          <view class="cu-avatar round lg" style="background-image:url(https://s2.loli.net/2023/04/14/SfTo1UYsOCZwBM2.jpg);"></view>
-          <view class="content flex-sub">
-            <view>王国发</view>
-            <view class="text-gray text-sm flex justify-between">
-              账号ID：2032578554
-            </view>
-          </view>
-        </view>
-      </view>
-      <van-collapse value="{{ activeNames }}" bind:change="onChange">
-        <van-collapse-item title="任务详情" name="3">
-          <view class=" cu-list menu ">
-            <view class="cu-item arrow">
-              <view class="content">
-                <text class="text-blue">抬臂练习</text>
-              </view>
-            </view>
-          </view>
-          <view class=" cu-list menu ">
-            <view class="cu-item arrow">
-              <view class="content">
-                <text class="text-blue">抬腿练习</text>
-              </view>
-            </view>
-          </view>
-          <view class=" cu-list menu ">
-            <view class="cu-item arrow">
-              <view class="content">
-                <text class="text-blue">步行练习</text>
-              </view>
-            </view>
-          </view>
-        </van-collapse-item>
-      </van-collapse>
-    </view>
-  </view>
-
-
-<!-- test -->
-<view class="cu-card dynamic 'no-card'" wx:for="{{patientList}}" wx:key="index">
+  <!-- 患者任务卡片 -->
+  <view class="cu-card dynamic 'no-card'" wx:for="{{patientList}}" wx:key="index">
     <view class="cu-item shadow">
       <view class="cu-list menu-avatar">
         <view class="cu-item">
@@ -195,7 +70,7 @@
         </view>
       </view>
       <van-collapse value="{{ activeNames }}" bind:change="onChange">
-        <van-collapse-item title="任务详情" name="item.iid">
+        <van-collapse-item title="任务详情" name="{{item.id}}">
           <view class=" cu-list menu " wx:for="{{item.taskList}}" wx:for-item="taskList" wx:key="taskList">
             <view class="cu-item arrow">
               <view class="content">
@@ -207,9 +82,7 @@
       </van-collapse>
     </view>
   </view>
-
-
-<!-- 添加任务按钮 -->
+  <!-- 添加任务按钮 -->
   <movable-area class="movable-area">
       <movable-view class="movable-view" direction="all">
         <image class="img" src="https://s2.loli.net/2023/04/18/dkB18mDIxELiAjo.png" mode="" bindtap="goToAdd"/>
