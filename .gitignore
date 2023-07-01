@@ -146,3 +146,5 @@ training/
 evaluation/
 datasets/
 custom/
+logs/
+results/
