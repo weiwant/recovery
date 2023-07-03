@@ -1,4 +1,3 @@
-import argparse
 import json
 from pathlib import Path
 
@@ -7,16 +6,10 @@ import numpy as np
 from tqdm import tqdm
 
 from src.models.keyframe.utils import video
+from src.models.keyframe.utils.config import get_config
 
 
-def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--video-dir', type=str, default='./custom/keyframe/videos/')
-    parser.add_argument('--label-dir', type=str, default='./custom/keyframe/labels/')
-    parser.add_argument('--sample-rate', type=int, default=15)
-    parser.add_argument('--save-path', type=str, default='./datasets/keyframe/custom_dataset.h5')
-    args = parser.parse_args()
-
+def main(args):
     # create output directory
     out_dir = Path(args.save_path).parent
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -63,4 +56,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    config = get_config(config_mode='datasets')
+    main(config)
