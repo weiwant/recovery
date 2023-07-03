@@ -1,22 +1,15 @@
 # -*- coding: utf-8 -*-
-import argparse
 
 import cv2
 import torch
 
 from src.models.keyframe.framework.model import PGL_SUM
+from src.models.keyframe.utils.config import get_config
 from src.models.keyframe.utils.summary import generate_summary
 from src.models.keyframe.utils.video import VideoPreprocessor
 
-if __name__ == "__main__":
-    # arguments to run the script
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--video-path", type=str, required=True, help="Path to the video to be summarized")
-    parser.add_argument("--model", type=str, required=True, help="Path to the model to be used")
-    parser.add_argument("--output-path", type=str, required=True, help="Path to the output summary")
-    parser.add_argument("--sample-rate", type=int, default=15, help="Sample rate for the video")
 
-    args = vars(parser.parse_args())
+def main(args):
     models_path = args["model"]
     video_path = args["video_path"]
     output_path = args["output_path"]
@@ -54,3 +47,8 @@ if __name__ == "__main__":
 
     out.release()
     cap.release()
+
+
+if __name__ == "__main__":
+    config = get_config(config_mode='infer')
+    main(config)
