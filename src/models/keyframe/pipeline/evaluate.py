@@ -63,7 +63,8 @@ def main(args):
     # Save the importance scores in txt format.
     with open(path + '/f_scores.txt', 'w') as outfile:
         json.dump(f_score_epochs, outfile)
-    print(max(range(len(f_score_epochs)), key=f_score_epochs.__getitem__), max(f_score_epochs))
+    print('best epoch: ', np.argmax(f_score_epochs))
+    print('best f_score: ', np.max(f_score_epochs))
 
 
 if __name__ == '__main__':
