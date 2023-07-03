@@ -112,7 +112,7 @@ def get_config(config_mode, parse=True, **optional_kwargs):
         parser.add_argument('--label-dir', type=str, default='./custom/keyframe/labels/')
         parser.add_argument('--sample-rate', type=int, default=15)
         parser.add_argument('--save-path', type=str, default='./datasets/keyframe/custom_dataset.h5')
-        kwargs = vars(parser.parse_args())
+        kwargs = parser.parse_args()
     elif config_mode == 'infer':
         parser.add_argument("--video-path", type=str, required=True, help="Path to the video to be summarized")
         parser.add_argument("--model", type=str, required=True, help="Path to the model to be used")
