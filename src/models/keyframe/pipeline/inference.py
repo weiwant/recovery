@@ -24,7 +24,6 @@ def main(args):
         scores, _ = trained_model(torch.Tensor(features).view(-1, 1024))
         scores = scores.squeeze(0).cpu().numpy().tolist()
         summary = generate_summary([cps], [scores], [n_frames], [picks])[0]
-        print(summary)
     cap = getattr(cv2, "VideoCapture")(video_path)
     width = int(cap.get(getattr(cv2, "CAP_PROP_FRAME_WIDTH")))
     height = int(cap.get(getattr(cv2, "CAP_PROP_FRAME_HEIGHT")))
