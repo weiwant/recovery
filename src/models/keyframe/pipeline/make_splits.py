@@ -1,9 +1,10 @@
-import argparse
 import json
 import random
 from pathlib import Path
 
 import h5py
+
+from src.models.keyframe.utils.config import get_config
 
 
 def make_random_splits(keys, num_test, num_splits):
@@ -32,23 +33,7 @@ def make_cross_val_splits(keys, num_videos, num_test):
     return splits
 
 
-def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--dataset', type=str, required=True,
-                        help='Path to h5 dataset')
-    parser.add_argument('--extra-datasets', type=str, nargs='+', default=[],
-                        help='Extra datasets to append to train set')
-    parser.add_argument('--save-path', type=str, required=True,
-                        help='Path to save generated splits')
-    parser.add_argument('--num-splits', type=int, default=5,
-                        help='How many splits to generate')
-    parser.add_argument('--train-ratio', type=float, default=0.8,
-                        help='Percentage of training data')
-    parser.add_argument('--method', type=str, default='random',
-                        choices=['random', 'cross'],
-                        help='Random selection or cross validation')
-    args = parser.parse_args()
-
+def main(args):
     dataset = h5py.File(args.dataset, 'r')
     keys = list(dataset.keys())
     keys = [str(Path(args.dataset) / key) for key in keys]
@@ -87,4 +72,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    config = get_config(config_mode='split')
+    main(config)
