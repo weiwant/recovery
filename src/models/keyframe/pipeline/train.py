@@ -157,9 +157,9 @@ class Solver(object):
             # Uncomment to save parameters at checkpoint
             if not os.path.exists(self.config.save_dir):
                 os.makedirs(self.config.save_dir)
-            # ckpt_path = str(self.config.save_dir) + f'/epoch-{epoch_i}.pt'
-            # tqdm.write(f'Save parameters at {ckpt_path}')
-            # torch.save(self.model.state_dict(), ckpt_path)
+            ckpt_path = str(self.config.save_dir) + f'/epoch-{epoch_i}.pt'
+            tqdm.write(f'Save parameters at {ckpt_path}')
+            torch.save(self.model.state_dict(), ckpt_path)
 
             self.evaluate(epoch_i)
 

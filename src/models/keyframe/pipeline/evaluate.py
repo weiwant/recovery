@@ -60,9 +60,10 @@ def main(args):
         f_score_epochs.append(np.mean(all_f_scores))
         print("f_score: ", np.mean(all_f_scores))
 
-    # Save the importance scores in json format.
-    with open(path + '/f_scores.json', 'w') as outfile:
+    # Save the importance scores in txt format.
+    with open(path + '/f_scores.txt', 'w') as outfile:
         json.dump(f_score_epochs, outfile)
+    print(max(range(len(f_score_epochs)), key=f_score_epochs.__getitem__), max(f_score_epochs))
 
 
 if __name__ == '__main__':
