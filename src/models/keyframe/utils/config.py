@@ -106,7 +106,7 @@ def get_config(config_mode, parse=True, **optional_kwargs):
         parser.add_argument('--method', type=str, default='random',
                             choices=['random', 'cross'],
                             help='Random selection or cross validation')
-        kwargs = vars(parser.parse_args())
+        kwargs = parser.parse_args()
     elif config_mode == 'datasets':
         parser.add_argument('--video-dir', type=str, default='./custom/keyframe/videos/')
         parser.add_argument('--label-dir', type=str, default='./custom/keyframe/labels/')
