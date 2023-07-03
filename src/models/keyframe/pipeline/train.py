@@ -199,19 +199,21 @@ class Solver(object):
                     weights.create_dataset(f"{video_name}/epoch_{epoch_i}", data=attn_weights)
 
 
+def main(train_configs, test_configs):
+    train_loader = get_loader(train_configs.mode, train_configs.video_type, train_configs.split_index)
+    test_loader = get_loader(test_configs.mode, test_configs.video_type, test_configs.split_index)
+    solver = Solver(train_configs, train_loader, test_loader)
+    solver.build()
+    solver.evaluate(-1)  # evaluates the summaries using the initial random weights of the network
+    solver.train()
+
+
 if __name__ == '__main__':
     """ Main function that sets the data loaders; trains and evaluates the model."""
-    configs = get_config(mode='train')
-    test_config = get_config(mode='test')
+    configs = get_config(config_mode='train', mode='train')
+    test_config = get_config(config_mode='train', mode='test')
 
     print(configs)
     print(test_config)
     print('Currently selected split_index:', configs.split_index)
-    train_data_loader = get_loader(configs.mode, configs.video_type, configs.split_index)
-    test_data_loader = get_loader(test_config.mode, test_config.video_type, test_config.split_index)
-    solver = Solver(configs, train_data_loader, test_data_loader)
-
-    solver.build()
-    solver.evaluate(-1)  # evaluates the summaries using the initial random weights of the network
-    solver.train()
-# tensorboard --logdir '../PGL-SUM/Summaries/PGL-SUM/'
+    main(configs, test_config)
