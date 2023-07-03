@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import argparse
 import json
 import os.path
 from os import listdir
@@ -7,20 +6,12 @@ from os import listdir
 import h5py
 import numpy as np
 
+from src.models.keyframe.utils.config import get_config
 from src.models.keyframe.utils.summary import generate_summary, evaluate_summary
 
 
-def main():
-    # arguments to run the script
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--path", type=str,
-                        required=True,
-                        help="Path to the json files with the scores of the frames for each epoch")
-    parser.add_argument("--dataset", type=str, default='SumMe', help="Dataset to be used")
-    parser.add_argument("--eval", type=str, default="max",
-                        help="Eval method to be used for f_score reduction (max or avg)")
-
-    args = vars(parser.parse_args())
+def main(args):
+    # arguments to run the scrip
     path = args["path"]
     dataset = args["dataset"]
     eval_method = args["eval"]
@@ -75,4 +66,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    config = get_config(config_mode='evaluate')
+    main(config)
