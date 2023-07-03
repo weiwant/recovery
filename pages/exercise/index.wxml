@@ -12,7 +12,7 @@
     <view class="text-content margin-bottom-xs ">截止时间：{{ddl}}</view>
     <view class="text-content margin-bottom-xs">任务名称：{{name}}</view>
     <view class="text-content margin-bottom-xs">难易程度：{{diff}}</view>
-    <view class="text-content margin-bottom-xs">完成情况：{{done}} / {{all}} 天</view>
+    <view class="text-content margin-bottom-xs">完成情况：{{done}} / {{all}}</view>
     <view class="text-content margin-bottom-xs">任务详情：{{detail}}</view>
   </view>
 </view>

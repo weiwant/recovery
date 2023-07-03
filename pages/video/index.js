@@ -22,21 +22,20 @@ Page({
    */
   uploadvideo: function() {
     var src = this.data.src;
-    wx.uploadFile({
-      url: '',
-      methid: 'POST',           // 可用可不用
-      filePath: src,
-      name: 'files',              // 服务器定义key字段名称
-      header: app.globalData.header,
-      success: function() {
-        console.log('视频上传成功')
-      },
-      fail: function() {
-        console.log('接口调用失败')
-      }
-    })
-  },
-  goTo:function(){
+    console.log(src);
+    // wx.uploadFile({
+    //   url: '',
+    //   methid: 'POST',           // 可用可不用
+    //   filePath: src,
+    //   name: 'files',              // 服务器定义key字段名称
+    //   header: app.globalData.header,
+    //   success: function() {
+    //     console.log('视频上传成功')
+    //   },
+    //   fail: function() {
+    //     console.log('接口调用失败')
+    //   }
+    // });
     wx.navigateTo({
       url: '../results/index',
     })

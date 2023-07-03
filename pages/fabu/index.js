@@ -47,6 +47,21 @@ Page({
       }
     })
   },
+
+  publish(){
+    wx.request({
+      url: 'url',
+      method:'POST',
+      data:{
+        user:'0014547',
+        url:this.data.imgList,
+      },
+      success:(res)=>{
+        console.log(res)
+        console.log(res.data)
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

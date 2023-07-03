@@ -8,6 +8,22 @@ Page({
 
   },
 
+  getbtn(){
+    wx.request({
+      url: 'http://38980ab1.r6.vip.cpolar.cn/recovery/api/article/get_list',
+      method:'POST',
+      data:{
+        userid:'lsfjds525',
+        class_:'科普',
+      },
+      success:(res)=>{
+        console.log(res)
+        console.log(res.data)
+      }
+    })
+  },
+
+
   /**
    * 生命周期函数--监听页面加载
    */

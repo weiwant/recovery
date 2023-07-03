@@ -15,7 +15,7 @@
   <view class='tool'>
     <view class='cicle-img'>
       <image  src='/images/share (3).png'></image>
-      <image class='share-img' src='/images/share (2).png'></image>
+      <image class='share-img' src='/images/share (2).png' bindtap="getbtn"></image>
     </view>
     <view class='horizon'></view>
   </view>

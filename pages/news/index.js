@@ -45,9 +45,27 @@ Page({
         tag:'下肢训练',
         isCollected:0,
       },
-    ]
+    ],
+    newsList:[],
   },
   tabSelect(e) {
+    
+    wx.request({
+      url: 'http://38980ab1.r6.vip.cpolar.cn/recovery/api/article/get_list',
+      method:'POST',
+      data:{
+        userid:'lsfjds525',
+        class_:'科普',
+      },
+      success:(res)=>{
+        console.log(res)
+        this.setData({
+        newsList:res.data
+        })
+        console.log(this.data.newsList)
+      }
+    })
+
     this.setData({
       TabCur: e.currentTarget.dataset.id,
       scrollLeft: (e.currentTarget.dataset.id-1)*60
