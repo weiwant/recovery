@@ -111,7 +111,8 @@ def get_config(config_mode, parse=True, **optional_kwargs):
         parser.add_argument('--video-dir', type=str, default='./custom/keyframe/videos/')
         parser.add_argument('--label-dir', type=str, default='./custom/keyframe/labels/')
         parser.add_argument('--sample-rate', type=int, default=15)
-        parser.add_argument('--save-path', type=str, default='./datasets/keyframe/custom_dataset.h5')
+        parser.add_argument('--save-path', type=str,
+                            default='./datasets/keyframe/eccv16_dataset_custom_google_pool5.h5')
         kwargs = parser.parse_args()
     elif config_mode == 'infer':
         parser.add_argument("--video-path", type=str, required=True, help="Path to the video to be summarized")
@@ -128,6 +129,12 @@ def get_config(config_mode, parse=True, **optional_kwargs):
         parser.add_argument("--eval", type=str, default="max",
                             help="Eval method to be used for f_score reduction (max or avg)")
 
+        kwargs = vars(parser.parse_args())
+    elif config_mode == 'combine':
+        parser.add_argument("--datasets", type=str, required=False, nargs='*', help="List of datasets to be combined")
+        parser.add_argument("--save-path", type=str, default='./datasets/keyframe/eccv16_dataset_mix_google_pool5.h5',
+                            help="Path to the output datasets")
+        parser.add_argument("--all", type=str2bool, default='true', help="Combine all datasets")
         kwargs = vars(parser.parse_args())
     else:
         raise ValueError('Invalid config mode')
