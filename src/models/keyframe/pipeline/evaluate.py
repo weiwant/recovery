@@ -17,7 +17,7 @@ def main(args):
     eval_method = args["eval"]
 
     results = [f for f in listdir(path) if f.endswith(".json")]
-    results.sort(key=lambda video: int(video[6:-5]))
+    results.sort(key=lambda video: video.split('_')[1][:-5])
     dataset_path = os.path.join('./datasets/keyframe',
                                 next(filter(lambda x: dataset.lower() in x, os.listdir('./datasets/keyframe'))))
 
