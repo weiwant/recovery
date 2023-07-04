@@ -5,13 +5,49 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    code:'',
+    nickName:'',
+    avatarUrl:'',
+    hasUserInfo:false,
   },
 
   goTo:function(){
-    wx.switchTab({
-      url: '../index/index',
+    // 获取code
+    wx.login({
+      success: (res) => {
+        console.log(res);
+        this.setData({
+         code: res.code,
+        });
+      },
     })
+    // 获取用户名和头像
+    if(!this.data.hasUserInfo){
+      wx.getUserProfile({
+        desc: '用于完善个人资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
+        success: (res) => {
+          this.setData({
+            nickName: res.userInfo.nickName,
+            avatarUrl:res.userInfo.avatarUrl,
+            hasUserInfo: true
+          });
+          console.log(res);
+          // 将基本信息保存在缓存中
+          wx.setStorage({
+            key:"userInfo",
+            data:{
+              nickname:this.data.nickName,
+              img:this.data.avatarUrl,
+            }
+          });
+          wx.switchTab({
+            url: '../index/index',
+          })
+        }
+      })
+    }
+     
+    
   },
 
   /**
@@ -39,14 +75,27 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide() {
-
+    console.log(this.data)
+    
+    // wx.request({
+          //   url: 'http://38980ab1.r6.vip.cpolar.cn/recovery/api/user/register',
+          //   method:'POST',
+          //   data:{
+          //     openid:"og_kajsdhoks6q9rjkds8",
+          //     nickname:this.data.nickName,
+          //     img:this.data.avatarUrl
+          //   },
+          //   success:(res)=>{
+          //     console.log(res)
+          //   }
+          // });
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload() {
-
+    
   },
 
   /**

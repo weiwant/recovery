@@ -5,9 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-      userName:'细品岁月',
-      userId:'203254455',
-      userImg:'https://s2.loli.net/2023/04/14/SfTo1UYsOCZwBM2.jpg'
+      userName:'游客',
+      userId:'0000000',
+      userImg:'https://s2.loli.net/2023/07/04/GawxuWsANhVM71c.png'
   },
   goTo:function(){
     wx.navigateTo({
@@ -26,7 +26,19 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady() {
-
+    var that = this;
+    // 从用户缓存中获取数据
+    wx.getStorage({
+      key: 'userInfo',
+      success (res) {
+        console.log(res.data);
+        that.setData({
+          userName:res.data.nickname,
+          userImg:res.data.img,
+          userId:'203254455'
+        });
+      },
+    })
   },
 
   /**

@@ -14,7 +14,7 @@
     "pages/fabu/index",
     "pages/circleDetail/index",
     "pages/doctor/index",
-        "pages/addTask/index"
+    "pages/addTask/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
