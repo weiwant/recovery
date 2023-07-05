@@ -2,7 +2,6 @@
 const app=getApp()
 const baseUrl=app.globalData.baseUrl
 
-
 Page({
 
   /**
@@ -18,31 +17,7 @@ Page({
     content:'',
     userId:'lsfjds525',
     iscollected:true
-
-    
   },
-  /**
-   * 收藏按钮
-   */
-  collectActicle(){
-    wx.request({
-      url: baseUrl+'/article/collect',
-      method:'POST',
-      data:{
-        id:this.data.newsId,
-        userid:this.data.userId
-      },
-      success:(res)=>{
-        wx.showToast({
-          title: '收藏成功！'
-        })
-      }
-    })
-
-  },
-  /**
-   * 获取资讯详情
-   */
   getDetail(){
     
     wx.request({
@@ -75,7 +50,6 @@ Page({
       newsId:options.id,
     });
     this.getDetail()
-    //console.log(app.globalData.baseUrl)
 
     
   },

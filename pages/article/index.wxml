@@ -1,4 +1,6 @@
 <!--pages/article/index.wxml-->
+<wxs src="../../utils/filter/filter.wxs" module="tools" />
+
 <view class='container'>
   <image class='head-imagee' src='{{url}}' style="{{0==isArticle?'':'display: none;'}}" ></image>
   <video class='head-imagee' src='{{url}}' style="{{1==isArticle?'':'display: none;'}}" ></video>
@@ -21,6 +23,6 @@
   </view>
   <!-- 正文 -->
   <text class='detail margin-bottom' decode="{{true}}">
-    {{content}}
+    {{tools.filter_N(content)}}
   </text>
 </view>
