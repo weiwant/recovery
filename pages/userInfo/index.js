@@ -70,6 +70,9 @@ Page({
         userImg:this.data.userImg,
       }
     });
+    this.setData({
+      modalName: e.currentTarget.dataset.target
+    })
   },
   /**
    * 生命周期函数--监听页面加载

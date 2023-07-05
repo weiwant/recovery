@@ -5,10 +5,20 @@
     <text class="cuIcon-title text-green "></text>我的信息 
   </view>
   <view class="action">
-    <button class="cu-btn bg-green shadow" bindtap="confirm" >确认更改</button>
+    <button class="cu-btn bg-green shadow" bindtap="confirm" data-target="Image">确认更改</button>
+  </view>
+</view>
+<!-- 确认更改后弹窗 -->
+<view class="cu-modal {{modalName=='Image'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white">
+      <view class="action margin-0 flex-sub  solid-left" bindtap="hideModal">更改成功</view>
+    </view>
   </view>
 </view>
 
+
+<!-- 用户信息 -->
 <view class="cu-form-group margin-top">
   <view class="title margin-left-xs">用户类别</view>
     <picker bindchange="PickerChange" value="{{index}}" range="{{picker}}">
