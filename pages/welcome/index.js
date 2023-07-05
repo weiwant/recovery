@@ -37,7 +37,7 @@ Page({
             key:"userInfo",
             data:{
               nickname:this.data.nickName,
-              img:this.data.avatarUrl,
+              userImg:this.data.avatarUrl,
             }
           });
           wx.switchTab({
