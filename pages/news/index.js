@@ -1,5 +1,6 @@
 // pages/news/index.js
-const baseUrl="http://1636fb15.r1.cpolar.top/recovery/api"
+const app=getApp()
+const baseUrl=app.globalData.baseUrl
 
 Page({
 
@@ -41,7 +42,7 @@ Page({
       
       success:(res)=>{
 
-        console.log(res),
+        //console.log(res),
         //转存到news[]
         this.setData({
           news:res.data,
@@ -70,7 +71,7 @@ Page({
    */
   tabSelect(e) {
     //console.log(e.currentTarget.dataset.id)
-    this.getNameFromTab(e.currentTarget.dataset.id)
+    //this.getNameFromTab(e.currentTarget.dataset.id)
     this.setData({
       
       TabCur: e.currentTarget.dataset.id,
