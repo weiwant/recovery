@@ -1,13 +1,13 @@
 <!--pages/article/index.wxml-->
 <view class='container'>
-  <image class='head-imagee' src='{{url}}' style="{{1==isArticle?'':'display: none;'}}" ></image>
-  <video class='head-imagee' src='{{url}}' style="{{0==isArticle?'':'display: none;'}}" ></video>
+  <image class='head-imagee' src='{{url}}' style="{{0==isArticle?'':'display: none;'}}" ></image>
+  <video class='head-imagee' src='{{url}}' style="{{1==isArticle?'':'display: none;'}}" ></video>
   <!-- 作者信息 -->
   <view class='author-date'>
     <image class='avatar' src='https://s2.loli.net/2023/04/14/boRaWVHMzskLc6B.jpg'></image>
-    <text class='author'>J_King</text>
+    <text class='author' >{{author}}</text>
     <text class='const-text'>发表于</text>
-    <text class='date'>3天前</text>
+    <text class='date'>{{createTime}}</text>
   </view>
   <!-- 标题 -->
   <text class='title'>{{title}}</text>

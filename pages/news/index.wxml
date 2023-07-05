@@ -16,10 +16,10 @@
 <scroll-view scroll-x class="bg-white nav">
   <view class="flex text-center">
     <view class="cu-item flex-sub {{0==TabCur?'text-orange cur':''}}"  bindtap="tabSelect" data-id="0">
-      锻炼
+      科普
     </view>
     <view class="cu-item flex-sub {{1==TabCur?'text-orange cur':''}}"  bindtap="tabSelect" data-id="1">
-      饮食
+      训练
     </view>
     <view class="cu-item flex-sub {{2==TabCur?'text-orange cur':''}}"  bindtap="tabSelect" data-id="2">
       药物
@@ -30,42 +30,10 @@
   </view>
 </scroll-view>
 
-<!-- 锻炼 -->
-<view class="cu-card article" style="{{0==TabCur?'':'display: none;'}}">
-  <!-- 内容crad -->
-  <view class="cu-item shadow" bindtap="goToDetail" wx:for="{{news}}" wx:key="index" id="{{item.newsId}}" >
-    <!-- 标题 -->
-    <view class="title">
-      <view class="text-cut">{{item.title}}</view>
-    </view>
-    <!-- 内容物 -->
-    <view class="content">
-      <!-- 图片内容 -->
-      <image src="{{item.imgUrl}}" mode="aspectFill"></image>
-      <view class="desc">
-        <!-- 文字内容 -->
-        <view class="text-content"> 
-          {{item.content}}
-        </view>
-        <view>
-          <!-- 视频文章标签 -->
-          <view class="cu-tag {{1==item.isAcrticle?'bg-red':'bg-blue'}} light sm round" >{{1==item.isAcrticle?'文章':'视频'}}</view>
-          <!-- 内容标签 -->
-          <view class="cu-tag bg-green light sm round">{{item.tag}}</view>
-          <!-- 收藏情况 -->
-          <text class="{{1==item.isCollected?'cuIcon-favorfill':'cuIcon-favor'}}  text-yellow margin-lr-lg">{{1==item.isCollected?'已收藏':'收藏'}}</text>
-        </view>
-      </view>
-    </view>
-  </view>
-
-
-</view>
-
-
-<!-- 饮食 -->
-<view class="cu-card article" style="{{1==TabCur?'':'display: none;'}}">
-  <view class="cu-item shadow" bindtap="goToDetail" wx:for="{{newsList}}" wx:key="index" id="{{item.newsId}}" >
+<!-- 卡片 -->
+<view class="cu-card article">
+  <!-- 内容card -->
+  <view class="cu-item shadow" bindtap="goToDetail" wx:for="{{news}}" wx:key="index" id="{{item.id}}" >
     <!-- 标题 -->
     <view class="title">
       <view class="text-cut">{{item.title}}</view>
@@ -76,97 +44,25 @@
       <image src="{{item.url}}" mode="aspectFill"></image>
       <view class="desc">
         <!-- 文字内容 -->
-        <text class="text-content" decode="true"> {{item.content}}
-        </text>
+        
+          <text class="text-content" decode="true"> {{item.content}}</text>
+        
         <view>
           <!-- 视频文章标签 -->
-          <view class="cu-tag {{1==item.isAcrticle?'bg-red':'bg-blue'}} light sm round" >{{0==item.type?'文章':'视频'}}</view>
+          <view class="cu-tag {{1==item.isAcrticle?'bg-red':'bg-blue'}} light sm round" >{{1==item.type?'文章':'视频'}}</view>
           <!-- 内容标签 -->
-          <view class="cu-tag bg-green light sm round">{{item.tag}}</view>
+          <!-- <view class="cu-tag bg-green light sm round">{{item.tag}}</view> -->
           <!-- 收藏情况 -->
           <text class="{{1==item.isCollected?'cuIcon-favorfill':'cuIcon-favor'}}  text-yellow margin-lr-lg">{{1==item.isCollected?'已收藏':'收藏'}}</text>
         </view>
       </view>
     </view>
   </view>
-<!-- card1 -->
-  <view class="cu-item shadow" bindtap="goToFood">
-    <view class="title">
-      <view class="text-cut">脑卒中的饮食该怎么吃呢？</view>
-    </view>
-    <view class="content">
-      <image src="https://s2.loli.net/2023/04/24/FaxbQ89JnqSU7X3.jpg" mode="aspectFill"></image>
-      <view class="desc">
-        <view class="text-content"> 
-          1. 饮食要有合理结构，以低盐、低脂肪、低胆固醇为宜，适当多食豆制品、蔬菜和水果，戒除吸烟、酗酒等不良习惯。每周至少吃三次鱼。应定时定量，少量多餐，每天4餐，晚餐宜清淡易消化。不宜过饱，忌食辛辣、刺激之品，戒烟酒。昏迷和吞咽困难者，可采用鼻饲，以保持营养。
 
-        </view>
-        <view>
-          <view class="cu-tag bg-red light sm round">文章</view>
-          <view class="cu-tag bg-pink light sm round">科普读物</view>
-          <text class="cuIcon-favor text-yellow margin-lr-lg">收藏</text>
-        </view>
-      </view>
-    </view>
-  </view>
-  <!-- card2 -->
-  <view class="cu-item shadow">
-    <view class="title">
-      <view class="text-cut">脑卒中康复餐菜谱</view>
-    </view>
-    <view class="content">
-      <image src="http://i2.hdslb.com/bfs/archive/695b28c3eb605b2498881b2efe1c5a5c641f9fe3.jpg" mode="aspectFill"></image>
-      <view class="desc">
-        <view class="text-content"> 
-          “虾仁蔬菜粥”所需食材：虾仁、西兰花、葱、大米。步骤：1.提前处理好虾仁，去虾线，加入少量
-        </view>
-        <view>
-          <view class="cu-tag bg-red light sm round">文章</view>
-          <view class="cu-tag bg-pink light sm round">菜谱分享</view>
-          <text class="{{iconName[index]}} text-yellow margin-lr-lg" bindtap="change">{{tt[index]}}</text>
-        </view>
-      </view>
-    </view>
-  </view>
-  <!-- card3 -->
-  <view class="cu-item shadow">
-    <view class="title">
-      <view class="text-cut">最普通的5顿康复营养餐</view>
-    </view>
-    <view class="content">
-      <image src="https://s2.loli.net/2023/04/24/gsrBjZtkifuP9Ux.png" mode="aspectFill"></image>
-      <view class="desc">
-        <view class="text-content"> 
-          今天教大家做几道非常简单的快手菜。营养又美味。第一顿主要是补充番茄红素、胡萝卜素
-        </view>
-        <view>
-          <view class="cu-tag bg-blue light sm round">视频</view>
-          <view class="cu-tag bg-pink light sm round">营养食谱</view>
-          <text class="cuIcon-favor text-yellow margin-lr-lg">收藏</text>
-        </view>
-      </view>
-    </view>
-  </view>
-  <!-- card4 -->
-  <view class="cu-item shadow">
-    <view class="title">
-      <view class="text-cut">术后吃啥 有助恢复</view>
-    </view>
-    <view class="content">
-      <image src="https://s2.loli.net/2023/04/24/xSVbEeIZcQGKFgT.png" mode="aspectFill"></image>
-      <view class="desc">
-        <view class="text-content"> 
-          对于手术病人，术后主要的任务有两个，一个是休息好，另一个就是吃好。休息是为了器官和组织的修复，而吃饭是为了摄取营养，供应身体的能量和促进伤口愈合。那么术后饮食该如何吃才科学呢？
-        </view>
-        <view>
-          <view class="cu-tag bg-blue light sm round">视频</view>
-          <view class="cu-tag bg-pink light sm round">术后饮食</view>
-          <text class="cuIcon-favorfill text-yellow margin-lr-lg">已收藏</text>
-        </view>
-      </view>
-    </view>
-  </view>
+
 </view>
+
+
 
 <view class="cu-tabbar-height"></view>
 </scroll-view>
