@@ -14,6 +14,7 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    baseUrl:'http://252947cb.r1.cpolar.top/recovery/api'
   }
 })
