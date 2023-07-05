@@ -5,13 +5,18 @@ Page({
    * 页面的初始数据
    */
   data: {
-      userName:'游客',
+      nickName:'游客',
       userId:'0000000',
       userImg:'https://s2.loli.net/2023/07/04/GawxuWsANhVM71c.png'
   },
-  goTo:function(){
+  goToDoctor:function(){
     wx.navigateTo({
       url: '../doctor/index',
+    })
+  },
+  goToUaerInfo:function(){
+    wx.navigateTo({
+      url: '../userInfo/index',
     })
   },
 
@@ -19,13 +24,23 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-
+    
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady() {
+   
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow(){
+    console.log("onshow")
+    this.tabBar();
+    // console.log("onload")
     var that = this;
     // 从用户缓存中获取数据
     wx.getStorage({
@@ -33,19 +48,13 @@ Page({
       success (res) {
         console.log(res.data);
         that.setData({
-          userName:res.data.nickname,
-          userImg:res.data.img,
+          nickName:res.data.nickname,
+          userImg:res.data.userImg,
           userId:'203254455'
         });
       },
     })
-  },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow(){
-    this.tabBar();
   },
 
   /**

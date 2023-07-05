@@ -6,7 +6,7 @@
     </view>
     <view class="content margin-left">
       <view>
-        <text class="text-xl userName margin-bottom-xs">{{userName}}</text>
+        <text class="text-xl userName margin-bottom-xs">{{nickName}}</text>
       </view>
       <view class="text-gray text-df flex margin-bottom-xxs">
         <text>
@@ -29,13 +29,13 @@
 
   <view class="cu-list menu ">
     <view class="cu-item arrow">
-      <view class="content" bindtap="goTo">
+      <view class="content" bindtap="goToDoctor">
         <image src="/images/doctor.png" class="png" mode="aspectFit"></image>
         <text class="text-black margin-left-xs">我的医生</text>
       </view>
     </view>
     <view class="cu-item arrow">
-      <view class="content">
+      <view class="content" bindtap="goToUaerInfo">
         <image src="/images/geren.png" class="png" mode="aspectFit"></image>
         <text class="text-black margin-left-xs">我的信息</text>
       </view>
