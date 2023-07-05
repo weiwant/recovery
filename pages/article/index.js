@@ -17,7 +17,7 @@ Page({
     title:'',
     content:'',
     userId:'lsfjds525',
-    //iscollected:true
+    iscollected:true
 
     
   },
