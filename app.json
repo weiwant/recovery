@@ -15,7 +15,8 @@
     "pages/circleDetail/index",
     "pages/doctor/index",
     "pages/addTask/index",
-    "pages/userInfo/index"
+    "pages/userInfo/index",
+    "pages/search/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

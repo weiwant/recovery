@@ -1,5 +1,5 @@
 <!--pages/userInfo/index.wxml-->
-
+<!-- 标题栏及确认按钮 -->
 <view class="cu-bar bg-white">
   <view class="action">
     <text class="cuIcon-title text-green "></text>我的信息 
@@ -27,7 +27,7 @@
       </view>
   </picker>
 </view>
-
+<!-- 用户头像 -->
 <view class="cu-form-group margin-top">
   <view class="title margin-left-xs">头像</view>
   <view class="cu-avatar radius bg-gray" bindtap="ChooseImage" style="background-image:url({{userImg}});"></view>
