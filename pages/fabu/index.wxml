@@ -8,7 +8,7 @@
 </view>
 <!-- 长输入框 -->
 <view class="cu-form-group margin-top solid-bottom">
-  <textarea maxlength="-1" disabled="{{modalName!=null}}" bindinput="textareaAInput" placeholder="分享你的故事..."></textarea>
+  <textarea maxlength="-1" disabled="{{modalName!=null}}" bindinput="contentInput" placeholder="分享你的故事..."></textarea>
 </view>
 <!-- 图片上传栏 -->
 <view class="cu-bar bg-white">
@@ -33,11 +33,11 @@
     </view>
   </view>
 </view> 
-
+<!-- 发布按钮 -->
 <view class="padding flex flex-direction bg-white padding">
   <button class="cu-btn lg text-lg bg-blue" bindtap="publish">发布</button>
 </view>
-
+<!-- 底部背景图 -->
 <view class="bg-white padding-top padding-bottom padding-margin">
   <view class="bg-img padding-tb-xl" style="background-image: url('https://s2.loli.net/2023/04/18/nR1TuhEwjlKxIAP.png');height: 414rpx;"></view>
 </view>

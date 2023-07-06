@@ -1,12 +1,21 @@
 // pages/fabu/index.js
+const app = getApp();
+const baseUrl=app.globalData.baseUrl
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    userImg:'',
+    nickName:'',
+    userId:'',
+    content:'',
     imgList: [],
   },
+
+  // 从相册里选取图片
   ChooseImage() {
     wx.chooseImage({
       count: 9, //默认9
@@ -25,12 +34,16 @@ Page({
       }
     });
   },
+
+  // 查看所选图片
   ViewImage(e) {
     wx.previewImage({
       urls: this.data.imgList,
       current: e.currentTarget.dataset.url
     });
   },
+
+  //删除所选图片
   DelImg(e) {
     wx.showModal({
       title: '删除图片',
@@ -48,17 +61,45 @@ Page({
     })
   },
 
+// 从用户缓存中获取数据
+  getInfo:function(){
+    var that = this;
+    wx.getStorage({
+      key: 'userInfo',
+      success (res) {
+        console.log(res.data);
+        that.setData({
+          nickName:res.data.nickname,
+          userImg:res.data.userImg,
+          userId:res.data.userId,
+        });
+      },
+    })
+  },
+
+// content内容监听
+  contentInput(e){
+    //console.log(e.detail.value)
+    this.setData({
+      content:e.detail.value
+    })
+  },
+
+// 发布帖子
   publish(){
     wx.request({
       url: 'url',
       method:'POST',
       data:{
-        user:'0014547',
-        url:this.data.imgList,
+        creator:this.data.nickName,
+        content:this.data.content,
+        pictures:this.data.imgList,
       },
       success:(res)=>{
         console.log(res)
-        console.log(res.data)
+        wx.showToast({
+          title: '发布成功',
+        })
       }
     })
   },

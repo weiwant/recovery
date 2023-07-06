@@ -50,7 +50,7 @@ Page({
         that.setData({
           nickName:res.data.nickname,
           userImg:res.data.userImg,
-          userId:'203254455'
+          userId:res.data.userId,
         });
       },
     })
