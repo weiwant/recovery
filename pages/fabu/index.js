@@ -88,7 +88,7 @@ Page({
 // 发布帖子
   publish(){
     wx.request({
-      url: 'url',
+      url: baseUrl+'/posts/add',
       method:'POST',
       data:{
         creator:this.data.nickName,
