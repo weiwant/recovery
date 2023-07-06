@@ -1,12 +1,15 @@
 // pages/circle/index.js
-Page({
+const app=getApp()
+const baseUrl=app.globalData.baseUrl
 
+Page({
   /**
    * 页面的初始数据
    */
   data: {
     TabCur: 0,
     scrollLeft:0,
+    userId:'lsfjds525',
     post:[
       {
         postId:1,
@@ -55,37 +58,73 @@ Page({
         imgList:[
         ]
       }
-  ],
+    ],
+    postList:[],
   },
+  // tab标签栏切换
   tabSelect(e) {
     this.setData({
       TabCur: e.currentTarget.dataset.id,
       scrollLeft: (e.currentTarget.dataset.id-1)*60
     })
   },
-  change:function(){
+  // 点赞效果？
+  change:function(e){
+    console.log("change")
+    //console.log(e.currentTarget.dataset.id)
+    //const id = e.currentTarget.dataset.id
+    //console.log(this.data.post[id])
     this.setData({
-      index: (this.data.item + 1) % 2
+      isGood:1,
     })
   },
+  // 跳转发布页面
   goTo:function(){
     wx.navigateTo({
       url: '../fabu/index',
     })
   },
+  // 跳转详情
   goToDetail:function(e){
-    // console.log(this.data);
-    console.log(e.currentTarget);
-    console.log(e.currentTarget.id);
+    console.log(this.data);
+    //console.log(e.currentTarget);
+    //console.log(e.currentTarget.id);
     wx.navigateTo({
       url: '../circleDetail/index?id='+e.currentTarget.id,
     })
   },
+// 获取帖子列表
+  getPostsList:function(){
+    wx.request({
+      url:baseUrl+'/posts/get_list',
+      method:'POST',
+      data:{
+        userid:this.data.userId
+      },
+      success:(res)=>{
+        console.log(res),
+        //转存到postList[]
+        this.setData({
+          postList:res.data,
+        })
+      },
+      fail(){
+        console.log('获取失败')
+        wx.showToast({
+          title: '暂无内容',
+          icon:null
+        })
+      },
+      complete(){
+      }
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-
+    //this.getPostsList();
   },
 
   /**

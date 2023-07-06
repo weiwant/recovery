@@ -37,7 +37,7 @@
     </view>
     <!-- 图片 -->
     <view class="grid flex-sub padding-lr col-3 grid-square" >
-       <view class="bg-img" style="background-image:url({{imgList.url}});" wx:for="{{item.imgList}}"  wx:for-item="imgList" wx:key="imgList" >
+       <view class="bg-img" style="background-image:url({{pictures.url}});" wx:for="{{item.pictures}}"  wx:for-item="pictures" wx:key="pictures" >
        </view> 
     </view>
     <!-- 帖子状态栏 -->
