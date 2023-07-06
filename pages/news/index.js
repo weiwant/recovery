@@ -14,7 +14,8 @@ Page({
     index:0,
     news:[],
     userId:'lsfjds525',
-    postid:0
+    postid:0,
+    search:'',
   },
   /**
    * 根据tab序号获取内容
@@ -38,15 +39,12 @@ Page({
         class_:this.data.class[this.data.TabCur],
         userid:this.data.userId
       },
-      
-      
       success:(res)=>{
 
         //console.log(res),
         //转存到news[]
         this.setData({
           news:res.data,
-
         })
       },
       fail(){
@@ -57,14 +55,8 @@ Page({
         })
       },
       complete(){
-        
-        
-       
       }
     })
-    
-
-
   },
   /**
    * 切换tab
@@ -73,18 +65,28 @@ Page({
     //console.log(e.currentTarget.dataset.id)
     //this.getNameFromTab(e.currentTarget.dataset.id)
     this.setData({
-      
       TabCur: e.currentTarget.dataset.id,
       scrollLeft: (e.currentTarget.dataset.id-1)*60
-      
     }),
     //console.log(this.data.class)
     //切换tab时获取资讯
     this.getNews()
   },
-  goTo:function(){
+// 获取输入框内容
+  getSearch:function(e){
+    const that = this;
+    that.setData({
+      search:e.detail.value.search,
+    })
+    //console.log("getsearch"+that.data.search);
+    this.goToSearch(e);
+  },
+  // 跳转搜索页面
+  goToSearch:function(e){
+    const that=this;
+    //console.log("gotosearch"+that.data.search);
     wx.navigateTo({
-      url: '../question/index',
+      url: '../search/index?keyword='+that.data.search,
     })
   },
   /**

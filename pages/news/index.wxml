@@ -1,68 +1,68 @@
 <!--pages/news/index.wxml-->
 <scroll-view scroll-y class="scrollPage">
-  <view class="cu-bar bg-white search solid-bottom">
-    <!-- 搜索框 -->
-    <view class="search-form radius margin-left-xs">
-      <text class="cuIcon-search text-blue"></text>
-      <input type="text" placeholder="搜索图片、文章、视频" confirm-type="search">
-      </input>
+<!-- 搜索栏 -->
+  <form bindsubmit='getSearch'>
+    <view class="cu-bar search bg-white">
+      <view class="search-form round">
+        <text class="cuIcon-search"></text>
+        <input type="text" placeholder="搜索图片、文章、视频" name="search"></input>
+      </view>
+      <view class="action">
+        <button class="cu-btn bg-blue shadow-blur round"  form-type='submit' >搜索</button>
+      </view>
     </view>
-    <!-- 咨询图标 -->
-    <view class="cu-avatar" style="background-color: white;">
-      <image src="/images/zixun.png" class="png" mode="aspectFit" bindtap="goTo" ></image>
+  </form>
+  <!-- Tab选择栏 -->
+  <scroll-view scroll-x class="bg-white nav"  >
+    <view class="flex text-center">
+      <view class="cu-item flex-sub {{0==TabCur?'text-orange cur':''}}"  bindtap="tabSelect" data-id="0">
+        科普
+      </view>
+      <view class="cu-item flex-sub {{1==TabCur?'text-orange cur':''}}"  bindtap="tabSelect" data-id="1">
+        训练
+      </view>
+      <view class="cu-item flex-sub {{2==TabCur?'text-orange cur':''}}"  bindtap="tabSelect" data-id="2">
+        药物
+      </view>
+      <view class="cu-item flex-sub {{3==TabCur?'text-orange cur':''}}"  bindtap="tabSelect" data-id="3">
+        其他
+      </view>
     </view>
-  </view>
-<!-- Tab选择栏 -->
-<scroll-view scroll-x class="bg-white nav">
-  <view class="flex text-center">
-    <view class="cu-item flex-sub {{0==TabCur?'text-orange cur':''}}"  bindtap="tabSelect" data-id="0">
-      科普
-    </view>
-    <view class="cu-item flex-sub {{1==TabCur?'text-orange cur':''}}"  bindtap="tabSelect" data-id="1">
-      训练
-    </view>
-    <view class="cu-item flex-sub {{2==TabCur?'text-orange cur':''}}"  bindtap="tabSelect" data-id="2">
-      药物
-    </view>
-    <view class="cu-item flex-sub {{3==TabCur?'text-orange cur':''}}"  bindtap="tabSelect" data-id="3">
-      其他
-    </view>
-  </view>
-</scroll-view>
+  </scroll-view>
 
-<!-- 卡片 -->
-<view class="cu-card article">
-  <!-- 内容card -->
-  <view class="cu-item shadow" bindtap="goToDetail" wx:for="{{news}}" wx:key="index" id="{{item.id}}" >
-    <!-- 标题 -->
-    <view class="title">
-      <view class="text-cut">{{item.title}}</view>
-    </view>
-    <!-- 内容物 -->
-    <view class="content">
-      <!-- 图片内容 -->
-      <image src="{{item.url}}" mode="aspectFill"></image>
-      <view class="desc">
-        <!-- 文字内容 -->
-        
-          <text class="text-content" decode="true"> {{item.content}}</text>
-        
-        <view>
-          <!-- 视频文章标签 -->
-          <view class="cu-tag {{1==item.isAcrticle?'bg-red':'bg-blue'}} light sm round" >{{1==item.type?'文章':'视频'}}</view>
-          <!-- 内容标签 -->
-          <!-- <view class="cu-tag bg-green light sm round">{{item.tag}}</view> -->
-          <!-- 收藏情况 -->
-          <text class="{{1==item.isCollected?'cuIcon-favorfill':'cuIcon-favor'}}  text-yellow margin-lr-lg">{{1==item.isCollected?'已收藏':'收藏'}}</text>
+  <!-- 卡片 -->
+  <view class="cu-card article">
+    <!-- 内容card -->
+    <view class="cu-item shadow" bindtap="goToDetail" wx:for="{{news}}" wx:key="index" id="{{item.id}}" >
+      <!-- 标题 -->
+      <view class="title">
+        <view class="text-cut">{{item.title}}</view>
+      </view>
+      <!-- 内容物 -->
+      <view class="content">
+        <!-- 图片内容 -->
+        <image src="{{item.url}}" mode="aspectFill"></image>
+        <view class="desc">
+          <!-- 文字内容 -->
+          
+            <text class="text-content" decode="true"> {{item.content}}</text>
+          
+          <view>
+            <!-- 视频文章标签 -->
+            <view class="cu-tag {{1==item.isAcrticle?'bg-red':'bg-blue'}} light sm round" >{{1==item.type?'文章':'视频'}}</view>
+            <!-- 内容标签 -->
+            <!-- <view class="cu-tag bg-green light sm round">{{item.tag}}</view> -->
+            <!-- 收藏情况 -->
+            <text class="{{1==item.isCollected?'cuIcon-favorfill':'cuIcon-favor'}}  text-yellow margin-lr-lg">{{1==item.isCollected?'已收藏':'收藏'}}</text>
+          </view>
         </view>
       </view>
     </view>
+
+
   </view>
 
 
-</view>
 
-
-
-<view class="cu-tabbar-height"></view>
+  <view class="cu-tabbar-height"></view>
 </scroll-view>
