@@ -38,7 +38,7 @@ Page({
             data:{
               nickname:this.data.nickName,
               userImg:this.data.avatarUrl,
-              userId:'lsfjds52',
+              userId:'lsfjds525',
             }
           });
           wx.switchTab({

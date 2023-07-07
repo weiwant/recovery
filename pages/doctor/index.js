@@ -1,4 +1,7 @@
 // pages/doctor/index.js
+const app = getApp();
+const baseUrl=app.globalData.baseUrl
+
 Page({
 
   /**
@@ -6,6 +9,7 @@ Page({
    */
   data: {
     index:0,
+    userId:'',
     doctorList:[
       {
         name:'赵正平',
@@ -21,27 +25,63 @@ Page({
       }
     ]
   },
+  // 绑定窗口显示
   showModal(e) {
     this.setData({
       modalName: e.currentTarget.dataset.target
     })
   },
+  // 绑定窗口关闭
   hideModal(e) {
     this.setData({
       modalName: null
     })
   },
+  // 林静窗口显示
   hideModal1(e) {
     this.setData({
       modalName: null,
       index: 1,
     })
   },
+
+  //从内存中获取用户信息
+  getInfo:function(){
+    var that = this;
+    wx.getStorage({
+      key: 'userInfo',
+      success (res) {
+        that.setData({
+          userId:res.data.userId,
+        });
+      },
+    })
+    console.log(this.data)
+  },
+
+  // 获取医生列表
+  getDoctorList:function(){
+    wx.request({
+      url: baseUrl+'/user/get_doctor',
+      method:'POST',
+      data:{
+        patient:this.data.userId,
+      },
+      success:(res)=>{
+        console.log(res.data)
+        this.setData({
+          doctorList:res.data,
+        })
+      }
+    })
+    console.log(this.data)
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-
+  this.getInfo()
   },
 
   /**
@@ -55,7 +95,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-
+    this.getDoctorList()
   },
 
   /**

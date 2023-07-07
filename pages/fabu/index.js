@@ -8,8 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userImg:'',
-    nickName:'',
+    nickName:'李淑芬',
     userId:'',
     content:'',
     imgList: [],
@@ -69,9 +68,8 @@ Page({
       success (res) {
         console.log(res.data);
         that.setData({
-          nickName:res.data.nickname,
-          userImg:res.data.userImg,
           userId:res.data.userId,
+          nickName:res.data.nickname,
         });
       },
     })
@@ -87,16 +85,17 @@ Page({
 
 // 发布帖子
   publish(){
+    console.log(this.data)
     wx.request({
       url: baseUrl+'/posts/add',
       method:'POST',
       data:{
-        creator:this.data.nickName,
+        creator:this.data.userId,
         content:this.data.content,
         pictures:this.data.imgList,
       },
       success:(res)=>{
-        console.log(res)
+        //console.log(res)
         wx.showToast({
           title: '发布成功',
         })
@@ -107,7 +106,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-
+    this.getInfo();
   },
 
   /**
