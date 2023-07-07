@@ -100,4 +100,4 @@ def get_pose(frame_gen, OPENPOSE_ROOT, model_type='BODY_25', max_people=1):
         datum = op.Datum()
         datum.cvInputData = frame
         opWrapper.emplaceAndPop(op.VectorDatum([datum]))
-        yield datum.poseKeypoints[0, :15, :2], idx
+        yield datum.poseKeypoints[0, :15, :2], frame, idx
