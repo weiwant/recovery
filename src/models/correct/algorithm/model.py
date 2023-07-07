@@ -102,4 +102,5 @@ class Correct:
                 numpy.repeat(numpy.expand_dims(self.skeleton[correct], axis=1), n, axis=1) + self.template[correct],
                 axis=0) / m, m / n, self.e
         else:
-            return numpy.repeat(numpy.expand_dims(self.skeleton[[0]], axis=1), n, axis=1) + self.template[0], 0, self.e
+            return (numpy.repeat(numpy.expand_dims(self.skeleton[[0]], axis=1), n, axis=1) + self.template[0]).reshape(
+                n, 2), 0, self.e
