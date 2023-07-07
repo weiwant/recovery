@@ -100,6 +100,6 @@ class Correct:
         if not m == 0:
             return numpy.sum(
                 numpy.repeat(numpy.expand_dims(self.skeleton[correct], axis=1), n, axis=1) + self.template[correct],
-                axis=0) / m, m / n
+                axis=0) / m, m / n, correct
         else:
-            return numpy.repeat(numpy.expand_dims(self.skeleton[[0]], axis=1), n, axis=1) + self.template[0], 0
+            return numpy.repeat(numpy.expand_dims(self.skeleton[[0]], axis=1), n, axis=1) + self.template[0], 0, correct
