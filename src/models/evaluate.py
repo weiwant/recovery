@@ -76,17 +76,19 @@ class Correct:
         return (cos > 0).astype(numpy.int32).reshape((64,))
 
     @classmethod
-    def save_template(cls, feature, mission_type):
+    def save_template(cls, feature, mission_type, status):
         """
         保存模板
 
-        :param feature:
-        :param mission_type:
+        :param feature: 特征
+        :param mission_type: 任务类型
+        :param status: 动作状态
         :return:
         """
         feature_hash = cls.feature_hash(feature)
         numpy.save(
-            os.path.join('./templates', mission_type, format(int(''.join(feature_hash.astype(str)), 2), '0>16x')),
+            os.path.join('./templates', mission_type,
+                         format(int(''.join(feature_hash.astype(str)), 2), '0>16x') + '_' + str(status)),
             feature)
 
     def find_template(self):
