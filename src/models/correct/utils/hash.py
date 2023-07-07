@@ -50,9 +50,10 @@ def find_template(feature, mission_type=None):
     names = []
     if mission_type is None:
         for t in os.listdir('./templates'):
-            names.extend(os.listdir(os.path.join('./templates', t)))
+            names.extend([os.path.join('./templates', t, f) for f in os.listdir(os.path.join('./templates', t))])
     else:
-        names.extend(os.listdir(os.path.join('./templates', mission_type)))
+        names.extend([os.path.join('./templates', mission_type, f) for f in
+                      os.listdir(os.path.join('./templates', mission_type))])
     template = max(names, key=lambda x: numpy.sum(
-        hash_array == numpy.array(list(format(int(x[:16], 16), '0>64b')), dtype=numpy.int32)))
-    return numpy.load(os.path.join('./templates', mission_type, template))
+        hash_array == numpy.array(list(format(int(os.path.basename(x)[:16], 16), '0>64b')), dtype=numpy.int32)))
+    return numpy.load(template)
