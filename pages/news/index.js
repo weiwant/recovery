@@ -141,6 +141,7 @@ Page({
    */
   onShow(){
     this.tabBar();
+    this.getNews()
   },
 
   /**

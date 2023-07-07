@@ -81,11 +81,12 @@ Page({
       onInit: initChart
     },
     //1患者，0医生
-    isPatient:0,
+    isPatient:1,
     doctorId:'255455mo',
-    patientId:'',
+    patientId:'lsfjds525',
     colors:['bg-red','bg-blue','bg-green'],
     btn:['去接受','去打卡','已完成'],
+    diff:['易','中','难'],
     index:0,
     activeNames: ['1'],
     taskList:[
@@ -165,15 +166,10 @@ Page({
       // },
     ]
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad(options) {
-    //获取当前医生id
-    
-    //获取医生任务列表
+  // 医生获取患者列表
+  getPatientList:function(){
     wx.request({
-      url: baseUrl+'/task/get',
+      url: baseUrl+'/user/get_task_doctor',
       method:'POST',
       data:{
         doctor:this.data.doctorId
@@ -186,6 +182,37 @@ Page({
         })
       }
     })
+  },
+  // 患者获取任务列表
+  getTaskList:function(){
+    wx.request({
+      url: baseUrl+'/task/get',
+      method:'POST',
+      data:{
+        patient:this.data.patientId
+      },
+      success:(res)=>{
+        console.log(res),
+        this.setData({
+          taskList:res.data
+        })
+      }
+    })
+  },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad(options) {
+    //获取当前医生id
+    if(!this.data.isPatient){
+      //医生获取患者任务列表
+      this.getPatientList()
+    }
+    // 患者获取康复任务列表
+    else{
+      this.getTaskList()
+    }
+    
 
 
   },
@@ -197,6 +224,14 @@ Page({
   },
   onShow(){
     this.tabBar();
+    if(!this.data.isPatient){
+      //医生获取患者任务列表
+      this.getPatientList()
+    }
+    // 患者获取康复任务列表
+    else{
+      this.getTaskList()
+    }
   },
   
   tabBar() {

@@ -17,13 +17,13 @@
     <!-- 发帖人信息 -->
     <view class="cu-list menu-avatar">
       <view class="cu-item">
-        <view class="cu-avatar round lg" style="background-image:url({{item.userImg}});">
+        <view class="cu-avatar round lg" style="background-image:url({{item.userImag}});">
           <view class="cu-tag badge cuIcon-vip bg-orange" style="{{1==item.isDoctor?'':'display:none;'}}" ></view>
         </view>
         <view class="content flex-sub">
-          <view>{{item.userName}}</view>
+          <view>{{item.username}}</view>
           <view class="text-gray text-sm flex justify-between">
-            {{item.time}}
+            {{item.create_time}}
           </view>
         </view>
       </view>
@@ -42,8 +42,8 @@
     </view>
     <!-- 帖子状态栏 -->
     <view class="text-gray text text-right padding flex align-center">
-      <text class="cuIcon-attentionfill margin-lr-xs "></text> 浏览（{{item.view}}）
-      <text class="{{1==item.isGood?'cuIcon-appreciatefill':'cuIcon-appreciate'}} flex-sub margin-lr-xs text-red" bindtap="change"></text>{{1==item.isGood?'已赞':'点赞'}}({{item.good}}) 
+      <text class="cuIcon-attentionfill margin-lr-xs "></text> 浏览（{{item.views}}）
+      <text class="{{1==item.isGood?'cuIcon-appreciatefill':'cuIcon-appreciate'}} flex-sub margin-lr-xs text-red" bindtap="change"></text>{{1==item.isGood?'已赞':'点赞'}}({{item.stars}}) 
       <text class="cuIcon-messagefill flex-sub margin-lr-xs"></text> 评论（{{item.comment}}）
       <text class="cuIcon-forwardfill flex-sub margin-lr-xs text-green"></text>转发
     </view>
