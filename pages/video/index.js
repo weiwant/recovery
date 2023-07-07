@@ -1,6 +1,9 @@
 // pages/video/index.js
-Page({
+const app = getApp();
+const baseUrl=app.globalData.baseUrl
 
+Page({
+  
   /**
    * 页面的初始数据
    */
@@ -24,15 +27,20 @@ Page({
     var src = this.data.src;
     console.log(src);
     wx.uploadFile({
-      url: '',
+      url: baseUrl+'/detail/upload',
       methid: 'POST',           // 可用可不用
       filePath: src,
-      name: 'files',              // 服务器定义key字段名称
-      header: app.globalData.header,
-      success: function() {
+      name: 'video',  // 服务器定义key字段名称
+      formData: {
+        'task': 18,
+      },            
+      //header: app.globalData.header,
+      success: function(res) {
+        console.log(res)
         console.log('视频上传成功')
       },
-      fail: function() {
+      fail: function(res) {
+        console.log(res)
         console.log('接口调用失败')
       }
     });

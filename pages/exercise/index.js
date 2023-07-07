@@ -36,7 +36,21 @@ Page({
       url: '../video/index',
     })
   },
- 
+  getDate(){
+    wx.request({
+      url: baseUrl+'/detail/get',
+      method:'POST',
+      data:{
+        doctor:this.data.doctorId
+      },
+      success:(res)=>{
+        console.log(res),
+        this.setData({
+          patientList:res.data
+        })
+      }
+    })
+  },
 
   /**
    * 生命周期函数--监听页面加载
