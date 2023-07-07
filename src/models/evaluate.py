@@ -73,7 +73,7 @@ class Correct:
         a = vectors[:, :8]
         b = vectors[:, -8:]
         cos = numpy.sum(a * b, axis=2) / (numpy.linalg.norm(a, axis=2) * numpy.linalg.norm(b, axis=2))
-        return (cos > 0).astype(numpy.int32).reshape((64,))
+        return (numpy.abs(cos) > numpy.sqrt(2) / 2).astype(numpy.int32).reshape((64,))
 
     @classmethod
     def save_template(cls, feature, mission_type, status):
