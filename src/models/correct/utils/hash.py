@@ -38,14 +38,19 @@ def save_template(feature, mission_type, status):
         feature)
 
 
-def find_template(feature, mission_type=None):
+def find_template(skeleton, mission_type=None):
     """
     寻找模板
 
-    :param feature: 特征
+    :param skeleton: 骨骼
     :param mission_type: 任务类型
     :return:
     """
+    n = skeleton.shape[0]
+    feature = numpy.zeros((n, n, 2), dtype=numpy.float32)
+    for i in range(n):
+        for j in range(n):
+            feature[i, j] = skeleton[j] - skeleton[i]
     hash_array = feature_hash(feature)
     names = []
     if mission_type is None:
