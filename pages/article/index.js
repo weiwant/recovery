@@ -16,8 +16,11 @@ Page({
     title:'',
     content:'',
     userId:'lsfjds525',
-    iscollected:true
+    isCollected:0
   },
+  /**
+   * 获取帖子内容
+   */
   getDetail(){
     
     wx.request({
@@ -40,6 +43,42 @@ Page({
     })
 
   },
+  /**
+   * 收藏帖子
+   */
+  collectActicle(){
+    //console.log(!this.data.iscollected)
+    //收藏
+    if(0==this.data.iscollected){
+      wx.request({
+        url: baseUrl+'/article/collect',
+        method:'POST',
+        data:{
+          article_id:this.data.newsId,
+          collector_id:this.data.userId
+        },
+        success:(res)=>{
+          //console.log(res)
+          this.setData({
+            iscollected:true
+          })
+          wx.showToast({
+            title: '收藏成功',
+          })
+        }
+      })
+      
+    } else {
+      //取消收藏
+      this.setData({
+        iscollected:false
+      })
+      wx.showToast({
+        title: '您已经收藏',
+        icon:'error'
+      })
+    }
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -48,6 +87,8 @@ Page({
     //console.log(options)
     this.setData({
       newsId:options.id,
+      isCollected:options.iscollected
+      
     });
     this.getDetail()
 

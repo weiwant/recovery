@@ -52,9 +52,16 @@ Page({
         difficulty:this.data.selectedDif
       },
       success:(res)=>{
+        console.log(res)
         wx.showToast({
           title: '发布成功',
         })
+        //返回任务界面
+        setTimeout(()=>{
+          wx.switchTab({
+            url: '/pages/index/index',
+          })
+        },2000)
       }
     })
   },

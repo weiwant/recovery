@@ -41,7 +41,7 @@ Page({
       },
       success:(res)=>{
 
-        //console.log(res),
+        //console.log(res.data),
         //转存到news[]
         this.setData({
           news:res.data,
@@ -93,9 +93,9 @@ Page({
    * 资讯详情 跳转到article/index
    */
   goToDetail:function(e){
-    //console.log(e.currentTarget.id)
+    //console.log(e.currentTarget.dataset.iscollected)
     wx.navigateTo({
-      url: '../article/index?id='+e.currentTarget.id
+      url: '../article/index?id='+e.currentTarget.id+'&iscollected='+e.currentTarget.dataset.iscollected
     })
   },
   goToFood:function(){
@@ -126,7 +126,7 @@ Page({
     //   },
     // })
     
-    this.getNews()
+    //this.getNews()
   },
 
   /**
