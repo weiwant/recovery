@@ -33,7 +33,7 @@
   <!-- 卡片 -->
   <view class="cu-card article">
     <!-- 内容card -->
-    <view class="cu-item shadow" bindtap="goToDetail" wx:for="{{news}}" wx:key="index" id="{{item.id}}" >
+    <view class="cu-item shadow" bindtap="goToDetail" wx:for="{{news}}" wx:key="index" id="{{item.id}}" data-iscollected="{{item.isCollected}}">
       <!-- 标题 -->
       <view class="title">
         <view class="text-cut">{{item.title}}</view>
