@@ -59,6 +59,7 @@ Page({
       //   ]
       // }
     ],
+    likePostId:''
    
   },
   // tab标签栏切换
@@ -71,9 +72,12 @@ Page({
   },
   // 点赞切换
   change:function(e){
+    this.setData({
+      likePostId:e.currentTarget.dataset.postid
+    })
     var index=e.currentTarget.id
     //index为索引
-    //console.log(e)
+    console.log(this.data.likePostId)
     //console.log(this.data.posts[index])
     var isgood="posts["+index+"].isGood"//posts[index].isGood
     var starNum="posts["+index+"].stars"//posts[index].stars
@@ -81,15 +85,39 @@ Page({
     //点赞加一
     if(!e.currentTarget.dataset.isgood){
       this.setData({
-      //切换点赞
+      //点赞
         [isgood]:(this.data.posts[index].isGood+1)%2,
         [starNum]:this.data.posts[index].stars+1
       })
+      wx.request({
+        url: baseUrl+'/posts/like',
+        method:'POST',
+        data:{
+          userid:this.data.userId,
+          post_id:this.data.likePostId
+          
+        },
+        success:(res)=>{
+          console.log(res)
+        }
+      })
     } else {
       this.setData({
-        //切换点赞
+        //取消点赞
         [isgood]:(this.data.posts[index].isGood+1)%2,
         [starNum]:this.data.posts[index].stars-1
+      }),
+      wx.request({
+        url: baseUrl+'/posts/dislike',
+        method:'POST',
+        data:{
+          userid:this.data.userId,
+          post_id:this.data.likePostId
+          
+        },
+        success:(res)=>{
+          console.log(res)
+        }
       })
     }
     //调用点赞接口
@@ -104,9 +132,9 @@ Page({
   },
   // 跳转详情
   goToDetail:function(e){
-    console.log(e)
+    //console.log(e)
     wx.navigateTo({
-      url: '../circleDetail/index?id='+e.currentTarget.id,
+      url: '../circleDetail/index?id='+e.currentTarget.dataset.postid+'&isgood='+e.currentTarget.dataset.isgood
     })
   },
 // 获取帖子列表
@@ -118,7 +146,7 @@ Page({
         userid:this.data.userId
       },
       success:(res)=>{
-        console.log(res),
+        console.log(res.data),
         //转存到post[]
         this.setData({
           posts:res.data,
