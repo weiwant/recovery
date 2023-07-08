@@ -1,4 +1,7 @@
 // pages/exercise/index.js
+const app = getApp();
+const baseUrl=app.globalData.baseUrl
+
 Page({
 
   /**
@@ -6,6 +9,7 @@ Page({
    */
   data: {
     taskId:0,
+    userId:'',
     list: ['2023-6-4','2023-6-5', '2023-6-6', '2023-6-8', '2023-6-9', '2023-6-10','2023-6-12','2023-6-13','2023-6-14','2023-6-15','2023-6-16'],
     ddl:'2023年5月5日',
     name:'步行练习',
@@ -36,17 +40,40 @@ Page({
       url: '../video/index',
     })
   },
-  getDate(){
+  // 获取用户信息
+  getInfo:function(){
+    const that=this
+    wx.getStorage({
+      key: 'userInfo',
+      success (res) {
+        that.setData({
+          userId:res.data.userId,
+        });
+      },
+    })
+    wx.getStorage({
+      key: 'taskInfo',
+      success (res) {
+        that.setData({
+          taskId:res.data.taskId,
+        });
+      },
+    })
+  },
+
+  // 获取任务训练结果
+  getResult:function(){
+    
     wx.request({
       url: baseUrl+'/detail/get',
       method:'POST',
       data:{
-        doctor:this.data.doctorId
+        patient:this.data.userId,
+        taskid:this.data.taskId,
       },
       success:(res)=>{
-        console.log(res),
         this.setData({
-          patientList:res.data
+          results:res.data
         })
       }
     })
@@ -56,10 +83,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    this.setData({
-      taskId:options.id,
-    });
-    console.log(this.data.taskId);
+    this.getInfo()
+    console.log(this.data)
+    this.getResult()
   },
 
   /**

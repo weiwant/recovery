@@ -11,7 +11,7 @@ Page({
   },
   goToDoctor:function(){
     wx.navigateTo({
-      url: '../doctor/index',
+      url: '../doctor/index?userId='+this.data.userId,
     })
   },
   goToUaerInfo:function(){
@@ -38,15 +38,13 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow(){
-    console.log("onshow")
     this.tabBar();
-    // console.log("onload")
+    
     var that = this;
     // 从用户缓存中获取数据
     wx.getStorage({
       key: 'userInfo',
       success (res) {
-        console.log(res.data);
         that.setData({
           nickName:res.data.nickname,
           userImg:res.data.userImg,

@@ -1,15 +1,7 @@
 // index.js
 // 获取应用实例
 import * as echarts from '../../ec-canvas/echarts';
-/**
- * 黄烨五月十五 2023/7/4 9:13:12
-  
-  /recovery/api/task/update
-  /recovery/api/task/get
-  /recovery/api/task/delete
 
-
- */
 const app = getApp();
 const baseUrl=app.globalData.baseUrl
 
@@ -249,8 +241,14 @@ Page({
   },
 
   goToExercise:function(e){
+    wx.setStorage({
+      key:"taskInfo",
+      data:{
+        taskId:e.currentTarget.dataset.id,
+      }
+    });
     wx.navigateTo({
-      url: '../exercise/index?id='+e.currentTarget.id,
+      url: '../exercise/index?',
     })
   },
 

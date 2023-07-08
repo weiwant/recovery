@@ -20,13 +20,13 @@
     <view class="padding-xl">
       <view class="cu-form-group">
         <view class="title">医生ID：</view>
-        <input placeholder="请输入绑定医生的账号ID"></input>
+        <input placeholder="请输入绑定医生的账号ID" bindinput="contentInput"></input>
 	    </view>
     </view>
     <view class="cu-bar bg-white justify-end">
       <view class="action">
         <button class="cu-btn line-green text-green" bindtap="hideModal">取消</button>
-        <button class="cu-btn bg-green margin-left" bindtap="hideModal1">确定</button>
+        <button class="cu-btn bg-green margin-left" bindtap="addDoctor">确定</button>
       </view>
     </view>
   </view>
@@ -56,31 +56,7 @@
     </view>
   </view>
 </view>
-<!-- 新绑定的医生 -->
-<view class="cu-list menu-avatar userInfo" style="{{1==index?'':'display: none;'}}">
-  <view class="cu-item cur">
-    <view class="cu-avatar radius xl " style="background-image:url(https://s2.loli.net/2023/04/26/a1j2zXPAhdQ7i4D.jpg);">
-    </view>
-    <view class="content margin-left">
-      <view>
-        <text class="text-xl userName margin-bottom-xs">林医生</text>
-      </view>
-      <view class="text-gray text-df flex margin-bottom-xxs">
-        <text>
-          <text class="cuIcon-profile text-green margin-right-xs"></text> 账号ID：105768941 
-        </text>
-      </view>
-      <view class="text-gray text-df flex">
-        <text>
-          <text class="cuIcon-form text-pink margin-right-xs"></text> 认证：中南医院康复科副主任  
-        </text>
-      </view>
-    </view>
-    <view class="action text-xxl">
-      <view class="cuIcon-qr_code text-gray xl"></view>
-    </view>
-  </view>
-</view>
+
 
 
 <!-- 底部背景图 -->
