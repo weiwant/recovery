@@ -78,18 +78,21 @@ Page({
     var isgood="posts["+index+"].isGood"//posts[index].isGood
     var starNum="posts["+index+"].stars"//posts[index].stars
     //动态数据
-    this.setData({
-      
+    //点赞加一
+    if(!e.currentTarget.dataset.isgood){
+      this.setData({
       //切换点赞
-      [isgood]:(this.data.posts[index].isGood+1)%2,
-      //加或者减
-
-      
-      [starNum]:this.data.posts[index].stars+1
-      
-      
-    })
-    
+        [isgood]:(this.data.posts[index].isGood+1)%2,
+        [starNum]:this.data.posts[index].stars+1
+      })
+    } else {
+      this.setData({
+        //切换点赞
+        [isgood]:(this.data.posts[index].isGood+1)%2,
+        [starNum]:this.data.posts[index].stars-1
+      })
+    }
+    //调用点赞接口
     
     
   },
