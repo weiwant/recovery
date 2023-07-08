@@ -12,9 +12,13 @@ App({
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
       }
     })
+    wx.cloud.init({
+      env:'recovery-1gpfqg1b2321ce8b',
+      traceUser:true,
+    })
   },
   globalData: {
     userInfo: null,
-    baseUrl:'http://5cda0730.r12.cpolar.top/recovery/api'
+    baseUrl:'http://30909a2a.r3.vip.cpolar.cn/recovery/api'
   }
 })

@@ -2,6 +2,10 @@
 const app = getApp();
 const baseUrl=app.globalData.baseUrl
 
+wx.cloud.init({
+  env:'recovery-1gpfqg1b2321ce8b',
+})
+
 Page({
 
   /**
@@ -12,6 +16,7 @@ Page({
     userId:'',
     content:'',
     imgList: [],
+    imgs:[],
   },
 
   // 从相册里选取图片
@@ -21,18 +26,34 @@ Page({
       sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album'], //从相册选择
       success: (res) => {
+        console.log(res.tempFilePaths[0]);
         if (this.data.imgList.length != 0) {
           this.setData({
             imgList: this.data.imgList.concat(res.tempFilePaths)
           })
+          this.uploadImg(res.tempFilePaths[0],this.data.imgList.length)
         } else {
           this.setData({
             imgList: res.tempFilePaths
           })
+          this.uploadImg(res.tempFilePaths[0],this.data.imgList.length)
         }
       }
     });
   },
+
+uploadImg(str,i){
+  wx.cloud.uploadFile({
+    cloudPath: String(Date.parse(new Date()))+String(i)+'.png', // 上传至云端的路径
+    filePath: str, // 小程序临时文件路径
+    success: res => {
+      // 返回文件 ID
+      console.log(res.fileID)
+      this.data.imgs.push(res.fileID)
+    },
+    fail: console.error
+  })
+},
 
   // 查看所选图片
   ViewImage(e) {
@@ -92,7 +113,7 @@ Page({
       data:{
         creator:this.data.userId,
         content:this.data.content,
-        pictures:this.data.imgList,
+        pictures:this.data.imgs,
       },
       success:(res)=>{
         //console.log(res)
