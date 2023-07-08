@@ -55,7 +55,7 @@ async def add(request: Request):
         if result_detail:
             exist = True
         checked['score'], checked['evaluation'] = inference(checked['video'], getattr(result, 'training_root'),
-                                                            getattr(result, 'evaluate_root'))
+                                                            getattr(result, 'evaluate_root'), getattr(result, 'type'))
         if exist:
             checked.update({'id': getattr(result_detail[0], 'id')})
             update_detail(**checked)
