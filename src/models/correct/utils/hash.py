@@ -56,10 +56,11 @@ def find_template(skeleton, mission_type=None):
     names = []
     if mission_type is None:
         for t in os.listdir('./templates'):
-            names.extend([os.path.join('./templates', t, f) for f in os.listdir(os.path.join('./templates', t))])
+            names.extend([os.path.join('./templates', t, f) for f in os.listdir(os.path.join('./templates', t)) if
+                          f.endswith('.npy')])
     else:
         names.extend([os.path.join('./templates', mission_type, f) for f in
-                      os.listdir(os.path.join('./templates', mission_type))])
+                      os.listdir(os.path.join('./templates', mission_type)) if f.endswith('.npy')])
     template = max(names, key=lambda x: numpy.sum(
         hash_array == numpy.array(list(format(int(os.path.basename(x)[:16], 16), '0>64b')), dtype=numpy.int32)))
     return numpy.load(template), os.path.basename(
