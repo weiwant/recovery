@@ -10,7 +10,7 @@ Page({
     TabCur: 0,
     scrollLeft:0,
     userId:'lsfjds525',
-    post:[
+    posts:[
       // {
       //   postId:1,
       //   userImg:'https://s2.loli.net/2023/04/14/boRaWVHMzskLc6B.jpg',
@@ -63,20 +63,38 @@ Page({
   },
   // tab标签栏切换
   tabSelect(e) {
+    //console.log(e.currentTarget)
     this.setData({
       TabCur: e.currentTarget.dataset.id,
       scrollLeft: (e.currentTarget.dataset.id-1)*60
     })
   },
-  // 点赞效果？
+  // 点赞切换
   change:function(e){
-    console.log("change")
-    //console.log(e.currentTarget.dataset.id)
-    //const id = e.currentTarget.dataset.id
-    //console.log(this.data.post[id])
-    this.setData({
-      isGood:1,
-    })
+    var index=e.currentTarget.id
+    //index为索引
+    //console.log(e)
+    //console.log(this.data.posts[index])
+    var isgood="posts["+index+"].isGood"//posts[index].isGood
+    var starNum="posts["+index+"].stars"//posts[index].stars
+    //动态数据
+    //点赞加一
+    if(!e.currentTarget.dataset.isgood){
+      this.setData({
+      //切换点赞
+        [isgood]:(this.data.posts[index].isGood+1)%2,
+        [starNum]:this.data.posts[index].stars+1
+      })
+    } else {
+      this.setData({
+        //切换点赞
+        [isgood]:(this.data.posts[index].isGood+1)%2,
+        [starNum]:this.data.posts[index].stars-1
+      })
+    }
+    //调用点赞接口
+    
+    
   },
   // 跳转发布页面
   goTo:function(){
@@ -86,9 +104,7 @@ Page({
   },
   // 跳转详情
   goToDetail:function(e){
-    console.log(this.data);
-    //console.log(e.currentTarget);
-    //console.log(e.currentTarget.id);
+    console.log(e)
     wx.navigateTo({
       url: '../circleDetail/index?id='+e.currentTarget.id,
     })
@@ -105,7 +121,7 @@ Page({
         console.log(res),
         //转存到post[]
         this.setData({
-          post:res.data,
+          posts:res.data,
         })
       },
       fail(){
@@ -122,7 +138,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    this.getPostsList();
+    //this.getPostsList();
   },
 
   /**

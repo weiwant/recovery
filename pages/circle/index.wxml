@@ -5,15 +5,15 @@
     <text class="cuIcon-hotfill"></text> 
     推荐
   </view>
-  <view class="cu-item {{2==TabCur?'text-blue cur':''}}" bindtap="tabSelect" data-id="3">
+  <view class="cu-item {{3==TabCur?'text-blue cur':''}}" bindtap="tabSelect" data-id="3">
     <text class="cuIcon-peoplefill"></text> 
     我的
   </view>
 </scroll-view>
 
 <!-- 帖子卡片 -->
-<view class="cu-card dynamic 'no-card'" wx:for="{{post}}" wx:key="index"  id="{{item.postId}}" bindtap="goToDetail">
-  <view class="cu-item shadow">
+<view class="cu-card dynamic 'no-card'" wx:for="{{posts}}" wx:key="index">
+  <view class="cu-item shadow" id="{{index}}">
     <!-- 发帖人信息 -->
     <view class="cu-list menu-avatar">
       <view class="cu-item">
@@ -29,10 +29,10 @@
       </view>
     </view>
     <!-- 发帖内容 -->
-    <view class="text-content" >
+    <view class="text-content" bindtap="goToDetail"   data-isgood="{{item.isGood}}">
       {{item.content}}
     </view>
-    <view class="text-content text-blue" bindtap="goToDetail">
+    <view class="text-content text-blue" bindtap="goToDetail" data-isgood="{{item.isGood}}">
       ...全文
     </view>
     <!-- 图片 -->
@@ -43,7 +43,7 @@
     <!-- 帖子状态栏 -->
     <view class="text-gray text text-right padding flex align-center">
       <text class="cuIcon-attentionfill margin-lr-xs "></text> 浏览（{{item.views}}）
-      <text class="{{1==item.isGood?'cuIcon-appreciatefill':'cuIcon-appreciate'}} flex-sub margin-lr-xs text-red" bindtap="change"></text>{{1==item.isGood?'已赞':'点赞'}}({{item.stars}}) 
+      <text class="{{1==item.isGood?'cuIcon-appreciatefill':'cuIcon-appreciate'}} flex-sub margin-lr-xs text-red" bindtap="change" id="{{index}}" data-isgood="{{item.isGood}}"></text>{{1==item.isGood?'已赞':'点赞'}}({{item.stars}}) 
       <text class="cuIcon-messagefill flex-sub margin-lr-xs"></text> 评论（{{item.comment}}）
       <text class="cuIcon-forwardfill flex-sub margin-lr-xs text-green"></text>转发
     </view>
