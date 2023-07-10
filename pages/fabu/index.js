@@ -98,7 +98,7 @@ Page({
     })
   },
 
-// content内容监听
+  // content内容监听
   contentInput(e){
     //console.log(e.detail.value)
     this.setData({
@@ -106,24 +106,24 @@ Page({
     })
   },
 
-// 向数据库传输数据
-post(page){
-  wx.request({
-    url: baseUrl+'/posts/add',
-    method:'POST',
-    data:{
-      creator:page.data.userId,
-      content:page.data.content,
-      pictures:page.data.links,
-    },
-    success:(res)=>{
-      //console.log(res)
-      wx.showToast({
-        title: '发布成功',
-      })
-    }
-  })
-},
+  // 向数据库传输数据
+  post(page){
+    wx.request({
+      url: baseUrl+'/posts/add',
+      method:'POST',
+      data:{
+        creator:page.data.userId,
+        content:page.data.content,
+        pictures:page.data.links,
+      },
+      success:(res)=>{
+        //console.log(res)
+        wx.showToast({
+          title: '发布成功',
+        })
+      }
+    })
+  },
 
 // 发布帖子
   publish(){

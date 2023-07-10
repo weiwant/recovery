@@ -34,7 +34,7 @@
 
 <view class="cu-timeline" wx:for="{{results}}" wx:key="index" >
   <!-- 测试 -->
-  <view class="cu-time">{{item.finish_date}}</view>
+  <view class="cu-time">{{item.date}}</view>
   <view class="cu-item">
     <view class="content">
       <view class="cu-capsule radius">
