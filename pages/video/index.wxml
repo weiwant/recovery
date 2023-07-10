@@ -16,7 +16,7 @@
     <block wx:for="{{imgList}}" wx:key="index"></block>
     
     <!-- 视频  -->
-    <view class="img-li" wx:if="{{src == ''}}" bindtap="chooseVideo">
+    <view class="img-li" wx:if="{{src == ''}}" bindtap="chooseV">
       <image class="uploading-icon icon" src="/images/addVideo.png"></image>
     </view>
   </view>

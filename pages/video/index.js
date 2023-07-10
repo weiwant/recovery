@@ -88,7 +88,6 @@ Page({
     console.log(this.data)
   } ,
 
-
   /**
  * 根据fileID获取HTTPS链接
  * @param {Array} fileID 需要转换的fileID数组
@@ -155,7 +154,7 @@ Page({
     return promise;
   }
   },
-
+  // 上传数据库
   upload: function() {
     console.log(this.data)
     wx.request({
@@ -173,6 +172,33 @@ Page({
     })
     
   },
+
+
+  chooseV:function(){
+    let mypage=this
+    wx.chooseVideo({
+      success (res) {
+        const tempFilePaths = res.tempFilePaths
+        mypage.setData({
+          src: res.tempFilePath,
+        })
+        wx.uploadFile({
+          url: baseUrl+'/detail/upload', 
+          filePath: tempFilePaths,
+          name: 'file',
+          formData: {
+            'task':mypage.data.taskId,
+          },
+          success (res){
+            const data = res.data
+            console.log(res)
+          }
+        })
+      }
+    })
+  },
+  
+
 
   /**
    * 生命周期函数--监听页面加载
