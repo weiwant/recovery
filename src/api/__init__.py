@@ -1,6 +1,8 @@
 import sanic
 
+from src.api.article import article_blueprint
 from src.api.detail import detail_blueprint
+from src.api.posts import posts_blueprint
 from src.api.task import task_blueprint
 from src.api.user import user_blueprint
 from src.utils.logger import get_logger
@@ -14,7 +16,9 @@ method_post = {}
 blueprints = [
     user_blueprint,
     task_blueprint,
-    detail_blueprint
+    detail_blueprint,
+    article_blueprint,
+    posts_blueprint
 ]
 for (k, v) in method_get.items():
     api_blueprint.add_route(v, k)
