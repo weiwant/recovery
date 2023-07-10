@@ -1,3 +1,8 @@
+"""
+@Author: Wenfeng Zhou
+"""
+
+
 def get_connect_string(dbtype, user='', host='', password='', driver='', dbname='', port='', path='', **kwargs):
     """
     构造数据库连接字符串

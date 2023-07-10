@@ -1,3 +1,6 @@
+"""
+@Author: Wenfeng Zhou
+"""
 from uuid import uuid4
 
 from src.classes.model import DataModel

@@ -1,8 +1,5 @@
 """
-
-@Author:hy
-@description: 发帖列表
-
+@Author: Ye Huang
 """
 import datetime
 
@@ -24,8 +21,8 @@ comment_logger = Comment.logger
 
 def add_post(**kwargs):
     """
-
     新发布帖子
+
     :param kwargs: creator，content
     :return: code
     """
@@ -38,9 +35,9 @@ def add_post(**kwargs):
 def get_post_list(**kwargs):
     """
     todo:查询每个帖子的创建者名称、头像、type。查询该用户点赞状态“isGood”，以及每个帖子的评论数，返回json列表
+
     :param kwargs: 用户id
     :return: 列表数据
-
     """
     result = Posts.get_record(**posts_fields(**kwargs).dict(exclude_none=True))
     info_dict = {"openid": kwargs.get("userid")}
@@ -83,8 +80,8 @@ def get_post_list(**kwargs):
 
 def get_post_detail(**kwargs):
     """
-
     查看帖子详情
+
     :param kwargs: 帖子id和用户id
     :return: 帖子详情+评论列表详情
 
@@ -154,8 +151,8 @@ def get_post_detail(**kwargs):
 
 def like_post(**kwargs):
     """
-
     点赞帖子
+
     :param kwargs: 用户id和帖子id
     :return:
     """
@@ -177,9 +174,10 @@ def like_post(**kwargs):
 
 def comment_post(**kwargs):
     """
-    todo 子评论处理
     帖子评论
-    :param kwargs:用户id，帖子id，评论内容，是否子评论，父评论id
+    todo:子评论处理
+
+    :param kwargs: 用户id，帖子id，评论内容，是否子评论，父评论id
     :return: 状态码
     """
     if kwargs.get('parent') is None:
@@ -191,8 +189,8 @@ def comment_post(**kwargs):
 
 def dislike_post(**kwargs):
     """
-
     取消点赞帖子
+
     :param kwargs: 用户id和帖子id
     :return:
     """

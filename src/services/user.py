@@ -1,3 +1,6 @@
+"""
+@Author: Wenfeng Zhou, Ye Huang
+"""
 import json
 
 import hashids
@@ -28,6 +31,7 @@ def add_user(**kwargs):
     """
     添加用户
 
+    :author: Ye Huang
     :param kwargs: 用户信息
     :return:
     """
@@ -54,6 +58,7 @@ def update_user(**kwargs):
     """
     更新用户
 
+    :author: Wenfeng Zhou
     :param kwargs: 用户信息
     :return:
     """
@@ -87,6 +92,7 @@ def get_user(**kwargs):
     """
     获取用户
 
+    :author: Wenfeng Zhou
     :param kwargs: 用户信息
     :return:
     """
@@ -129,6 +135,7 @@ def delete_user(**kwargs):
     """
     删除用户
 
+    :author: Wenfeng Zhou
     :param kwargs: 用户信息
     :return:
     """
@@ -141,6 +148,7 @@ def exist_user(**kwargs):
     """
     用户是否存在
 
+    :author: Wenfeng Zhou
     :param kwargs: 用户信息
     :return:
     """
@@ -151,6 +159,7 @@ def add_patient(**kwargs):
     """
     添加患者数据
 
+    :author: Wenfeng Zhou
     :param kwargs: 患者信息
     :return:
     """
@@ -163,6 +172,7 @@ def add_doctor(**kwargs):
     """
     添加医生数据
 
+    :author: Wenfeng Zhou
     :param kwargs: 医生信息
     :return:
     """
@@ -173,8 +183,9 @@ def add_doctor(**kwargs):
 
 def bind_user(**kwargs):
     """
-
     添加医患绑定
+
+    :author: Ye Huang
     :param kwargs:
     :return:
     """
@@ -189,9 +200,10 @@ def bind_user(**kwargs):
 
 def get_doctor(**kwargs):
     """
-
     获取我的医生列表
-    :param kwargs:patient
+
+    :author: Ye Huang
+    :param kwargs: patient
     :return:
     """
     if len(User_bind.get_record(**kwargs)) == 0:
@@ -214,9 +226,10 @@ def get_doctor(**kwargs):
 
 def get_patient(**kwargs):
     """
-
     获取医生的患者列表
-    :param kwargs:doctor
+
+    :author: Ye Huang
+    :param kwargs: doctor
     :return:
     """
     if len(User_bind.get_record(**kwargs)) == 0:

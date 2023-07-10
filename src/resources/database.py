@@ -1,3 +1,6 @@
+"""
+@Author: Wenfeng Zhou
+"""
 from typing import Union
 
 from casestyle import pascalcase

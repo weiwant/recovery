@@ -1,4 +1,6 @@
-# -*- coding: utf-8 -*-
+"""
+@Author: Wenfeng Zhou
+"""
 
 import cv2
 import torch

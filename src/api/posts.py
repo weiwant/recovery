@@ -1,3 +1,6 @@
+"""
+@Author: Ye Huang
+"""
 import datetime
 import uuid
 from typing import Optional
@@ -17,9 +20,9 @@ logger = get_logger(__name__)
 async def add(request: Request):
     """
     用户发帖
-    parm：Request
-    return：
 
+    :param request: 请求
+    :return: 响应结果
     """
     await request.receive_body()
     data = request.json
@@ -48,10 +51,10 @@ async def add(request: Request):
 @posts_blueprint.route("/get_list", methods=['POST'])
 async def get_list(request: Request):
     """
-        用户获取列表
-        parm：Request
-        return：
+    用户获取列表
 
+    :param request: request
+    :return: Response
     """
     await request.receive_body()
     data = request.json
@@ -75,6 +78,7 @@ async def get_list(request: Request):
 async def get_tail(request: Request):
     """
     用户获取帖子详情
+
     :param request: request
     :return: 详情
     """
@@ -101,6 +105,7 @@ async def get_tail(request: Request):
 async def like(request: Request):
     """
     用户点赞帖子
+
     :param request: request
     :return: 响应结果
     """
@@ -127,8 +132,8 @@ async def like(request: Request):
 @posts_blueprint.route('/dislike', methods=['POST'])
 async def dislike(request: Request):
     """
-
     用户取消点赞帖子
+
     :param request: request
     :return: response
     """
@@ -155,8 +160,8 @@ async def dislike(request: Request):
 @posts_blueprint.route('/comment', methods=['POST'])
 async def comment(request: Request):
     """
-
     用户评论
+
     :param request: request
     :return: 响应结果
     """

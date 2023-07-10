@@ -1,3 +1,6 @@
+"""
+@Author: Wenfeng Zhou, Ye Huang
+"""
 from enum import IntEnum
 from typing import Optional
 
@@ -19,6 +22,7 @@ async def register(request: Request):
     """
     用户注册
 
+    :author: Wenfeng Zhou
     :param request: 请求
     :return:
     """
@@ -65,6 +69,7 @@ async def login(request: Request):
     """
     用户登录
 
+    :author: Wenfeng Zhou
     :param request: 请求
     :return:
     """
@@ -97,6 +102,7 @@ async def update(request: Request):
     """
     更新用户信息
 
+    :author: Wenfeng Zhou
     :param request:
     :return:
     """
@@ -143,6 +149,7 @@ async def delete(request: Request):
     """
     删除用户
 
+    :author: Wenfeng Zhou
     :param request: 请求
     :return:
     """
@@ -182,6 +189,7 @@ async def add_info(request: Request):
     """
     添加用户信息
 
+    :author: Wenfeng Zhou
     :param request: 请求
     :return:
     """
@@ -219,8 +227,9 @@ async def add_info(request: Request):
 @user_blueprint.route('/bind', methods=['POST'])
 async def bind1(request: Request):
     """
-
     添加医患绑定
+
+    :author: Ye Huang
     :param request:
     :return: 响应状态
     """
@@ -250,8 +259,9 @@ async def bind1(request: Request):
 @user_blueprint.route('/doctor_list', methods=['POST'])
 async def get_doctor1(request: Request):
     """
-
     患者获取医生列表
+
+    :author: Ye Huang
     :param request:
     :return:
     """
@@ -280,8 +290,9 @@ async def get_doctor1(request: Request):
 @user_blueprint.route('/patient_list', methods=['POST'])
 async def get_patient1(request: Request):
     """
-
     获取医生的患者列表
+
+    :author: Ye Huang
     :param request:
     :return:
     """

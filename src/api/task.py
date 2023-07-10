@@ -1,3 +1,6 @@
+"""
+@Author: Wenfeng Zhou, Ye Huang
+"""
 import json
 from datetime import date, datetime
 from enum import IntEnum
@@ -20,6 +23,7 @@ async def add(request: Request):
     """
     添加任务
 
+    :author: Wenfeng Zhou
     :param request: 请求
     :return:
     """
@@ -80,6 +84,7 @@ async def delete(request: Request):
     """
     删除任务
 
+    :author: Wenfeng Zhou
     :param request:
     :return:
     """
@@ -112,6 +117,7 @@ async def update(request: Request):
     """
     更新任务
 
+    :author: Wenfeng Zhou
     :param request: 请求
     :return:
     """
@@ -180,6 +186,7 @@ async def get(request: Request):
     """
     获取任务
 
+    :author: Wenfeng Zhou
     :param request:
     :return:任务列表
     """
@@ -200,8 +207,9 @@ async def get(request: Request):
 @task_blueprint.route('/get_info', methods=['POST'])
 async def get_info(request: Request):
     """
-
     获取任务详细信息
+
+    :author: Ye Huang
     :param request:
     :return:
     """

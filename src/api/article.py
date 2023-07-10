@@ -1,8 +1,5 @@
 """
-
-@Author:hy
-@description:
-
+@Author: Ye Huang
 """
 from pydantic import BaseModel, ValidationError
 from sanic import Blueprint, Request
@@ -18,8 +15,8 @@ logger = get_logger(__name__)
 @article_blueprint.route("/get_list", methods=['POST'])
 async def get1(request: Request):
     """
-
     获取资讯列表
+
     :param request: request
     :return: response
     """
@@ -48,8 +45,8 @@ async def get1(request: Request):
 @article_blueprint.route("/get_detail", methods=['POST'])
 async def get2(request: Request):
     """
-
     获取资讯详情
+
     :param request: request
     :return: 详情数据
     """
@@ -77,8 +74,8 @@ async def get2(request: Request):
 @article_blueprint.route("/search", methods=['POST'])
 async def search1(request: Request):
     """
-
     关键字搜索帖子
+
     :param request: request
     :return: 对应帖子列表
     """
@@ -111,8 +108,8 @@ async def search1(request: Request):
 @article_blueprint.route("/collect", methods=['POST'])
 async def collect1(request: Request):
     """
-
     收藏资讯
+
     :param request: request
     :return: 状态
     """
@@ -140,6 +137,12 @@ async def collect1(request: Request):
 
 @article_blueprint.route("/discollect", methods=['POST'])
 async def discollect1(request: Request):
+    """
+    取消收藏资讯
+
+    :param request: request
+    :return: 状态
+    """
     await request.receive_body()
     data = request.json
 

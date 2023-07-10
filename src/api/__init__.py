@@ -1,3 +1,6 @@
+"""
+@Author: Wenfeng Zhou
+"""
 import sanic
 
 from src.api.article import article_blueprint

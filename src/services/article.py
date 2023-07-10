@@ -1,3 +1,6 @@
+"""
+@Author: Ye Huang
+"""
 import re
 
 from src.classes.model import DataModel
@@ -14,8 +17,8 @@ collect_fields = getattr(Tables, 'CollectField')
 
 def get_list(**kwargs):
     """
-
     获取资讯列表
+
     :param kwargs: 前端类别参数和用户id
     :return:result
     """
@@ -41,8 +44,8 @@ def get_list(**kwargs):
 
 def get_detail(**kwargs):
     """
-
     获取资讯详情
+
     :param kwargs: 帖子id
     :return: result
     """
@@ -56,10 +59,10 @@ def get_detail(**kwargs):
 
 def search(**kwargs):
     """
+    获取资讯详情
 
-       获取资讯详情
-       :param kwargs: 搜索关键字keyword和用户userid
-       :return: result
+    :param kwargs: 搜索关键字keyword和用户userid
+    :return: result
     """
     result = Article.get_record(**article_fields(**kwargs).dict(exclude_none=True))
     if result is None:
@@ -87,8 +90,8 @@ def search(**kwargs):
 
 def collect(**kwargs):
     """
-
     收藏资讯
+
     :param kwargs: collector_id,article_id
     :return: code
     """
@@ -100,6 +103,7 @@ def collect(**kwargs):
 def disCollect(**kwargs):
     """
     取消收藏
+
     :param kwargs: collector_id,article_id
     :return: code
     """

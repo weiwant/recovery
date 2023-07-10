@@ -1,3 +1,6 @@
+"""
+@Author: Wenfeng Zhou, Ye Huang
+"""
 import os
 import shutil
 
@@ -19,6 +22,7 @@ def update_task(**kwargs):
     """
     更新任务
 
+    :author: Wenfeng Zhou
     :param kwargs: 任务参数
     :return:
     """
@@ -31,6 +35,7 @@ def add_task(**kwargs):
     """
     添加任务
 
+    :author: Wenfeng Zhou
     :param kwargs: 任务参数
     :return:
     """
@@ -47,6 +52,7 @@ def delete_task(**kwargs):
     """
     删除任务
 
+    :author: Wenfeng Zhou
     :param kwargs: 任务参数
     :return:
     """
@@ -65,6 +71,7 @@ def get_task(**kwargs):
     """
     获取任务
 
+    :author: Wenfeng Zhou
     :param kwargs: 任务参数
     :return:
     """
@@ -92,6 +99,13 @@ def get_task(**kwargs):
 
 
 def get_task_info(**kwargs):
+    """
+    获取任务信息
+
+    :author: Ye Huang
+    :param kwargs:
+    :return:
+    """
     res = TaskInfo.get_record(**kwargs)
     if len(res) == 0:
         task_logger.error(f'获取任务失败: {kwargs}')
