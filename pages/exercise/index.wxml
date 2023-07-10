@@ -11,8 +11,8 @@
    <view class="bg-img padding-left text-bold" style="background-image: url('https://s2.loli.net/2023/04/18/nR1TuhEwjlKxIAP.png');height: 414rpx;"> 
     <view class="text-content margin-bottom-xs ">截止时间：{{ddl}}</view>
     <view class="text-content margin-bottom-xs">任务名称：{{name}}</view>
-    <view class="text-content margin-bottom-xs">难易程度：{{diff}}</view>
-    <view class="text-content margin-bottom-xs">完成情况：{{done}} / {{all}}</view>
+    <view class="text-content margin-bottom-xs">难易程度：{{diffs[diff]}}</view>
+    <view class="text-content margin-bottom-xs">完成情况：{{done}} / {{all}} 天</view>
     <view class="text-content margin-bottom-xs">任务详情：{{detail}}</view>
   </view>
 </view>
@@ -34,7 +34,7 @@
 
 <view class="cu-timeline" wx:for="{{results}}" wx:key="index" >
   <!-- 测试 -->
-  <view class="cu-time">{{item.date}}</view>
+  <view class="cu-time">{{item.finish_date}}</view>
   <view class="cu-item">
     <view class="content">
       <view class="cu-capsule radius">
@@ -43,9 +43,9 @@
       </view>
       <view class="margin-top">
         评估结果：
-        <text class="text-yellow text-xl text-bold" >{{item.grades}}</text>
+        <text class="text-yellow text-xl text-bold" >{{item.score}}</text>
       </view>
-      <view class="margin-top ">训练建议：{{item.advice}}</view>
+      <view class="margin-top ">训练建议：{{item.evaluation}}</view>
      
       
     </view>

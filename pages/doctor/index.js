@@ -8,7 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userId:'',
+    userId:'lsfjds525',
     doctorList:[
       // {
       //   name:'赵正平',

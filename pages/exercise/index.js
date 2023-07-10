@@ -11,12 +11,13 @@ Page({
     taskId:0,
     userId:'',
     list: ['2023-6-4','2023-6-5', '2023-6-6', '2023-6-8', '2023-6-9', '2023-6-10','2023-6-12','2023-6-13','2023-6-14','2023-6-15','2023-6-16'],
-    ddl:'2023年5月5日',
-    name:'步行练习',
-    diff:'难',
-    done:'0',
-    all:'30天',
-    detail:'侧卧，屈曲下侧腿。伸直上侧腿。将上便腿向外侧抬起至45度,保持1-2秒，徐徐放下。每组15次。该练习可以塌加膝关节侧方稳定性。',
+    ddl:'',
+    name:'',
+    diff:null,
+    diffs:['易','中','难'],
+    done:'',
+    all:'',
+    detail:'',
     results:[
       {
         date:'04-16',
@@ -32,7 +33,8 @@ Page({
         grades:89,
         advice:'在摆臂练习中，要注意手臂抬起的角度与高度。注意不要过度训练，引起肌肉损伤。'
       },
-    ]
+    ],
+    
    
   },
   goTo:function(){
@@ -46,6 +48,7 @@ Page({
     wx.getStorage({
       key: 'userInfo',
       success (res) {
+        //console.log(res)
         that.setData({
           userId:res.data.userId,
         });
@@ -54,6 +57,7 @@ Page({
     wx.getStorage({
       key: 'taskInfo',
       success (res) {
+        //console.log(res)
         that.setData({
           taskId:res.data.taskId,
         });
@@ -62,30 +66,56 @@ Page({
   },
 
   // 获取任务训练结果
-  getResult:function(){
-    
+  getResult:function(page){
+    console.log(page.data)
     wx.request({
       url: baseUrl+'/detail/get',
       method:'POST',
       data:{
-        patient:this.data.userId,
-        taskid:this.data.taskId,
+        task:page.data.taskId,
       },
       success:(res)=>{
-        this.setData({
+        console.log(res)
+        page.setData({
           results:res.data
         })
       }
     })
   },
 
+  //获取任务详情
+  getDetail:function(page){
+    //console.log(page.data)
+    wx.request({
+      url: baseUrl+'/task/get_info',
+      method:'POST',
+      data:{
+        id:page.data.taskId,
+      },
+      success:(res)=>{
+        //console.log(res);
+        page.setData({
+          ddl:res.data.ddl,
+          name:res.data.name,
+          diff:res.data.diff,
+          done:res.data.done,
+          all:res.data.all,
+          detail:res.data.detail,
+        })
+      }
+    })
+  },
+
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
     this.getInfo()
-    console.log(this.data)
-    this.getResult()
+    let myPage=this
+    setTimeout(function(){myPage.getDetail(myPage);},100)
+    setTimeout(function(){myPage.getResult(myPage);},100)
+    
   },
 
   /**

@@ -54,12 +54,12 @@ function initChart(canvas, width, height, dpr) {
       name: '抬臂练习',
       type: 'line',
       smooth: true,
-      data: [2,3, 3, 4, 4, 5, 3]
+      data: [95,84,87,91,75,98,83]
     }, {
       name: '抬腿练习',
       type: 'line',
       smooth: true,
-      data: [5, 5, 4, 5, 3, 4, 5]
+      data: [75,85, 94, 95, 93, 84, 95]
     }]
   };
 
@@ -184,7 +184,7 @@ Page({
         patient:this.data.patientId
       },
       success:(res)=>{
-        console.log(res),
+        //console.log(res),
         this.setData({
           taskList:res.data
         })

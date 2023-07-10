@@ -19,6 +19,6 @@ App({
   },
   globalData: {
     userInfo: null,
-    baseUrl:'http://30909a2a.r3.vip.cpolar.cn/recovery/api'
+    baseUrl:'http://36e3fe3e.r8.cpolar.top/recovery/api'
   }
 })
