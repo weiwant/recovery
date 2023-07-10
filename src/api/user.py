@@ -6,7 +6,8 @@ from sanic import Request, Blueprint
 
 from src.classes.response import Response
 from src.services.task import delete_task, get_task
-from src.services.user import add_user, exist_user, get_user, update_user, delete_user, add_patient, add_doctor
+from src.services.user import add_user, exist_user, get_user, update_user, delete_user, add_patient, add_doctor, \
+    bind_user, get_doctor, get_patient
 from src.utils.logger import get_logger
 
 user_blueprint = Blueprint('user', url_prefix='/user')
@@ -213,3 +214,94 @@ async def add_info(request: Request):
     except Exception as e:
         logger.error(f'添加用户信息失败: {e}')
         return Response(500, '添加用户信息失败').text()
+
+
+@user_blueprint.route('/bind', methods=['POST'])
+async def bind1(request: Request):
+    """
+
+    添加医患绑定
+    :param request:
+    :return: 响应状态
+    """
+
+    await request.receive_body()
+    data = request.json
+
+    class Check(BaseModel):
+        """
+        检查数据
+        """
+        patient: str
+        doctor: str
+
+    try:
+        checked = Check(**data).dict(exclude_none=True)
+        bind_user(**checked)
+        return Response(200, message='绑定成功').text()
+    except ValidationError as e:
+        logger.error(f'参数错误: {e}')
+        return Response(400, '参数错误').text()
+    except Exception as e:
+        logger.error(f'绑定失败: {e}')
+        return Response(500, '绑定失败').text()
+
+
+@user_blueprint.route('/doctor_list', methods=['POST'])
+async def get_doctor1(request: Request):
+    """
+
+    患者获取医生列表
+    :param request:
+    :return:
+    """
+
+    await request.receive_body()
+    data = request.json
+
+    class Check(BaseModel):
+        """
+        检查数据
+        """
+        patient: str
+
+    try:
+        checked = Check(**data).dict(exclude_none=True)
+        res = get_doctor(**checked)
+        return Response(200, data=res).json()
+    except ValidationError as e:
+        logger.error(f'参数错误: {e}')
+        return Response(400, '参数错误').text()
+    except Exception as e:
+        logger.error(f'获取失败: {e}')
+        return Response(500, '获取失败').text()
+
+
+@user_blueprint.route('/patient_list', methods=['POST'])
+async def get_patient1(request: Request):
+    """
+
+    获取医生的患者列表
+    :param request:
+    :return:
+    """
+
+    await request.receive_body()
+    data = request.json
+
+    class Check(BaseModel):
+        """
+        检查数据
+        """
+        doctor: str
+
+    try:
+        checked = Check(**data).dict(exclude_none=True)
+        res = get_patient(**checked)
+        return Response(200, data=res).json()
+    except ValidationError as e:
+        logger.error(f'参数错误: {e}')
+        return Response(400, '参数错误').text()
+    except Exception as e:
+        logger.error(f'获取失败: {e}')
+        return Response(500, '获取失败').text()

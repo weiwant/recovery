@@ -86,11 +86,10 @@ async def get(request: Request):
         检查数据
         """
         task: int
-        finish_date: date
 
     try:
         checked = Check(**data).dict(exclude_none=True)
-        result = get_detail(**checked)[0].to_json()
+        result = get_detail(**checked)
         return Response(200, data=result).json()
     except ValidationError as e:
         logger.error(f'参数错误: {e}')

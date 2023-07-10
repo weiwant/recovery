@@ -1,3 +1,7 @@
+import json
+
+import hashids
+import requests
 from sqlalchemy.orm import Session
 
 from src.classes.model import DataModel
@@ -13,6 +17,11 @@ doctor_fields = getattr(Tables, 'DoctorInfoField')
 PatientInfo: DataModel = getattr(Tables, 'PatientInfo')
 patient_logger = PatientInfo.logger
 patient_fields = getattr(Tables, 'PatientInfoField')
+User_bind: DataModel = getattr(Tables, 'UserBind')
+user_bind_logger = User_bind.logger
+TaskInfo: DataModel = getattr(Tables, 'TaskInfo')
+task_logger = TaskInfo.logger
+task_fields = getattr(Tables, 'TaskInfoField')
 
 
 def add_user(**kwargs):
@@ -22,7 +31,21 @@ def add_user(**kwargs):
     :param kwargs: 用户信息
     :return:
     """
-    if not Userinfo.add_record(**kwargs):
+
+    url_code2Session = "https://api.weixin.qq.com/sns/jscode2session?appid={}&secret={}&js_code={}" \
+                       "&grant_type=authorization_code".format(kwargs['appid'], kwargs['secret'], kwargs['code'])
+    data = requests.get(url_code2Session)
+    if data.status_code == 200:
+        data_content = json.loads(data.content)
+        if 'session_key' in data_content:
+            session_key = data_content['session_key']
+            kwargs.update({'session_key': session_key})
+        if 'openid' in data_content:
+            openid = data_content['openid']
+            openid = hashids.Hashids(min_length=16, salt='dcghjjhggggio').encode(openid)
+            kwargs.update({'openid': openid})
+
+    if not Userinfo.add_record(**user_fields(**kwargs).dict(exclude_none=True)):
         user_logger.error(f'添加用户失败: {kwargs}')
         raise ValueError(f'添加用户失败: {kwargs}')
 
@@ -126,7 +149,7 @@ def exist_user(**kwargs):
 
 def add_patient(**kwargs):
     """
-    添加患者
+    添加患者数据
 
     :param kwargs: 患者信息
     :return:
@@ -138,7 +161,7 @@ def add_patient(**kwargs):
 
 def add_doctor(**kwargs):
     """
-    添加医生
+    添加医生数据
 
     :param kwargs: 医生信息
     :return:
@@ -146,3 +169,75 @@ def add_doctor(**kwargs):
     if DoctorInfo.add_record(**doctor_fields(**kwargs).dict(exclude_none=True, exclude={'id'})) is None:
         doctor_logger.error(f'添加医生失败: {kwargs}')
         raise ValueError(f'添加医生失败: {kwargs}')
+
+
+def bind_user(**kwargs):
+    """
+
+    添加医患绑定
+    :param kwargs:
+    :return:
+    """
+    if not len(User_bind.get_record(**kwargs)) == 0:
+        user_bind_logger.error(f'已绑定:{kwargs}')
+        raise ValueError(f'已绑定:{kwargs}')
+    else:
+        if User_bind.add_record(**kwargs) is None:
+            user_bind_logger.error(f'绑定失败:{kwargs}')
+            raise ValueError(f'绑定失败:{kwargs}')
+
+
+def get_doctor(**kwargs):
+    """
+
+    获取我的医生列表
+    :param kwargs:patient
+    :return:
+    """
+    if len(User_bind.get_record(**kwargs)) == 0:
+        user_bind_logger.error(f'无内容:{kwargs}')
+        raise ValueError(f'无内容:{kwargs}')
+    else:
+        result = []
+        res = User_bind.get_record(**kwargs)
+        for item in res:
+            id_dict = {'openid': item.doctor}
+            info_dict = {'id': item.doctor}
+            user = Userinfo.get_record(**id_dict)
+            info_dict.update({'imgUrl': user[0].img})
+            doc = DoctorInfo.get_record(**{'userid': item.doctor})
+            info_dict.update({'name': doc[0].name})
+            info_dict.update({'hospital': doc[0].hospital})
+            result.append(info_dict)
+        return result
+
+
+def get_patient(**kwargs):
+    """
+
+    获取医生的患者列表
+    :param kwargs:doctor
+    :return:
+    """
+    if len(User_bind.get_record(**kwargs)) == 0:
+        user_bind_logger.error(f'无内容:{kwargs}')
+        raise ValueError(f'无内容:{kwargs}')
+    else:
+        result = []
+        res = User_bind.get_record(**kwargs)
+        for item in res:
+            user_dict = {}
+            user = Userinfo.get_record(**{'openid': item.patient})
+            user_dict.update({'patientId': item.patient})
+            user_dict.update({'patientName': user[0].nickname})
+            user_dict.update({'patientImg': user[0].img})
+            taskList = []
+            people = {'doctor': kwargs['doctor'], 'patient': item.patient}
+            task = TaskInfo.get_record(**people)
+            for t in task:
+                task_dict = {'taskName': t.type}
+                task_dict.update({'taskid': t.id})
+                taskList.append(task_dict)
+            user_dict.update({'tasklist': taskList})
+            result.append(user_dict)
+        return result

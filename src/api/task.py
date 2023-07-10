@@ -8,7 +8,7 @@ from pydantic import BaseModel, ValidationError, validator
 from sanic import Request, Blueprint
 
 from src.classes.response import Response
-from src.services.task import add_task, get_task, update_task, delete_task
+from src.services.task import add_task, get_task, update_task, delete_task, get_task_info
 from src.utils.logger import get_logger
 
 task_blueprint = Blueprint('task', url_prefix='/task')
@@ -180,8 +180,8 @@ async def get(request: Request):
     """
     获取任务
 
-    :param request: 请求
-    :return:
+    :param request:
+    :return:任务列表
     """
     await request.receive_body()
     data = request.json
@@ -189,6 +189,36 @@ async def get(request: Request):
     try:
         result = get_task(**data)
         return Response(200, data=result).json()
+    except ValidationError as e:
+        logger.error(f'参数错误: {e}')
+        return Response(400, '参数错误').text()
+    except Exception as e:
+        logger.error(f'获取失败: {e}')
+        return Response(500, '获取失败').text()
+
+
+@task_blueprint.route('/get_info', methods=['POST'])
+async def get_info(request: Request):
+    """
+
+    获取任务详细信息
+    :param request:
+    :return:
+    """
+
+    await request.receive_body()
+    data = request.json
+
+    class Check(BaseModel):
+        """
+        检查数据
+        """
+        id: int
+
+    try:
+        checked = Check(**data).dict(exclude_none=True)
+        res = get_task_info(**checked)
+        return Response(200, data=res).json()
     except ValidationError as e:
         logger.error(f'参数错误: {e}')
         return Response(400, '参数错误').text()
