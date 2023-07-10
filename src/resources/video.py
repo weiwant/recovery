@@ -24,7 +24,7 @@ def keyframe(video_path, use_model=False, rate=0.5, fps=30):
         n_frames, features, cps, n_fps, picks = video_processor.run(video_path)
         model = PGL_SUM(input_size=1024, output_size=1024, num_segments=4, heads=8,
                         fusion="add", pos_enc="absolute")
-        model.load_state_dict(torch.load('./models/keyframe/keyframe.pth'))
+        model.load_state_dict(torch.load('./models/keyframe/keyframe.pt'))
         model.eval()
         with torch.no_grad():
             scores, _ = model(torch.Tensor(features).view(-1, 1024))
