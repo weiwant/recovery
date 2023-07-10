@@ -132,9 +132,50 @@ async def upload(request: Request):
         checked['video_type'] = checked['video_type'][0]
         checked['task'] = checked['task'][0]
         result = get_task(id=checked['task'])[0]
-        checked['training_root'] = getattr(result, 'training_root')
+        checked['training_root'] = result['training_root']
         file_name = upload_video(**checked)
         return Response(200, data=file_name).json()
+    except ValidationError as e:
+        logger.error(f'参数错误: {e}')
+        return Response(400, '参数错误').text()
+    except Exception as e:
+        logger.error(f'获取失败: {e}')
+        return Response(500, '获取失败').text()
+
+
+@detail_blueprint.route('/lines', methods=['POST'])
+async def lines(request: Request):
+    """
+    获取折线图数据
+
+    :param request:
+    :return:
+    """
+    await request.receive_body()
+    data = request.json
+
+    class Check(BaseModel):
+        """
+        检查数据
+        """
+        openid: str
+
+    try:
+        checked = Check(**data).dict(exclude_none=True)
+        tasks = get_task(patient=checked['openid'])
+        results = []
+        for task in tasks:
+            temp = {
+                'type': 'line',
+                'smooth': True,
+                'data': [],
+                'name': task['type']
+            }
+            details = get_detail(task=task['id'])
+            for detail in details:
+                temp['data'].append(detail.score)
+            results.append(temp)
+        return Response(200, data=results).json()
     except ValidationError as e:
         logger.error(f'参数错误: {e}')
         return Response(400, '参数错误').text()
