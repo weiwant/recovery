@@ -5,25 +5,25 @@
     <view class="cu-list menu-avatar">
       <view class="cu-item">
       <!-- 头像 -->
-        <view class="cu-avatar round lg" style="background-image:url({{userImg}});">  
-        <view class="cu-tag badge cuIcon-vip bg-orange" style="{{1==isDoctor?'':'display:none;'}}" ></view>
+        <view class="cu-avatar round lg" style="background-image:url({{detail.userImag}});">  
+        <view class="cu-tag badge cuIcon-vip bg-orange" style="{{1==detail.isDoctor?'':'display:none;'}}" ></view>
         </view>
         <!-- 用户名及发帖时间 -->
         <view class="content flex-sub">
-          <view>{{userName}}</view>
+          <view>{{detail.username}}</view>
           <view class="text-gray text-sm flex justify-between">
-            {{time}}
+            {{detail.create_time}}
           </view>
         </view>
       </view>
     </view>
     <!-- 帖子内容 -->
-    <view class="text-content" bindtap="goToDetail">
-      <text decode="{{true}}">{{content}}</text>
+    <view class="text-content">
+      <text decode="{{true}}">{{detail.content}}</text>
     </view>
     <!-- 帖子图片 -->
     <view class="grid flex-sub padding-lr col-3 grid-square">
-     <view class="bg-img" style="background-image:url({{item.url}});" wx:for="{{imgList}}"   wx:key="index" bindtap="showModal" data-target="Image1">
+     <view class="bg-img" style="background-image:url({{item.url}});" wx:for="{{detail.pictures}}"   wx:key="index" bindtap="showModal" data-target="Image1">
     </view>
     </view>
 
@@ -64,32 +64,32 @@
 
     <!-- 点赞状态栏 -->
     <view class="text-gray text text-right padding flex align-center">
-      <text class="cuIcon-attentionfill margin-lr-xs "></text> 浏览（{{view}}）
-      <text class="{{1==item.isGood?'cuIcon-appreciatefill':'cuIcon-appreciate'}} flex-sub margin-lr-xs text-red" bindtap="change"></text>{{1==isGood?'已赞':'点赞'}}({{good}}) 
-      <text class="cuIcon-messagefill flex-sub margin-lr-xs"></text> 评论（{{comment}}）
+      <text class="cuIcon-attentionfill margin-lr-xs "></text> 浏览（{{detail.views}}）
+      <text class="{{1==detail.isGood?'cuIcon-appreciatefill':'cuIcon-appreciate'}} flex-sub margin-lr-xs text-red" bindtap="change"></text>{{1==isGood?'已赞':'点赞'}}({{detail.good}}) 
+      <text class="cuIcon-messagefill flex-sub margin-lr-xs"></text> 评论（{{detail.comment.length}}）
       <text class="cuIcon-forwardfill flex-sub margin-lr-xs text-green"></text>转发
     </view>
 
     <!-- 评论区 -->
-    <view class="cu-list menu-avatar comment solids-top" wx:for="{{commentList}}" wx:key="index">
+    <view class="cu-list menu-avatar comment solids-top" wx:for="{{detail.comment}}" wx:key="index">
       <view class="cu-item">
         <view class="cu-avatar round" style="background-image:url({{item.userUrl}});"></view>
         <view class="content">
-          <view class="text-orange">{{item.userName}}</view>
+          <view class="text-orange">{{item.username}}</view>
           <view class="text-black text-content text-df">
             {{item.content}}
           </view>
           <view class="grey padding-sm radius margin-top-sm text-sm"  >
             <view class="flex"  wx:for="{{item.children}}" wx:for-item="children" wx:key="{{children}}">
-              <view class="text-blue">{{children.username}}</view>
+              <view class="text-blue">{{children.username}}</view><text>:</text>
               <view class="flex-sub text-grey">{{children.cont}}</view>
             </view>
           </view>
           <view class="margin-top-sm flex justify-between text-lg">
-            <view class="text-gray text-df">{{item.time}}</view>
+            <view class="text-gray text-df">{{item.comment_time}}</view>
             <view>
               <!-- <text class="cuIcon-appreciatefill text-red"></text> -->
-              <text class="cuIcon-messagefill text-blue "> 评论 </text>
+              <text class="cuIcon-messagefill text-blue "> 回复 </text>
             </view>
           </view>
         </view>
