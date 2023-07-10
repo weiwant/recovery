@@ -65,7 +65,7 @@
     <!-- 点赞状态栏 -->
     <view class="text-gray text text-right padding flex align-center">
       <text class="cuIcon-attentionfill margin-lr-xs "></text> 浏览（{{detail.views}}）
-      <text class="{{1==detail.isGood?'cuIcon-appreciatefill':'cuIcon-appreciate'}} flex-sub margin-lr-xs text-red" bindtap="change"></text>{{1==isGood?'已赞':'点赞'}}({{detail.good}}) 
+      <text class="{{1==isGood?'cuIcon-appreciatefill':'cuIcon-appreciate'}} flex-sub margin-lr-xs text-red" bindtap="change" data-isgood="{{isGood}}"></text>{{1==isGood?'已赞':'点赞'}}({{detail.stars}}) 
       <text class="cuIcon-messagefill flex-sub margin-lr-xs"></text> 评论（{{detail.comment.length}}）
       <text class="cuIcon-forwardfill flex-sub margin-lr-xs text-green"></text>转发
     </view>
@@ -80,6 +80,7 @@
             {{item.content}}
           </view>
           <view class="grey padding-sm radius margin-top-sm text-sm"  >
+          <!-- 子评论列表 -->
             <view class="flex"  wx:for="{{item.children}}" wx:for-item="children" wx:key="{{children}}">
               <view class="text-blue">{{children.username}}</view><text>:</text>
               <view class="flex-sub text-grey">{{children.cont}}</view>
@@ -89,8 +90,14 @@
             <view class="text-gray text-df">{{item.comment_time}}</view>
             <view>
               <!-- <text class="cuIcon-appreciatefill text-red"></text> -->
-              <text class="cuIcon-messagefill text-blue "> 回复 </text>
+              
             </view>
+          </view>
+          <!-- 子评论输入 -->
+          <view class="cu-bar input">
+            
+            <input class="solid-bottom" maxlength="300" cursor-spacing="10" placeholder="回复TA" bindinput="commentInput"></input>
+            <text class="cuIcon-messagefill text-blue" bindtap="sonSay" data-commentId="{{item.id}}"> 回复 </text>
           </view>
         </view>
       </view>
@@ -104,9 +111,9 @@
     <view class="action">
       <text class="cuIcon-roundaddfill text-grey"></text>
     </view>
-    <input class="solid-bottom" maxlength="300" cursor-spacing="10"></input>
+    <input class="solid-bottom" maxlength="300" cursor-spacing="10" placeholder="说点什么吧..." bindinput="commentInput" value="{{comment}}"></input>
     <view class="action">
       <text class="cuIcon-emojifill text-grey"></text>
     </view>
-    <button class="cu-btn bg-blue shadow-blur">评论</button>
+    <button class="cu-btn bg-blue shadow-blur" bindtap="say">评论</button>
   </view>
