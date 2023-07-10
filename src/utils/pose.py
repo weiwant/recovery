@@ -2,9 +2,14 @@
 @Author: Wenfeng Zhou
 """
 import os
+from sys import platform
 
 import cv2
-import pyopenpose as op
+
+if platform == 'win32':
+    import pyopenpose as op
+else:
+    from openpose import pyopenpose as op
 
 
 def process_video(video_path, OPENPOSE_ROOT, model_type='BODY_25', max_people=1):
