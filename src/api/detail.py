@@ -93,6 +93,12 @@ async def get(request: Request):
     try:
         checked = Check(**data).dict(exclude_none=True)
         result = get_detail(**checked)
+        result = [i.to_json() for i in result]
+        for r in result:
+            date_string, time_string = str(r['finish_date']).split(' ')
+            r['date'] = date_string[5:]
+            r['time'] = time_string[:8]
+            r['isMorn'] = int(time_string <= '12:00:00')
         return Response(200, data=result).json()
     except ValidationError as e:
         logger.error(f'参数错误: {e}')
