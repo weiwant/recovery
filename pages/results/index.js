@@ -9,8 +9,8 @@ Page({
    */
   data: {
       isSucceed:1,
-      grades:94,
-      advice:'本次的练习中，请注意手臂抬起的角度与高度。其中，右臂与右肩的角度可以适当减小，避免过度训练，引起右大臂肌肉群拉伤，影响右大臂肌肉功能恢复。',
+      grades:null,
+      advice:'',
       video:'',
       taskId:0,
   },
@@ -19,11 +19,9 @@ Page({
       url: '../exercise/index',
     })
   },
-  showModal(e) {
-    let myPage=this
-    this.getResult(myPage)
+  showModal(name) {
     this.setData({
-      modalName: e.currentTarget.dataset.target
+      modalName: name
     })
   },
   hideModal(e) {
@@ -32,8 +30,13 @@ Page({
     })
   },
 
-  getResult:function(page){ 
+  getResult:function(e){ 
+    let name= e.currentTarget.dataset.target
+    let page = this
     console.log(page.data)
+    wx.showLoading({
+      title: '分析中',
+    })
     wx.request({
       url: baseUrl+'/detail/add',
       method:'POST',
@@ -42,14 +45,21 @@ Page({
         video:page.data.video,
       },
       success:(res)=>{
+        wx.hideLoading()
         console.log(res)
         page.setData({
           grades:res.data.score,
           advice:res.data.evaluation,
         })
+        page.showModal(name)
       },
       fail:(res)=>{
+        wx.hideLoading()
         console.log(res)
+        wx.showToast({
+          title: '结果获取失败',
+          icon:'error',
+        })
       },
     })
   } , 

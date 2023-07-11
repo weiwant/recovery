@@ -83,7 +83,7 @@ Page({
     //折线图注解列表
     nameTests:[],
     //1患者，0医生
-    isPatient:0,
+    isPatient:1,
     doctorId:'zzp1568789965',
     patientId:'lsfjds525',
     colors:['bg-red','bg-blue','bg-green'],

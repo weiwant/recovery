@@ -48,7 +48,7 @@ Page({
 
   
 
-  // 选取视频并直接向后端传视频
+  // 选取视频
   chooseV:function(){
     let mypage=this
     wx.chooseVideo({
@@ -62,10 +62,13 @@ Page({
     })
   },
   
-  // 跳转至结果页面
+  // 上传视频并跳转至结果页面
   goToResult:function(){
     let mypage=this
     console.log(mypage.data)
+    wx.showLoading({
+      title: '上传中',
+    })
     wx.uploadFile({
       url: baseUrl+'/detail/upload', 
       filePath: mypage.data.src,
@@ -75,6 +78,7 @@ Page({
         'video_type':'mp4',
       },
       success (res){
+        wx.hideLoading()
         const data = res.data
         console.log(res)
         mypage.setData({
@@ -86,6 +90,10 @@ Page({
       },
       fail (res){
         console.log(res);
+        wx.showToast({
+          title: '上传失败',
+          icon: 'error',
+        })
       }
     })
 
