@@ -63,7 +63,7 @@ class Correct:
         n = self.similarity.shape[0]
         temp = numpy.copy(self.similarity)
         temp[numpy.eye(n, dtype=numpy.bool_)] = 0
-        a = numpy.sum(self.similarity, axis=1) / (n - 1)
+        a = numpy.sum(temp, axis=1) / (n - 1)
         A = numpy.sum(a) / n
         S = numpy.sqrt(numpy.sum((a - A) ** 2) / n)
         t = A - S
