@@ -11,6 +11,7 @@ from pydantic import BaseModel, ValidationError, validator
 from sanic import Request, Blueprint
 
 from src.classes.response import Response
+from src.services.detail import get_detail
 from src.services.task import add_task, get_task, update_task, delete_task, get_task_info
 from src.utils.logger import get_logger
 
@@ -227,6 +228,40 @@ async def get_info(request: Request):
         checked = Check(**data).dict(exclude_none=True)
         res = get_task_info(**checked)
         return Response(200, data=res).json()
+    except ValidationError as e:
+        logger.error(f'参数错误: {e}')
+        return Response(400, '参数错误').text()
+    except Exception as e:
+        logger.error(f'获取失败: {e}')
+        return Response(500, '获取失败').text()
+
+
+@task_blueprint.route('/date_list', methods=['POST'])
+async def date_list(request: Request):
+    """
+    获取任务日期列表
+
+    :author: Wenfeng Zhou
+    :param request: 请求
+    :return: 任务日期列表
+    """
+    await request.receive_body()
+    data = request.json
+
+    class Check(BaseModel):
+        """
+        检查数据
+        """
+        id: int
+
+    try:
+        checked = Check(**data).dict(exclude_none=True)
+        result = get_detail(**{'task': checked['id']})
+        results = []
+        for r in result:
+            dt = getattr(r, 'finish_date')
+            results.append(str(dt.year) + '-' + str(dt.month) + '-' + str(dt.day))
+        return Response(200, data=results).json()
     except ValidationError as e:
         logger.error(f'参数错误: {e}')
         return Response(400, '参数错误').text()

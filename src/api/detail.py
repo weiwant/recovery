@@ -53,6 +53,7 @@ async def add(request: Request):
         result = get_task(id=data['task'])[0]
         data['deadline'] = result['deadline']
         checked = Check(**data).dict(exclude_none=True)
+        checked['status'] = result['status']
         checked['finish_date'] = str(datetime.datetime.now())
         exist = False
         result_detail = get_detail(**{'task': checked['task'], 'finish_date': checked['finish_date']})

@@ -92,8 +92,9 @@ def inference(video, training_root, evaluate_root, task_type):
     for (pose, frame, n) in get_pose(frame_gen, config.OPENPOSE_ROOT):
         template, _, status = find_template(pose, task_type)
         if len(action_sequence) > 0:
-            if start is None and status == action_sequence[0]:
-                start = n
+            if start is None:
+                if status == action_sequence[0]:
+                    start = n
             else:
                 if n < start + status_durations[0] * fps:
                     if not status == action_sequence[0]:

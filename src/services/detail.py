@@ -29,6 +29,10 @@ def add_detail(**kwargs):
         if not TaskInfo.update_record(**{'id': kwargs['task'], 'status': 2}):
             task_logger.error(f'更新任务失败: {kwargs}')
             raise ValueError(f'更新任务失败: {kwargs}')
+    elif kwargs['status'] == 0:
+        if not TaskInfo.update_record(**{'id': kwargs['task'], 'status': 1}):
+            task_logger.error(f'更新任务失败: {kwargs}')
+            raise ValueError(f'更新任务失败: {kwargs}')
 
 
 def get_detail(**kwargs):
@@ -71,3 +75,11 @@ def update_detail(**kwargs):
     if not DetailInfo.update_record(**detail_fields(**kwargs).dict(exclude_none=True)):
         detail_logger.error(f'更新任务详情失败: {kwargs}')
         raise ValueError(f'更新任务详情失败: {kwargs}')
+    try:
+        if kwargs['deadline'] == kwargs['finish_date']:
+            TaskInfo.update_record(**{'id': kwargs['task'], 'status': 2})
+        elif kwargs['status'] == 0:
+            TaskInfo.update_record(**{'id': kwargs['task'], 'status': 1})
+    except Exception:
+        detail_logger.error(f'更新任务失败: {kwargs}')
+        raise ValueError(f'更新任务失败: {kwargs}')
