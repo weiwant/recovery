@@ -71,10 +71,10 @@
       </view>
       <van-collapse value="{{ activeNames }}" bind:change="onChange">
         <van-collapse-item title="任务详情" name="{{item.id}}">
-          <view class=" cu-list menu " wx:for="{{item.tasklist}}" wx:for-item="taskList" wx:key="taskList">
+          <view class=" cu-list menu " wx:for="{{item.tasklist}}" wx:for-item="taskList" wx:key="taskList" bindtap="goToExercise" data-id="{{taskList.taskid}}">
             <view class="cu-item arrow">
               <view class="content">
-                <text class="text-blue">{{taskList.taskName}}</text>
+                <text class="text-blue" >{{taskList.taskName}}</text>
               </view>
             </view>
           </view>

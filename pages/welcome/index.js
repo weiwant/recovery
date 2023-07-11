@@ -78,18 +78,7 @@ Page({
   onHide() {
     console.log(this.data)
     
-    // wx.request({
-          //   url: 'http://38980ab1.r6.vip.cpolar.cn/recovery/api/user/register',
-          //   method:'POST',
-          //   data:{
-          //     openid:"og_kajsdhoks6q9rjkds8",
-          //     nickname:this.data.nickName,
-          //     img:this.data.avatarUrl
-          //   },
-          //   success:(res)=>{
-          //     console.log(res)
-          //   }
-          // });
+
   },
 
   /**

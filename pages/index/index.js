@@ -83,7 +83,7 @@ Page({
     //折线图注解列表
     nameTests:[],
     //1患者，0医生
-    isPatient:1,
+    isPatient:0,
     doctorId:'zzp1568789965',
     patientId:'lsfjds525',
     colors:['bg-red','bg-blue','bg-green'],
@@ -292,9 +292,19 @@ Page({
   },
 
   goToExercise:function(e){
-    wx.navigateTo({
-      url: '../exercise/index?id='+e.currentTarget.id,
+    console.log(e.currentTarget.dataset.id)
+    wx.setStorage({
+      key:"taskInfo",
+      data:{
+        taskId:e.currentTarget.dataset.id
+      },
+      success(res){
+        wx.navigateTo({
+          url: '../exercise/index?',
+        })
+      }
     })
+    
   },
 
   goToAdd:function(){
