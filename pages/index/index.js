@@ -8,8 +8,10 @@ const baseUrl=app.globalData.baseUrl
 /**
  * 任务完成图表
  */
+let chart
+
 function initChart(canvas, width, height, dpr) {
-  const chart = echarts.init(canvas, null, {
+  chart = echarts.init(canvas, null, {
     width: width,
     height: height,
     devicePixelRatio: dpr // new
@@ -18,12 +20,13 @@ function initChart(canvas, width, height, dpr) {
 
   var option = {
     title: {
-      text: '近一周训练结果',
+      text: '近期训练结果',
       left: 'center'
     },
     legend: {
-      data: ['抬臂练习', '抬腿练习'],
-      top: 30,
+      //线条注解
+      data: [],
+      top: 'bottom',
       left: 'center',
       z: 100
     },
@@ -37,7 +40,7 @@ function initChart(canvas, width, height, dpr) {
     xAxis: {
       type: 'category',
       boundaryGap: false,
-      data: ['4.12', '4.13', '4.14', '4.15', '4.16', '4.17', '4.18'],
+      // data: ['4.12', '4.13', '4.14', '4.15', '4.16', '4.17', '4.18'],
       // show: false
     },
     yAxis: {
@@ -50,28 +53,35 @@ function initChart(canvas, width, height, dpr) {
       }
       // show: false
     },
-    series: [{
-      name: '抬臂练习',
-      type: 'line',
-      smooth: true,
-      data: [95,84,87,91,75,98,83]
-    }, {
-      name: '抬腿练习',
-      type: 'line',
-      smooth: true,
-      data: [75,85, 94, 95, 93, 84, 95]
-    }]
+    series: []
+    // {
+    //   name: '抬臂练习',
+    //   type: 'line',
+    //   smooth: true,
+    //   data: [95,84,87,91,75,98,83]
+    // }, {
+    //   name: '抬腿练习',
+    //   type: 'line',
+    //   smooth: true,
+    //   data: [75,85, 94, 95, 93, 84, 95]
+    // }
   };
 
   chart.setOption(option);
   return chart;
 }
 
+/**
+ * 表格点击事件声明
+ */
+
+
 Page({
   data: {
     ec: {
       onInit: initChart
     },
+    nameTests:[],
     //1患者，0医生
     isPatient:1,
     doctorId:'255455mo',
@@ -192,6 +202,43 @@ Page({
     })
   },
   /**
+   * 患者获取训练图标数据
+   */
+  getchart(){
+    wx.request({
+      url: baseUrl+'/detail/lines',
+      method:'POST',
+      data:{
+        openid:this.data.patientId
+      },
+      success:(res)=>{
+        //console.log(res.data)
+        //把res、data放入series,
+        chart.setOption({
+          series:res.data
+        })
+        //线条注解
+        
+        for(var i=0;i<res.data.length;i++){
+          var names="nameTests["+i+"]"
+          this.setData({
+            [names]:res.data[i].name
+          })
+          //console.log(this.data.nameTests)
+          
+        }
+        chart.setOption({
+          legend:{
+            data:this.data.nameTests
+          }
+        })
+      },
+      fail(res){
+        console.log(res)
+      }
+    })
+  },
+  /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
@@ -200,11 +247,14 @@ Page({
       //医生获取患者任务列表
       this.getPatientList()
     }
-    // 患者获取康复任务列表
+    // 患者
     else{
+      //患者获取康复任务列表
       this.getTaskList()
+      //患者获取训练图表数据
+      this.getchart()
     }
-    
+  
 
 
   },
@@ -241,14 +291,8 @@ Page({
   },
 
   goToExercise:function(e){
-    wx.setStorage({
-      key:"taskInfo",
-      data:{
-        taskId:e.currentTarget.dataset.id,
-      }
-    });
     wx.navigateTo({
-      url: '../exercise/index?',
+      url: '../exercise/index?id='+e.currentTarget.id,
     })
   },
 
