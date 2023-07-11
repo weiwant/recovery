@@ -56,7 +56,7 @@
     </view>
   </view>
   <!-- 患者任务卡片 -->
-  <view class="cu-card dynamic 'no-card'" wx:for="{{patientList}}" wx:key="index">
+  <view class="cu-card dynamic 'no-card'" wx:for="{{patientList}}" wx:key="index" id='{{index}}'>
     <view class="cu-item shadow">
       <view class="cu-list menu-avatar">
         <view class="cu-item">
@@ -70,7 +70,7 @@
         </view>
       </view>
       <van-collapse value="{{ activeNames }}" bind:change="onChange">
-        <van-collapse-item title="任务详情" name="{{item.id}}">
+        <van-collapse-item title="任务详情" name="{{index}}">
           <view class=" cu-list menu " wx:for="{{item.tasklist}}" wx:for-item="taskList" wx:key="taskList" bindtap="goToExercise" data-id="{{taskList.taskid}}">
             <view class="cu-item arrow">
               <view class="content">
