@@ -207,8 +207,8 @@ async def comment(request: Request):
         return Response(500, "评论失败").text()
 
 
-@posts_blueprint.route('/delete',methods=['POST'])
-async def delete(request:Request):
+@posts_blueprint.route('/delete', methods=['POST'])
+async def delete(request: Request):
     """
     删除帖子
 
@@ -224,7 +224,7 @@ async def delete(request:Request):
          检测数据
         """
         userid: str
-        post_id:str
+        post_id: str
 
     try:
         checked = Check(**data).dict(exclude_none=True)
