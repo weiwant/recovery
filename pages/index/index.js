@@ -68,12 +68,11 @@ function initChart(canvas, width, height, dpr) {
   };
 
   chart.setOption(option);
+
   return chart;
 }
 
-/**
- * 表格点击事件声明
- */
+
 
 
 Page({
@@ -81,10 +80,11 @@ Page({
     ec: {
       onInit: initChart
     },
+    //折线图注解列表
     nameTests:[],
     //1患者，0医生
     isPatient:1,
-    doctorId:'255455mo',
+    doctorId:'zzp1568789965',
     patientId:'lsfjds525',
     colors:['bg-red','bg-blue','bg-green'],
     btn:['去接受','去打卡','已完成'],
@@ -168,10 +168,11 @@ Page({
       // },
     ]
   },
+  
   // 医生获取患者列表
   getPatientList:function(){
     wx.request({
-      url: baseUrl+'/user/get_task_doctor',
+      url: baseUrl+'/user/patient_list',
       method:'POST',
       data:{
         doctor:this.data.doctorId
