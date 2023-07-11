@@ -1,7 +1,7 @@
 // pages/exercise/index.js
 const app = getApp();
 const baseUrl=app.globalData.baseUrl
-
+import getCalendar from "../../components/calendar/calendar"
 Page({
 
   /**
@@ -10,7 +10,7 @@ Page({
   data: {
     taskId:0,
     userId:'',
-    list: ['2023-6-4','2023-6-5', '2023-6-6', '2023-6-8', '2023-6-9', '2023-6-10','2023-6-12','2023-6-13','2023-6-14','2023-6-15','2023-6-16'],
+    list: [],
     ddl:'',
     name:'',
     diff:null,
@@ -67,7 +67,7 @@ Page({
 
   // 获取任务训练结果
   getResult:function(page){
-    console.log(page.data)
+    //console.log(page.data)
     wx.request({
       url: baseUrl+'/detail/get',
       method:'POST',
@@ -75,7 +75,7 @@ Page({
         task:page.data.taskId,
       },
       success:(res)=>{
-        console.log(res)
+        //console.log(res)
         page.setData({
           results:res.data
         })
@@ -106,15 +106,40 @@ Page({
     })
   },
 
-
+  /**
+   * 获取日历信息
+   */
+  getCalender:function(page){
+    //console.log(page.data)
+    let aa=page.selectComponent("#calendar")
+    wx.request({
+      url: baseUrl+'/task/date_list',
+      method:'POST',
+      data:{
+        id:page.data.taskId
+      },
+      success(res){
+        // console.log("this")
+        // console.log(res)
+        page.setData({
+          list:res.data
+        })
+        aa.getCalendar()
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
+    //console.log(options)
     this.getInfo()
     let myPage=this
     setTimeout(function(){myPage.getDetail(myPage);},100)
     setTimeout(function(){myPage.getResult(myPage);},100)
+    setTimeout(function(){myPage.getCalender(myPage);},100)
+
+    
     
   },
 

@@ -1,6 +1,6 @@
 <!--pages/exercise/index.wxml-->
 <!-- 日历 -->
-<calendar list="{{list}}"></calendar>
+<calendar list="{{list}}" id="calendar"></calendar>
 <!-- 任务详情 -->
 <view class="cu-bar bg-white solid-bottom margin-top">
   <view class="action">
