@@ -69,7 +69,8 @@ class Correct:
         A = numpy.sum(a) / n
         S = numpy.sqrt(numpy.sum((a - A) ** 2) / n)
         t = A - S
-        return numpy.sum(numpy.abs((t - self.similarity) / t), axis=1)
+        exception = a < t
+        self.e1[exception] += (t - a[exception]) / t
 
     def get_e2(self):
         """
@@ -86,7 +87,8 @@ class Correct:
         s1_4 = (temp[:, int(p1_4) - 1] + temp[:, math.ceil(p1_4) - 1]) / 2
         IQR = s3_4 - s1_4
         outlier = s1_4 - 1.5 * IQR
-        return numpy.sum(numpy.abs((outlier - self.similarity.T) / outlier), axis=0)
+        exception = numpy.fmax((outlier - self.similarity.T) / outlier, 0)
+        self.e2 += numpy.sum(exception, axis=0)
 
     def run(self, skeleton, template):
         """
@@ -100,8 +102,10 @@ class Correct:
         self.template = template
         self.feature = self.get_feature()
         self.similarity = self.get_similarity()
-        self.e1 = self.get_e1()
-        self.e2 = self.get_e2()
+        self.e1 = numpy.zeros(self.similarity.shape[0])
+        self.e2 = numpy.zeros(self.similarity.shape[0])
+        self.get_e1()
+        self.get_e2()
         self.e = self.e1 + self.e2
         correct = self.e < self.k
         m = numpy.sum(correct)
