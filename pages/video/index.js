@@ -13,9 +13,8 @@ Page({
    */
   data: {
     taskId:null,
-    src: '',        // 上传视频临时地址
-    fileID:[],      //视频在云存储里的id
-    video:'',       //视频https地址
+    src: '',        //上传视频临时地址
+    video:'',       //视频地址
   },
 
   // 获取用户信息
@@ -47,158 +46,51 @@ Page({
       })
   },
 
-  // 选取视频
-  chooseVideo: function() {
-    var _this = this;
-    wx.chooseVideo({
-      success: function(res) {
-        _this.setData({
-          src: res.tempFilePath,
-        })
-        _this.uploadvideo()
-      }
-    })
-  },
+  
 
-  /**
-   * 上传视频至云服务器 目前后台限制最大100M, 以后如果视频太大可以选择视频的时候进行压缩
-   */
-  uploadvideo(){
-    var src = this.data.src;
-    wx.cloud.uploadFile({
-      cloudPath: String(Date.parse(new Date()))+'训练视频.mp4', // 上传至云端的路径
-      filePath: src, // 小程序临时文件路径
-      success: res => {
-        // 返回文件 ID
-        console.log(res.fileID)
-        this.data.fileID.push(res.fileID)
-        this.test()
-      },
-      fail: console.error
-    })
-  },
-
-  //转https
-  test(){
-    console.log(this.data);
-    const httpsLinks =  this.batchFileIdToHttps(this.data.fileID, 'FTH');
-    this.setData({
-      video:httpsLinks[0]
-    })
-    console.log(this.data)
-  } ,
-
-  /**
- * 根据fileID获取HTTPS链接
- * @param {Array} fileID 需要转换的fileID数组
- * @param {String} type 转化类型（默认FTH），可选值：FTH（FileIdToHttps：fileID转https）、GTU（getTempFileURL：用fileID获取临时https地址）
- * @param {String} env 环境id（当type=GTU时才需要填写，若所需环境为默认环境则无需填写）
- * @param {String} appid 环境所属appid（若传env，则appid必传）
- * @return {Array} 返回HTTPS链接
- */
-  batchFileIdToHttps(fileIds,type='FTH',env,appid) {
-  if(!Array.isArray(fileIds)){
-    throw new Error('数据类型必须是数组')
-  }
-  if(type == 'FTH') return FTH(fileIds);
-  else if(type == 'GTU') return GTU(fileIds,env,appid);
-  else throw new Error('type参数不正确')
- 
-  function FTH(fileIds) {
-    console.log('fileID转https');
-    return fileIds.map(fileId => {
-      const regex = /cloud:\/\/(.+)\.([^\/]+)\/(.+)/;
-      const match = fileId.match(regex);
-      if (!match) {
-        return '无法兑换成https链接';
-      }
-      // const envId = match[1];
-      const customId = match[2];
-      const path = match[3];
-      return `https://${customId}.tcb.qcloud.la/${path}`;
-    });
-  }
- 
-  async function GTU(fileIds,env,appid) {
-    console.log('用fileID获取临时https地址');
-    // 声明新的 cloud 实例
-    const cloud = env && appid ? new wx.cloud.Cloud({
-      // 资源方 AppID
-      resourceAppid: appid,
-      // 资源方环境 ID
-      resourceEnv: env,
-    }) : wx.cloud
-    await cloud.init();
-    const promise = new Promise((resolve, reject) => {
-      cloud.getTempFileURL({
-        fileList: fileIds,
-        config: {
-          env: env ? env : ''
-        },
-        success: res => {
-          const fileList = [];
-          for (const item of res.fileList) {
-            fileList.push(item.tempFileURL)
-          }
-          resolve(fileList);
-        },
-        fail: err => {
-          const fileList = [];
-          for (const item of fileIds) {
-            fileList.push('获取临时地址失败')
-          }
-          reject(fileList);
-        }
-      })
-    });
-    return promise;
-  }
-  },
-  // 上传数据库
-  upload: function() {
-    console.log(this.data)
-    wx.request({
-      url: baseUrl+'/detail/upload',
-      method:'POST',
-      data:{
-        task:this.data.taskId,
-        video:this.data.video,
-      },
-      success:(res)=>{
-        wx.navigateTo({
-          url: '../results/index',
-        })
-      }
-    })
-    
-  },
-
-
+  // 选取视频并直接向后端传视频
   chooseV:function(){
     let mypage=this
     wx.chooseVideo({
       success (res) {
-        const tempFilePaths = res.tempFilePaths
+        const tempFilePaths = res.tempFilePath
+        console.log(tempFilePaths);
         mypage.setData({
           src: res.tempFilePath,
-        })
-        wx.uploadFile({
-          url: baseUrl+'/detail/upload', 
-          filePath: tempFilePaths,
-          name: 'file',
-          formData: {
-            'task':mypage.data.taskId,
-          },
-          success (res){
-            const data = res.data
-            console.log(res)
-          }
         })
       }
     })
   },
   
+  // 跳转至结果页面
+  goToResult:function(){
+    let mypage=this
+    console.log(mypage.data)
+    wx.uploadFile({
+      url: baseUrl+'/detail/upload', 
+      filePath: mypage.data.src,
+      name: 'video',
+      formData: {
+        'task':mypage.data.taskId,
+        'video_type':'mp4',
+      },
+      success (res){
+        const data = res.data
+        console.log(res)
+        mypage.setData({
+          video:data
+        })
+        wx.navigateTo({
+          url: '../results/index?video='+mypage.data.video,
+        })
+      },
+      fail (res){
+        console.log(res);
+      }
+    })
 
+    
+  },
 
   /**
    * 生命周期函数--监听页面加载

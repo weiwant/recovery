@@ -23,7 +23,7 @@
   <!-- 上传 E -->
 
 <view class="padding flex flex-direction bg-white" >
-  <button class="cu-btn bg-blue lg" bindtap="upload">上传视频</button>
+  <button class="cu-btn bg-blue lg" bindtap="goToResult">上传视频</button>
 </view>
 <view class="bg-img padding-tb-xl" style="background-image: url('https://s2.loli.net/2023/04/18/nR1TuhEwjlKxIAP.png');height: 414rpx;"></view>
 

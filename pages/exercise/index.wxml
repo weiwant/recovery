@@ -24,7 +24,7 @@
   </view>
 </view>
 <view class="text-center padding">
-    <video class="img" src='http://47.113.202.168/demo.mp4' ></video>
+    <video class="img" src='cloud://recovery-1gpfqg1b2321ce8b.7265-recovery-1gpfqg1b2321ce8b-1319258389/臀中肌的肌力训练.mp4' ></video>
 </view>
 <view class="text-center padding-bottom">
       <button class="cu-btn bg-grn shadow round margin-top-lg margin-bottom-lg text-lg lg" bindtap="goTo">今日打卡</button>
