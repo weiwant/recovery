@@ -14,8 +14,8 @@ Collect: DataModel = getattr(Tables, 'Collect')
 collect_logger = Collect.logger
 collect_fields = getattr(Tables, 'CollectField')
 
-UserInfo: DataModel = getattr(Tables, 'UserInfo')
-userinfo_fileds = getattr(Tables, 'UserInfo')
+UserInfo: DataModel = getattr(Tables, 'Userinfo')
+userinfo_fileds = getattr(Tables, 'Userinfo')
 userinfo_logger = UserInfo.logger
 
 
