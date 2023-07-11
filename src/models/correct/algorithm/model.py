@@ -1,6 +1,8 @@
 """
 @Author: Wenfeng Zhou
 """
+import math
+
 import numpy
 
 
@@ -76,11 +78,15 @@ class Correct:
         :return:
         """
         n = self.similarity.shape[0]
-        p3_4 = int(3 * (n + 1) / 4) - 1
-        p1_4 = int((n + 1) / 4) - 1
-        IQR = self.similarity[:, p3_4] - self.similarity[:, p1_4]
-        outlier = self.similarity[:, p1_4] - 1.5 * IQR
-        return numpy.sum(numpy.abs((outlier - self.similarity) / outlier), axis=0)
+        p3_4 = 3 * (n + 1) / 4
+        p1_4 = (n + 1) / 4
+        temp = numpy.copy(self.similarity)
+        temp = numpy.sort(temp, axis=1)
+        s3_4 = (temp[:, int(p3_4) - 1] + temp[:, math.ceil(p3_4) - 1]) / 2
+        s1_4 = (temp[:, int(p1_4) - 1] + temp[:, math.ceil(p1_4) - 1]) / 2
+        IQR = s3_4 - s1_4
+        outlier = s1_4 - 1.5 * IQR
+        return numpy.sum(numpy.abs((outlier - self.similarity.T) / outlier), axis=0)
 
     def run(self, skeleton, template):
         """
