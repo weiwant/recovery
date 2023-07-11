@@ -23,7 +23,7 @@ if hasattr(config, 'USE_GPU') and hasattr(config, 'OPENPOSE_ROOT'):
         os.environ['PATH'] = os.environ['PATH'] + ';' + bin_dir + ';' + dll_dir
         sys.path.append(os.path.join(dir_name, build_dir, 'python', 'openpose', 'Release'))
     else:
-        sys.path.append(os.path.join(dir_name, build_dir, 'python'))
+        sys.path.append(os.path.join('./', dir_name, build_dir, 'python'))
 if hasattr(config, 'DATABASE_CONFIG') and hasattr(config, 'TABLES'):
     from sqlalchemy import create_engine, MetaData
     from sqlalchemy.ext.automap import automap_base
