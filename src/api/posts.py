@@ -9,7 +9,8 @@ from pydantic import BaseModel, ValidationError
 from sanic import Blueprint, Request
 
 from src.classes.response import Response
-from src.services.posts import add_post, get_post_list, get_post_detail, like_post, comment_post, dislike_post
+from src.services.posts import add_post, get_post_list, get_post_detail, like_post, comment_post, dislike_post, \
+    delete_post
 from src.utils.logger import get_logger
 
 posts_blueprint = Blueprint("posts", url_prefix="/posts")
@@ -28,6 +29,9 @@ async def add(request: Request):
     data = request.json
 
     class Check(BaseModel):
+        """
+         检测数据
+        """
         content: str
         pictures: Optional[list]
         creator: str
@@ -60,6 +64,9 @@ async def get_list(request: Request):
     data = request.json
 
     class Check(BaseModel):
+        """
+         检测数据
+        """
         userid: str
 
     try:
@@ -86,6 +93,9 @@ async def get_tail(request: Request):
     data = request.json
 
     class Check(BaseModel):
+        """
+         检测数据
+        """
         userid: str
         id: str
 
@@ -114,6 +124,9 @@ async def like(request: Request):
     data = request.json
 
     class Check(BaseModel):
+        """
+         检测数据
+        """
         userid: str
         post_id: str
 
@@ -142,6 +155,9 @@ async def dislike(request: Request):
     data = request.json
 
     class Check(BaseModel):
+        """
+         检测数据
+        """
         userid: str
         post_id: str
 
@@ -170,6 +186,9 @@ async def comment(request: Request):
     data = request.json
 
     class Check(BaseModel):
+        """
+         检测数据
+        """
         commenter: str
         post_id: str
         content: str
@@ -186,3 +205,34 @@ async def comment(request: Request):
     except Exception as e:
         logger.error(f'评论失败：{e}')
         return Response(500, "评论失败").text()
+
+
+@posts_blueprint.route('/delete',methods=['POST'])
+async def delete(request:Request):
+    """
+    删除帖子
+
+    :param request: request
+    :return: 响应结果
+    """
+
+    await request.receive_body()
+    data = request.json
+
+    class Check(BaseModel):
+        """
+         检测数据
+        """
+        userid: str
+        post_id:str
+
+    try:
+        checked = Check(**data).dict(exclude_none=True)
+        delete_post(**checked)
+        return Response(200, message='删除成功').text()
+    except ValidationError as e:
+        logger.error(f'参数错误:{e}')
+        return Response(400, "参数错误").text()
+    except Exception as e:
+        logger.error(f'评论失败：{e}')
+        return Response(500, "删除失败").text()

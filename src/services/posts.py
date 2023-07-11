@@ -34,7 +34,7 @@ def add_post(**kwargs):
 
 def get_post_list(**kwargs):
     """
-    todo:查询每个帖子的创建者名称、头像、type。查询该用户点赞状态“isGood”，以及每个帖子的评论数，返回json列表
+    查询每个帖子的创建者名称、头像、type。查询该用户点赞状态“isGood”，以及每个帖子的评论数，返回json列表
 
     :param kwargs: 用户id
     :return: 列表数据
@@ -212,3 +212,25 @@ def dislike_post(**kwargs):
             if Likes.delete_record(**id_dict) is False:
                 posts_logger.error(f'取消点赞失败:{kwargs}')
                 raise ValueError(f'取消点赞失败:{kwargs}')
+
+
+def delete_post(**kwargs):
+    """
+    删除帖子
+
+    :param kwargs: 用户id和帖子id
+    :return:
+    """
+    post_dict={'id':kwargs.get('post_id')}
+    if len(Posts.get_record(**post_dict)) == 0:
+        posts_logger.error(f'无此内容:{kwargs}')
+        raise ValueError(f'无此内容:{kwargs}')
+    else:
+        author = Posts.get_record(**post_dict)[0]['creator']
+        if not author == kwargs.get('userid'):
+            posts_logger.error(f'无权限:{kwargs}')
+            raise ValueError(f'无权限:{kwargs}')
+        else:
+            if not Posts.delete_record(**post_dict):
+                posts_logger.error(f'删除失败:{kwargs}')
+                raise ValueError(f'删除失败:{kwargs}')
