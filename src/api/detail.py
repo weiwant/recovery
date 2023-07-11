@@ -1,6 +1,7 @@
 """
 @Author: Wenfeng Zhou
 """
+import datetime
 from datetime import date
 from typing import List
 
@@ -50,21 +51,23 @@ async def add(request: Request):
 
     try:
         result = get_task(id=data['task'])[0]
-        data['deadline'] = getattr(result, 'deadline')
+        data['deadline'] = result['deadline']
         checked = Check(**data).dict(exclude_none=True)
-        checked['finish_date'] = date.today()
+        checked['finish_date'] = str(datetime.datetime.now())
         exist = False
         result_detail = get_detail(**{'task': checked['task'], 'finish_date': checked['finish_date']})
         if result_detail:
             exist = True
-        checked['score'], checked['evaluation'] = inference(checked['video'], getattr(result, 'training_root'),
-                                                            getattr(result, 'evaluate_root'), getattr(result, 'type'))
+        checked['score'], checked['evaluation'] = inference(checked['video'], result['training_root'],
+                                                            result['evaluate_root'], result['type'])
         if exist:
             checked.update({'id': getattr(result_detail[0], 'id')})
             update_detail(**checked)
         else:
             add_detail(**checked)
-        return Response(200, '添加成功').text()
+        return Response(200,
+                        data={'score': format(checked['score'] * 100, '.2f'),
+                              'evaluation': checked['evaluation']}).json()
     except ValidationError as e:
         logger.error(f'参数错误: {e}')
         return Response(400, '参数错误').text()

@@ -172,8 +172,8 @@ async def delete(request: Request):
         elif user_type == 3:
             temp.update({'doctor': checked['openid']})
         for task in get_task(**temp):
-            delete_task(**{'id': getattr(task, 'id'), 'training_root': getattr(task, 'training_root'),
-                           'evaluate_root': getattr(task, 'evaluate_root')})
+            delete_task(**{'id': task['id'], 'training_root': task['training_root'],
+                           'evaluate_root': task['evaluate_root']})
         delete_user(**checked)
         return Response(200, '删除成功').text()
     except ValidationError as e:

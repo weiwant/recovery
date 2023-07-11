@@ -99,7 +99,7 @@ async def delete(request: Request):
 
     try:
         checked = Check(**data).dict(exclude_none=True)
-        temp = get_task(id=checked['id'])[0].to_json()
+        temp = get_task(id=checked['id'])[0]
         checked['training_root'] = temp['training_root']
         checked['evaluate_root'] = temp['evaluate_root']
         delete_task(**checked)
