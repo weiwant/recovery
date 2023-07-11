@@ -134,7 +134,7 @@ async def upload(request: Request):
         result = get_task(id=checked['task'])[0]
         checked['training_root'] = result['training_root']
         file_name = upload_video(**checked)
-        return Response(200, data=file_name).json()
+        return Response(200, message=file_name).text()
     except ValidationError as e:
         logger.error(f'参数错误: {e}')
         return Response(400, '参数错误').text()
