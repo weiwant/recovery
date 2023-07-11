@@ -14,9 +14,10 @@ Collect: DataModel = getattr(Tables, 'Collect')
 collect_logger = Collect.logger
 collect_fields = getattr(Tables, 'CollectField')
 
-UserInfo:DataModel = getattr(Tables,'UserInfo')
-userinfo_fileds = getattr(Tables,'UserInfo')
+UserInfo: DataModel = getattr(Tables, 'UserInfo')
+userinfo_fileds = getattr(Tables, 'UserInfo')
 userinfo_logger = UserInfo.logger
+
 
 def get_list(**kwargs):
     """
@@ -60,7 +61,6 @@ def get_detail(**kwargs):
         return result
 
 
-
 def search(**kwargs):
     """
     获取资讯详情
@@ -92,7 +92,6 @@ def search(**kwargs):
         return suggestions
 
 
-
 def collect(**kwargs):
     """
     收藏资讯
@@ -103,7 +102,6 @@ def collect(**kwargs):
     if Collect.add_record(**kwargs) is None:
         article_logger.error(f'收藏失败:{kwargs}')
         raise ValueError(f'收藏失败: {kwargs}')
-
 
 
 def disCollect(**kwargs):
@@ -131,14 +129,14 @@ def add_article(**kwargs):
     :param kwargs: title,content,create_time,author,picture,type,class_,userid
     :return: code
     """
-    user_dict = {'openid': kwargs.get('id')}
-    if len(UserInfo.get_record(**user_dict)) == 0:
+    result = UserInfo.get_record(**{'openid': kwargs.get('id')})
+    if len(result) == 0:
         article_logger.error(f'该用户不存在:{kwargs}')
         raise ValueError(f'该用户不存在:{kwargs}')
     else:
-        user = UserInfo.get_record(**user_dict)[0]
-        type = user['type']
-        if not type == 1:
+        user = result[0]
+        user_type = user['type']
+        if not user_type == 1:
             article_logger.error(f'该用户无权限:{kwargs}')
             raise ValueError(f'该用户无权限:{kwargs}')
     if Article.add_record(**kwargs) is None:
@@ -153,22 +151,21 @@ def delete_article(**kwargs):
     :param kwargs: userid,article_id
     :return: code
     """
-    id_dict={"id":kwargs.get('article_id')}
-    user_dict={'openid':kwargs.get('id')}
-    if len(UserInfo.get_record(**user_dict)) == 0:
+    id_dict = {"id": kwargs.get('article_id')}
+    user_dict = {'openid': kwargs.get('id')}
+    result = UserInfo.get_record(**user_dict)
+    if len(result) == 0:
         article_logger.error(f'该用户不存在:{kwargs}')
         raise ValueError(f'该用户不存在:{kwargs}')
     else:
-        user = UserInfo.get_record(**user_dict)[0]
-        type = user['type']
-        if not type == 1:
+        user_type = result[0]['type']
+        if not user_type == 1:
             article_logger.error(f'该用户无权限:{kwargs}')
             raise ValueError(f'该用户无权限:{kwargs}')
-    if len(Article.get_record(**id_dict)) ==0:
+    if len(Article.get_record(**id_dict)) == 0:
         article_logger.error(f'该文章不存在:{kwargs}')
         raise ValueError(f'该文章不存在:{kwargs}')
     else:
         if not Article.delete_record(**id_dict):
             article_logger.error(f'删除文章失败:{kwargs}')
             raise ValueError(f'删除文章失败:{kwargs}')
-

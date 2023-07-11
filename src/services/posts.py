@@ -221,7 +221,7 @@ def delete_post(**kwargs):
     :param kwargs: 用户id和帖子id
     :return:
     """
-    post_dict={'id':kwargs.get('post_id')}
+    post_dict = {'id': kwargs.get('post_id')}
     if len(Posts.get_record(**post_dict)) == 0:
         posts_logger.error(f'无此内容:{kwargs}')
         raise ValueError(f'无此内容:{kwargs}')
