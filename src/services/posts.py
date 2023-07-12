@@ -40,7 +40,6 @@ def get_post_list(**kwargs):
     :return: 列表数据
     """
     result = Posts.get_record(**posts_fields(**kwargs).dict(exclude_none=True))
-    info_dict = {"openid": kwargs.get("userid")}
     if result is None:
         posts_logger.error(f'内容为空:{kwargs}')
         raise ValueError(f'内容为空:{kwargs}')
@@ -48,8 +47,8 @@ def get_post_list(**kwargs):
         reslist = []
         for item in result:
             temp = item.to_json()
-            user1 = Userinfo.get_record(**info_dict)
-            user = user1[0].to_json()
+            user1 = Userinfo.get_record(**{"openid": temp['creator']})
+            user = user1[0].to_json() if user1 else None
             if user1 is None:
                 posts_logger.error(f'无此用户:{kwargs}')
                 raise ValueError(f'无此用户:{kwargs}')

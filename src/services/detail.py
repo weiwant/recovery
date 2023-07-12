@@ -1,6 +1,7 @@
 """
 @Author: Wenfeng Zhou
 """
+import os.path
 from uuid import uuid4
 
 from src.classes.model import DataModel
@@ -60,6 +61,8 @@ def upload_video(**kwargs):
     training_root = kwargs['training_root']
     file_name = uuid4().hex + '.' + kwargs['video_type']
     file_path = f'./training/{training_root}/{file_name}'
+    if not os.path.exists(f'./training/{training_root}'):
+        os.makedirs(f'./training/{training_root}')
     with open(file_path, 'wb') as f:
         f.write(file.body)
     return file_name

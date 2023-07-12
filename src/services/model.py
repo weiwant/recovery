@@ -31,6 +31,7 @@ def inference(video, training_root, evaluate_root, task_type):
     video_path = os.path.join('./training', training_root, video)
     model = Correct(**joblib.load('./models/correct/correct.pkl'))
     frame_gen = keyframe(video_path)
+    task_type = TASK[task_type]
     description = json.load(open(next(pathlib.Path(os.path.join('./templates', task_type)).glob('*.json')), 'r'))
     repeat = description['repeat']
     action_sequence = deque(description['action_sequence'] * repeat)
@@ -83,6 +84,8 @@ def inference(video, training_root, evaluate_root, task_type):
     fps = cap.get(getattr(cv2, 'CAP_PROP_FPS'))
     width = int(cap.get(getattr(cv2, 'CAP_PROP_FRAME_WIDTH')))
     height = int(cap.get(getattr(cv2, 'CAP_PROP_FRAME_HEIGHT')))
+    if not os.path.exists(os.path.join('./evaluation', evaluate_root)):
+        os.makedirs(os.path.join('./evaluation', evaluate_root))
     output_path = os.path.join('./evaluation', evaluate_root, video)
     out = getattr(cv2, 'VideoWriter')(output_path, fourcc, fps, (width, height))
     cap.release()
@@ -93,7 +96,7 @@ def inference(video, training_root, evaluate_root, task_type):
     evaluation = set()
     start = None
     for (pose, frame, n) in get_pose(frame_gen, config.OPENPOSE_ROOT):
-        template, _, status = find_template(pose, TASK[task_type] if task_type in TASK else None)
+        template, _, status = find_template(pose, task_type)
         if len(action_sequence) > 0:
             if start is None:
                 if status == action_sequence[0]:
