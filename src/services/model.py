@@ -131,4 +131,4 @@ def inference(video, training_root, evaluate_root, task_type):
     a_score = numpy.mean(a_scores)
     if len(evaluation) == 0:
         evaluation.add('动作标准，请继续保持')
-    return numpy.sum(numpy.array([a_score, c_score, t_score]) * numpy.array([0.4, 0.4, 0.2])), '\n'.join(evaluation)
+    return numpy.dot([a_score, c_score, t_score], [0.4, 0.4, 0.2]), '\n'.join(evaluation)
