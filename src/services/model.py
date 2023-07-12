@@ -11,6 +11,7 @@ import joblib
 import numpy
 
 import config
+from config import TASK
 from src.models.correct.algorithm.model import Correct
 from src.models.correct.utils.hash import find_template
 from src.resources.video import keyframe
@@ -92,7 +93,7 @@ def inference(video, training_root, evaluate_root, task_type):
     evaluation = set()
     start = None
     for (pose, frame, n) in get_pose(frame_gen, config.OPENPOSE_ROOT):
-        template, _, status = find_template(pose, task_type)
+        template, _, status = find_template(pose, TASK[task_type] if task_type in TASK else None)
         if len(action_sequence) > 0:
             if start is None:
                 if status == action_sequence[0]:

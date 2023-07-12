@@ -25,6 +25,11 @@ TABLES = {
     'likes': 'id',
     'collect': 'id'
 }
+TASK = {
+    '坐姿抬腿训练': 'sit_lift_leg',
+    '躺下抬腿训练': 'lie_lift_leg',
+    '躺下开合腿训练': 'lie_open_leg'
+}
 USE_GPU = True
 OPENPOSE_ROOT = 'openpose-1.7.0'
 key = get_random_bytes(16)
