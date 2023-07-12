@@ -12,11 +12,11 @@ async def access_log_middleware(request: Request):
     """
     记录访问日志
     """
-    logger.info(f'访问: {request.path}')
+    logger.info(f'访问: {request.method} {request.path}')
 
 
 async def response_log_middleware(request: Request, response):
     """
     记录响应日志
     """
-    logger.info(f'响应: {request.path} {response.status}')
+    logger.info(f'响应: {request.method} {request.path} {response.status}')
