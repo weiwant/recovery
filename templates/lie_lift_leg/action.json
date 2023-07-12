@@ -1,0 +1,35 @@
+{
+  "action_sequence": [
+    0,
+    1,
+    2,
+    1,
+    0
+  ],
+  "status_durations": [
+    0.5,
+    0.5,
+    3,
+    0.5,
+    0.5
+  ],
+  "repeat": 2,
+  "stay_actions": [
+    [
+      1,
+      2
+    ]
+  ],
+  "angle_threshold": [
+    [
+      10,
+      11,
+      30
+    ],
+    [
+      9,
+      10,
+      30
+    ]
+  ]
+}
