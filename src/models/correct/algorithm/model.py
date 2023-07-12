@@ -17,6 +17,8 @@ class Correct:
 
         :param k: k值
         """
+        self.direction = None
+        self.distance = None
         self.e = None
         self.e2 = None
         self.e1 = None
@@ -101,6 +103,11 @@ class Correct:
         self.skeleton = skeleton
         self.template = template
         self.feature = self.get_feature()
+        self.distance = numpy.linalg.norm(self.feature, axis=2, keepdims=True)
+        template_distance = numpy.linalg.norm(self.template, axis=2, keepdims=True)
+        self.direction = numpy.zeros_like(self.template)
+        numpy.divide(self.template, template_distance, out=self.direction, where=template_distance != 0)
+        self.direction = self.direction * self.distance
         self.similarity = self.get_similarity()
         self.e1 = numpy.zeros(self.similarity.shape[0])
         self.e2 = numpy.zeros(self.similarity.shape[0])
@@ -112,8 +119,8 @@ class Correct:
         n = self.skeleton.shape[0]
         if not m == 0:
             return numpy.sum(
-                numpy.repeat(numpy.expand_dims(self.skeleton[correct], axis=1), n, axis=1) + self.template[correct],
+                numpy.repeat(numpy.expand_dims(self.skeleton[correct], axis=1), n, axis=1) + self.direction[correct],
                 axis=0) / m, m / n, self.e
         else:
-            return (numpy.repeat(numpy.expand_dims(self.skeleton[[0]], axis=1), n, axis=1) + self.template[0]).reshape(
+            return (numpy.repeat(numpy.expand_dims(self.skeleton[[0]], axis=1), n, axis=1) + self.direction[0]).reshape(
                 n, 2), 0, self.e

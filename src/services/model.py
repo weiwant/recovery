@@ -35,6 +35,8 @@ def inference(video, training_root, evaluate_root, task_type):
     action_sequence = deque(description['action_sequence'] * repeat)
     status_durations = deque(description['status_durations'] * repeat)
     angle_threshold = numpy.array(description['angle_threshold'])
+    threshold: numpy.ndarray = numpy.cos(angle_threshold[:, 2] / 180 * numpy.pi)
+    stay_actions = description['stay_actions']
     skeleton_lines = [(0, 1), (1, 2), (2, 3), (3, 4), (1, 5), (5, 6), (6, 7), (1, 8), (8, 9), (9, 10), (10, 11),
                       (8, 12), (12, 13), (13, 14)]
     descriptions = {
@@ -85,10 +87,10 @@ def inference(video, training_root, evaluate_root, task_type):
     cap.release()
     a_scores = []
     c_scores = []
-    t_scores = numpy.ones((len(action_sequence),), dtype=numpy.float32)
+    t_scores = []
+    t_template = []
     evaluation = set()
     start = None
-    i = 0
     for (pose, frame, n) in get_pose(frame_gen, config.OPENPOSE_ROOT):
         template, _, status = find_template(pose, task_type)
         if len(action_sequence) > 0:
@@ -97,17 +99,14 @@ def inference(video, training_root, evaluate_root, task_type):
                     start = n
             else:
                 if n < start + status_durations[0] * fps:
-                    if not status == action_sequence[0]:
-                        t_scores[i] -= 0.5 * 0.05
-                        evaluation.add('动作保持时间过短')
+                    t_scores.append(status)
+                    t_template.append(action_sequence[0])
                 else:
                     start = n
-                    i += 1
                     action_sequence.popleft()
                     status_durations.popleft()
         correct_pose, score, _ = model.run(pose, template)
         c_scores.append(score)
-        threshold: numpy.ndarray = numpy.cos(angle_threshold[:, 2] / 180 * numpy.pi)
         correct_angle: numpy.ndarray = model.similarity[angle_threshold[:, 0], angle_threshold[:, 1]] > threshold
         a_scores.append(numpy.mean(correct_angle))
         for j in range(correct_angle.shape[0]):
@@ -118,8 +117,17 @@ def inference(video, training_root, evaluate_root, task_type):
             getattr(cv2, 'line')(frame, tuple(cv_correct_pose[t[0]]), tuple(cv_correct_pose[t[1]]), (0, 255, 0), 2)
         out.write(frame)
     out.release()
+    t_scores = numpy.array(t_scores)
+    t_template = numpy.array(t_template)
+    if len(action_sequence) > 1:
+        evaluation.add('动作时间过短')
+    for action in stay_actions:
+        key_action = numpy.isin(t_template, action)
+        s = numpy.mean(numpy.isin(t_scores[key_action], action))
+        if s < 0.5:
+            evaluation.add('关键动作停留时间过短')
     c_score = numpy.mean(c_scores)
-    t_score = numpy.mean(t_scores)
+    t_score = numpy.mean(t_scores == t_template)
     a_score = numpy.mean(a_scores)
     if len(evaluation) == 0:
         evaluation.add('动作标准，请继续保持')
