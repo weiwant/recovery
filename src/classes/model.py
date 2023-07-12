@@ -95,3 +95,18 @@ class DataModel:
             except Exception as e:
                 self.logger.error(f'获取 {self.class_.__name__} 记录失败: {e}')
                 return None
+
+    def count(self, **kwargs):
+        """
+        获取记录数
+
+        :param kwargs: record
+        :return:
+        """
+        with self.session_maker() as session:
+            try:
+                session: Session
+                return session.query(self.class_).filter_by(**kwargs).count()
+            except Exception as e:
+                self.logger.error(f'获取 {self.class_.__name__} 记录失败: {e}')
+                return None

@@ -1,6 +1,7 @@
 """
 @Author: Wenfeng Zhou
 """
+import datetime
 import os.path
 from uuid import uuid4
 
@@ -26,12 +27,16 @@ def add_detail(**kwargs):
     if result is None:
         detail_logger.error(f'添加任务详情失败: {kwargs}')
         raise ValueError(f'添加任务详情失败: {kwargs}')
-    if kwargs['deadline'] == kwargs['finish_date']:
+    if kwargs['deadline'] == datetime.datetime.fromisoformat(kwargs['finish_date']).date():
         if not TaskInfo.update_record(**{'id': kwargs['task'], 'status': 2}):
             task_logger.error(f'更新任务失败: {kwargs}')
             raise ValueError(f'更新任务失败: {kwargs}')
     elif kwargs['status'] == 0:
         if not TaskInfo.update_record(**{'id': kwargs['task'], 'status': 1}):
+            task_logger.error(f'更新任务失败: {kwargs}')
+            raise ValueError(f'更新任务失败: {kwargs}')
+    elif DetailInfo.count(**{'task': kwargs['task']}) == kwargs['circle_times']:
+        if not TaskInfo.update_record(**{'id': kwargs['task'], 'status': 2}):
             task_logger.error(f'更新任务失败: {kwargs}')
             raise ValueError(f'更新任务失败: {kwargs}')
 
@@ -79,10 +84,12 @@ def update_detail(**kwargs):
         detail_logger.error(f'更新任务详情失败: {kwargs}')
         raise ValueError(f'更新任务详情失败: {kwargs}')
     try:
-        if kwargs['deadline'] == kwargs['finish_date']:
+        if kwargs['deadline'] == datetime.datetime.fromisoformat(kwargs['finish_date']).date():
             TaskInfo.update_record(**{'id': kwargs['task'], 'status': 2})
         elif kwargs['status'] == 0:
             TaskInfo.update_record(**{'id': kwargs['task'], 'status': 1})
+        elif DetailInfo.count(**{'task': kwargs['task']}) == kwargs['circle_times']:
+            TaskInfo.update_record(**{'id': kwargs['task'], 'status': 2})
     except Exception:
         detail_logger.error(f'更新任务失败: {kwargs}')
         raise ValueError(f'更新任务失败: {kwargs}')

@@ -85,7 +85,6 @@ def get_post_detail(**kwargs):
     :return: 帖子详情+评论列表详情
 
     """
-    dict1 = {'openid': kwargs['userid']}
     dict2 = {'post_id': kwargs['id']}
     res = Posts.get_record(**posts_fields(**kwargs).dict(exclude_none=True))
     if res is None:
@@ -93,7 +92,7 @@ def get_post_detail(**kwargs):
         raise ValueError(f'此帖不存在:{kwargs}')
     else:
         temp = res[0].to_json()
-        user1 = Userinfo.get_record(**dict1)
+        user1 = Userinfo.get_record(**{'openid': temp['creator']})
         user = user1[0].to_json()
         if user1 is None:
             posts_logger.error(f'无此用户:{kwargs}')

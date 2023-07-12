@@ -2,6 +2,7 @@
 @Author: Wenfeng Zhou
 """
 import datetime
+import re
 from datetime import date
 from typing import List
 
@@ -55,19 +56,21 @@ async def add(request: Request):
         checked = Check(**data).dict(exclude_none=True)
         checked['status'] = result['status']
         checked['finish_date'] = str(datetime.datetime.now())
+        checked['circle_time'] = int(re.match(r'^(\d+).*', result['circle_time']).groups()[0])
         exist = False
         result_detail = get_detail(**{'task': checked['task'], 'finish_date': checked['finish_date']})
         if result_detail:
             exist = True
         checked['score'], checked['evaluation'] = inference(checked['video'], result['training_root'],
                                                             result['evaluate_root'], result['type'])
+        checked['score'] = float(format(checked['score'] * 100, '.2f'))
         if exist:
             checked.update({'id': getattr(result_detail[0], 'id')})
             update_detail(**checked)
         else:
             add_detail(**checked)
         return Response(200,
-                        data={'score': format(checked['score'] * 100, '.2f'),
+                        data={'score': checked['score'],
                               'evaluation': checked['evaluation']}).json()
     except ValidationError as e:
         logger.error(f'参数错误: {e}')
