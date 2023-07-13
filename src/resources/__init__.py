@@ -6,14 +6,14 @@ import sys
 from datetime import date
 from sys import platform
 
-from src import config
+import config
 from src.utils.encoder import JSONEncoder
 from src.utils.logger import get_logger
 from src.utils.model import ModelExt
 
 logger = get_logger(__name__)
 if hasattr(config, 'USE_GPU') and hasattr(config, 'OPENPOSE_ROOT'):
-    from src.config import USE_GPU, OPENPOSE_ROOT
+    from config import USE_GPU, OPENPOSE_ROOT
 
     dir_name = OPENPOSE_ROOT
     build_dir = 'build_GPU' if USE_GPU else 'build_CPU'
@@ -29,7 +29,7 @@ if hasattr(config, 'DATABASE_CONFIG') and hasattr(config, 'TABLES'):
     from sqlalchemy.ext.automap import automap_base
     from sqlalchemy.orm import sessionmaker
 
-    from src.config import DATABASE_CONFIG, TABLES
+    from config import DATABASE_CONFIG, TABLES
     from src.utils.database import get_connect_string
 
     connect_string = get_connect_string(**DATABASE_CONFIG)
