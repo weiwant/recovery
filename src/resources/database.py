@@ -7,8 +7,8 @@ from casestyle import pascalcase
 from pydantic import BaseModel
 from pydantic.typing import NoneType
 
-from config import TABLES
 from src.classes.model import DataModel
+from src.config import TABLES
 from src.resources import session_maker, base
 
 

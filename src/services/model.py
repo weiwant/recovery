@@ -10,8 +10,8 @@ import cv2
 import joblib
 import numpy
 
-import config
-from config import TASK
+from src import config
+from src.config import TASK
 from src.models.correct.algorithm.model import Correct
 from src.models.correct.utils.hash import find_template
 from src.resources.video import keyframe
