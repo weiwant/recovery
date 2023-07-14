@@ -1,77 +1,69 @@
-# 开始
+# 一、部署环境
 
----
+## 1.1 系统部署结构
 
-## 准备
+![图片](data:image/png;base64,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)
 
-- Python 3.7
-- cuda 11.6
-- cudnn 8.8
-- Visual Studio 2022
-- cmake gui
 
-添加***Python 3.7***的***路径***到***环境变量***中的***PATH***
+## 1.2 服务器配置要求
 
-添加***cuda/bin***的***路径***、***cuda/libnvvp***的***路径***、***cuda/extras/CUPTI/lib64***的***路径***、***cuda/include***的***路径***到***环境变量***中的***PATH***
+### 1.2.1 Windows
 
-添加***cudnn/cuda/bin***的***路径***到***环境变量***中的***PATH***
+* 操作系统：Windows 10
+* 内存：8GB
+* 显存（可选）：4GB
+### 1.2.2 Linux
 
----
+* 操作系统：Ubuntu 20
+* 内存：8GB
+* 显存（可选）：4GB
+## 1.3 客户端配置要求
 
-## 安装
+* 微信（Android/iOS客户端）
+# 二、系统软硬件安装与配置
 
-1. 克隆仓库
+## 2.1 服务器要求组件安装
 
-```sh
-git clone git@gitlab.com:ZWForum/recovery.git
-```
+### 2.1.1 Openpose
 
-2. 解压文件***packages/openpose-1.7.0.zip***到项目根目录下，命名为***openpose***
+#### a）Windows
 
-3. 运行***openpose/models/getModels.bat***脚本
+* 安装python3.7、Visual Studio 2022、Cmake GUI、opencv、CUDA和cudnn
+* 配置python、opencv、CUDA和cudnn的环境变量
+* 克隆项目仓库
+* 进入仓库目录解压packages/openpose-1.7.0.zip到项目根目录下，命名为openpose
+* 运行openpose/models/getModels.bat脚本
+* 解压packages/caffe-master.zip并复制到openpose/3rdparty/caffe，解压packages/pybind11-2.10.4.zip并复制到openpose/3rdparty/pybind11
+* 在openpose中创建文件夹build_CPU和build_GPU
+* 打开cmake gui并设置源目录为openpose，根据是否使用GPU设置生成目录为openpose/build_CPU或openpose/build_GPU
+* 点击Add Entry添加Python 3.7的路径到PYTHON_EXECUTABLE
+* 点击Configure并选择Visual Studio 17 2022和x64
+* 设置BUILD_PYTHON、DOWNLOAD_BODY_25_MODEL、DOWNLOAD_BODY_COCO_MODEL、DOWNLOAD_FACE_MOD、DOWNLOAD_HAND_MODEL、DOWNLOAD_BODY_MPI_MODEL选项为ON
+* 设置GPU_MODE为CPU_ONLY并取消USE_CUDNN（CPU版本）或设置GPU_MODE为CUDA（GPU版本）
+* 点击Configure然后点击Generate，点击Open Project并设置生成解决方案为Release x64
+#### b）Linux
 
-4. 运行***openpose/3rdparty/windows***中的***getCaffe.bat、getCaffe3rdparty.bat、getFreeglut.bat、getOpenCV.bat、getSpinnaker.bat***脚本
+* 安装python3.7、cmake、opencv、CUDA和cudnn
+* 配置python、opencv、CUDA和cudnn的环境变量
+* 克隆项目仓库
+* 进入仓库目录解压packages/openpose-1.7.0.zip到项目根目录下，命名为openpose
+* 运行openpose/models/getModels.sh脚本
+* 解压packages/caffe-master.zip并复制到openpose/3rdparty/caffe，解压packages/pybind11-2.10.4.zip并复制到openpose/3rdparty/pybind11
+* 在openpose中创建文件夹build_CPU和build_GPU
+* 进入build_CPU或build_GPU
+* 运行命令cmake -D PYTHON_EXECUTABLE=**{python位置}** -D BUILD_PYTHON=ON -D DOWNLOAD_BODY_25_MODEL=ON -D DOWNLOAD_BODY_COCO_MODEL=ON -D DOWNLOAD_FACE_MOD=ON -D DOWNLOAD_HAND_MODEL=ON -D DOWNLOAD_BODY_MPI_MODEL=ON -D GPU_MODE=CPU_ONLY（或CUDA） -D USE_CUDNN=OFF（或ON） -D PYTHON_LIBRARY=**{python对应的动态链接库so文件}** ../
+* 运行命令make install
+## 2.2 数据库安装
 
-5. 解压文件***packages/caffe-master.zip***并复制到***openpose/3rdparty/windows/caffe***
+本项目使用MySQL数据库，可兼容常见的MySQL5.5及MySQL8.0版本，Windows操作系统可选择安装MySQL8.0，Linux系统推荐安装MySQL5.5。
 
-6. 解压文件***packages/pybind11-2.10.4.zip***并复制到***openpose/3rdparty/windows/pybind11***
+# 三、系统安装与配置
 
-7. 在***openpose***中创建文件夹***build_CPU, build_GPU***
+## 3.1 总体安装说明
 
-#### 编译CPU
+在编译构建完openpose和安装完数据库后，进入项目仓库目录，使用pip对项目依赖进行安装，项目依赖安装完后，则根据自身情况对配置进行更改并进行数据库初始化，完成后即可通过manage.py入口启动服务器。
 
-1. 打开cmake gui并设置源目录为***openpose***，设置生成目录为***openpose/build_CPU***
+## 3.2 数据库初始化
 
-2. 点击***Add Entry***添加***Python 3.7***的***路径***到***PYTHON_EXECUTABLE***
+在项目的config模块中，将数据库配置的用户名、密码、服务器、数据库名和端口按实际情况修改，使用项目仓库中的sql文件在数据库中创建相应的表结构，至此完成数据库的初始化。
 
-3. 点击***Configure***并选择***Visual Studio 17 2022***和***x64***
-
-4. 设置***BUILD_PYTHON、DOWNLOAD_BODY_25_MODEL、DOWNLOAD_BODY_COCO_MODEL、DOWNLOAD_FACE_MOD、DOWNLOAD_HAND_MODEL、DOWNLOAD_BODY_MPI_MODEL选项***为***ON***
-
-5. 设置***GPU_MODE***为***CPU_ONLY***并取消***USE_CUDNN***
-
-6. 点击***Configure***然后点击***Generate***
-
-7. 点击***Open Project***并设置生成解决方案为***Release x64***
-
-#### 编译GPU
-
-1. 打开cmake gui并设置源目录为***openpose***，设置生成目录为***openpose/build_GPU***
-
-2. 点击***Add Entry***添加***Python 3.7***的***路径***到***PYTHON_EXECUTABLE***
-
-3. 点击***Configure***并选择***Visual Studio 17 2022***和***x64***
-
-4. 设置***BUILD_PYTHON、DOWNLOAD_BODY_25_MODEL、DOWNLOAD_BODY_COCO_MODEL、DOWNLOAD_FACE_MOD、DOWNLOAD_HAND_MODEL、DOWNLOAD_BODY_MPI_MODEL选项***为***ON***
-
-5. 设置***GPU_MODE***为***CUDA***
-
-6. 点击***Configure***然后点击***Generate***
-
-7. 点击***Open Project***并设置生成解决方案为***Release x64***
-
-#### 安装Python依赖
-
-```shell
-pip install -r requirements.txt
-```
