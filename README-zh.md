@@ -12,14 +12,17 @@
 * 操作系统：Windows 10
 * 内存：8GB
 * 显存（可选）：4GB
+
 ### 1.2.2 Linux
 
 * 操作系统：Ubuntu 20
 * 内存：8GB
 * 显存（可选）：4GB
+
 ## 1.3 客户端配置要求
 
 * 微信（Android/iOS客户端）
+
 # 二、系统软硬件安装与配置
 
 ## 2.1 服务器要求组件安装
@@ -41,6 +44,7 @@
 * 设置BUILD_PYTHON、DOWNLOAD_BODY_25_MODEL、DOWNLOAD_BODY_COCO_MODEL、DOWNLOAD_FACE_MOD、DOWNLOAD_HAND_MODEL、DOWNLOAD_BODY_MPI_MODEL选项为ON
 * 设置GPU_MODE为CPU_ONLY并取消USE_CUDNN（CPU版本）或设置GPU_MODE为CUDA（GPU版本）
 * 点击Configure然后点击Generate，点击Open Project并设置生成解决方案为Release x64
+
 #### b）Linux
 
 * 安装python3.7、cmake、opencv、CUDA和cudnn
@@ -53,6 +57,7 @@
 * 进入build_CPU或build_GPU
 * 运行命令cmake -D PYTHON_EXECUTABLE=**{python位置}** -D BUILD_PYTHON=ON -D DOWNLOAD_BODY_25_MODEL=ON -D DOWNLOAD_BODY_COCO_MODEL=ON -D DOWNLOAD_FACE_MOD=ON -D DOWNLOAD_HAND_MODEL=ON -D DOWNLOAD_BODY_MPI_MODEL=ON -D GPU_MODE=CPU_ONLY（或CUDA） -D USE_CUDNN=OFF（或ON） -D PYTHON_LIBRARY=**{python对应的动态链接库so文件}** ../
 * 运行命令make install
+
 ## 2.2 数据库安装
 
 本项目使用MySQL数据库，可兼容常见的MySQL5.5及MySQL8.0版本，Windows操作系统可选择安装MySQL8.0，Linux系统推荐安装MySQL5.5。
