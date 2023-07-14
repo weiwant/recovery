@@ -32,7 +32,7 @@ Page({
         id:this.data.postId
       },
       success:(res)=>{
-        //console.log(res.data)
+        console.log(res.data)
         this.setData({
           detail:res.data
         })

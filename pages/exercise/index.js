@@ -138,8 +138,6 @@ Page({
     setTimeout(function(){myPage.getDetail(myPage);},100)
     setTimeout(function(){myPage.getResult(myPage);},100)
     setTimeout(function(){myPage.getCalender(myPage);},100)
-
-    
     
   },
 

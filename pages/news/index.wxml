@@ -49,7 +49,7 @@
           
           <view>
             <!-- 视频文章标签 -->
-            <view class="cu-tag {{1==item.isAcrticle?'bg-red':'bg-blue'}} light sm round" >{{1==item.type?'文章':'视频'}}</view>
+            <view class="cu-tag {{1==item.isAcrticle?'bg-red':'bg-blue'}} light sm round" >{{0==item.type?'文章':'视频'}}</view>
             <!-- 内容标签 -->
             <!-- <view class="cu-tag bg-green light sm round">{{item.tag}}</view> -->
             <!-- 收藏情况 -->

@@ -130,7 +130,7 @@ Page({
     let myPage = this
     console.log(this.data)
     this.test()
-    setTimeout(function(){myPage.post(myPage);},1000)
+    setTimeout(function(){myPage.post(myPage);},7000)
   },
   //转https
    test(){

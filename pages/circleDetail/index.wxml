@@ -23,7 +23,7 @@
     </view>
     <!-- 帖子图片 -->
     <view class="grid flex-sub padding-lr col-3 grid-square">
-     <view class="bg-img" style="background-image:url({{item.url}});" wx:for="{{detail.pictures}}"   wx:key="index" bindtap="showModal" data-target="Image1">
+     <view class="bg-img" style="background-image:url({{pictures}});" wx:for="{{detail.pictures}}"   wx:for-item="pictures" wx:key="pictures" bindtap="showModal" data-target="Image1">
     </view>
     </view>
 

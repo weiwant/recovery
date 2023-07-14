@@ -33,14 +33,12 @@ Page({
     
     wx.request({
       url:baseUrl+'/article/get_list',
-      
       method:'POST',
       data:{
         class_:this.data.class[this.data.TabCur],
         userid:this.data.userId
       },
       success:(res)=>{
-
         //console.log(res.data),
         //转存到news[]
         this.setData({

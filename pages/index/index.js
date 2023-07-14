@@ -297,7 +297,8 @@ Page({
     wx.setStorage({
       key:"taskInfo",
       data:{
-        taskId:e.currentTarget.dataset.id
+        taskId:e.currentTarget.dataset.id,
+        taskType:e.currentTarget.dataset.type,
       },
       success(res){
         wx.navigateTo({

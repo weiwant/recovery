@@ -14,15 +14,16 @@ Page({
       video:'',
       taskId:0,
   },
-  goToExercise:function(){
-    wx.navigateTo({
-      url: '../exercise/index',
+  goToIndex:function(){
+    wx.switchTab({
+      url: '../index/index',
     })
   },
   showModal(name) {
     this.setData({
       modalName: name
     })
+
   },
   hideModal(e) {
     this.setData({

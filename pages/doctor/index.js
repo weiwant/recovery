@@ -59,6 +59,7 @@ Page({
         this.setData({
           modalName: null
         })
+        this.getDoctorList()
       }
     })
   },
