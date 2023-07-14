@@ -58,7 +58,8 @@ async def add(request: Request):
         checked['finish_date'] = str(datetime.datetime.now())
         checked['circle_time'] = int(re.match(r'^(\d+).*', result['circle_time']).groups()[0])
         exist = False
-        result_detail = get_detail(**{'task': checked['task'], 'finish_date': checked['finish_date']})
+        result_detail = get_detail(**{'task': checked['task']})
+        result_detail = list(filter(lambda x: getattr(x, 'finish_date').date() == datetime.date.today(), result_detail))
         if result_detail:
             exist = True
         checked['score'], checked['evaluation'] = inference(checked['video'], result['training_root'],
