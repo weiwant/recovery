@@ -1,0 +1,3 @@
+后端开发：周文峰、黄烨
+周文峰编写代码文件(60%)：classes文件夹100%, models文件夹100%, resources文件夹100%, utils文件夹100%, api/task.py:70%, api/detail.py:100%, api/user.py:50%, services/task.py:70%, services/detail.py:100%, services/user.py:50%.
+黄烨编写代码(40%)：api/task.py:30%, api/user.py:50%, services/task.py:30%, services/user.py:50%, api/article.py:100%, /api/posts.py:100%, services/article.py:100%, services/posts.py:100%.
