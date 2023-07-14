@@ -35,7 +35,7 @@ def add_detail(**kwargs):
         if not TaskInfo.update_record(**{'id': kwargs['task'], 'status': 1}):
             task_logger.error(f'更新任务失败: {kwargs}')
             raise ValueError(f'更新任务失败: {kwargs}')
-    elif DetailInfo.count(**{'task': kwargs['task']}) == kwargs['circle_times']:
+    elif DetailInfo.count(**{'task': kwargs['task']}) == kwargs['circle_time']:
         if not TaskInfo.update_record(**{'id': kwargs['task'], 'status': 2}):
             task_logger.error(f'更新任务失败: {kwargs}')
             raise ValueError(f'更新任务失败: {kwargs}')
@@ -88,7 +88,7 @@ def update_detail(**kwargs):
             TaskInfo.update_record(**{'id': kwargs['task'], 'status': 2})
         elif kwargs['status'] == 0:
             TaskInfo.update_record(**{'id': kwargs['task'], 'status': 1})
-        elif DetailInfo.count(**{'task': kwargs['task']}) == kwargs['circle_times']:
+        elif DetailInfo.count(**{'task': kwargs['task']}) == kwargs['circle_time']:
             TaskInfo.update_record(**{'id': kwargs['task'], 'status': 2})
     except Exception:
         detail_logger.error(f'更新任务失败: {kwargs}')
